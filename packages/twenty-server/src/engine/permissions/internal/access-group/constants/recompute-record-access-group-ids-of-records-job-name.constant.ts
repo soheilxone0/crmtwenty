@@ -1,2 +1,0 @@
-export const RECOMPUTE_RECORD_ACCESS_GROUP_IDS_OF_RECORDS_JOB_NAME =
-  'RecomputeRecordAccessGroupIdsOfRecordsJob';

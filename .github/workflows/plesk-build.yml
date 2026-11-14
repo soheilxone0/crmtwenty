@@ -1,0 +1,118 @@
+name: Build for Plesk (production branch)
+
+# crmtwenty: shared hosting cannot run `composer install` or `npm run build`,
+# so this workflow does it on GitHub and publishes a ready-to-run copy of the
+# app (with vendor/ and the compiled assets) to the `production` branch.
+# In Plesk → Git, point "crm.arounidea.com" at the `production` branch and
+# use "Pull updates" / automatic deployment.
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: plesk-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build production branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          # The lowest PHP version the app supports, so the bundled vendor/
+          # works on any PHP 8.3+ selected in Plesk.
+          php-version: '8.3'
+          extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
+          tools: composer:v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install PHP dependencies (no dev)
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-progress
+
+      - name: Build admin assets
+        working-directory: packages/Webkul/Admin
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Assemble the production copy
+        run: |
+          set -euo pipefail
+
+          OUT="$RUNNER_TEMP/out"
+          mkdir -p "$OUT"
+
+          # Every file tracked in Git, minus development-only folders …
+          git ls-files -z \
+            | grep -zv -E '^(\.github|\.ai|\.claude|\.codex|tests|packages/Webkul/Admin/tests)/' \
+            | tar --null -T - -cf - | tar -xf - -C "$OUT"
+
+          # … plus what was built above.
+          tar -cf - vendor public/admin/build | tar -xf - -C "$OUT"
+
+          # Everything in this copy is meant to be deployed, including vendor/.
+          cat > "$OUT/.gitignore" <<'EOF'
+          /.env
+          /storage/*.key
+          /storage/installed
+          /public/storage
+          /public/hot
+          EOF
+
+          printf '%s\n' "${GITHUB_SHA}" > "$OUT/REVISION"
+
+      - name: Publish to the production branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          OUT="$RUNNER_TEMP/out"
+          PUB="$RUNNER_TEMP/publish"
+          REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+          git init -q "$PUB"
+          cd "$PUB"
+          git config user.name "crmtwenty build"
+          git config user.email "crmtwenty@users.noreply.github.com"
+          git remote add origin "$REMOTE"
+
+          # Keep a linear history on `production` so a plain `git pull` in Plesk
+          # always fast-forwards.
+          if git ls-remote --exit-code --heads origin production >/dev/null 2>&1; then
+            git fetch -q --depth=1 origin production
+            git checkout -q -b production FETCH_HEAD
+          else
+            git checkout -q --orphan production
+          fi
+
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          (cd "$OUT" && tar -cf - .) | tar -xf -
+
+          git add -A -f
+          git reset -q -- .env 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "production is already up to date."
+            exit 0
+          fi
+
+          git commit -q -m "Build ${GITHUB_SHA::7} for Plesk" -m "Source: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
+          git push -q origin production
+          echo "Published $(git rev-parse --short HEAD) to production."

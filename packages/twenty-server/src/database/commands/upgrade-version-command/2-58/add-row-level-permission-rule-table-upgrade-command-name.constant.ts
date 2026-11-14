@@ -1,2 +1,0 @@
-export const ADD_ROW_LEVEL_PERMISSION_RULE_TABLE_UPGRADE_COMMAND_NAME =
-  '2.58.0_AddRowLevelPermissionRuleTableFastInstanceCommand_1794327249159';

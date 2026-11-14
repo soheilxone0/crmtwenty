@@ -1,1 +1,0 @@
-export const GMAIL_MAX_MESSAGE_PARTS_TO_PROCESS = 100;

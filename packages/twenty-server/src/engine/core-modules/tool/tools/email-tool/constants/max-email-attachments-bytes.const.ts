@@ -1,1 +1,0 @@
-export const MAX_EMAIL_ATTACHMENTS_BYTES = 25 * 1024 * 1024;
