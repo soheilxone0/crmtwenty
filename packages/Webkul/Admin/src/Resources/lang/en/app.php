@@ -2220,6 +2220,7 @@ return [
             'start-date' => 'Start Date',
             'end-date' => 'End Date',
             'export-pdf' => 'Export PDF',
+            'vs-previous' => 'vs previous period',
 
             /**
              * Shortcuts on the dashboard's date range picker. Each is resolved against today when

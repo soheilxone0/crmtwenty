@@ -19,7 +19,7 @@
                 <!-- Email Header -->
                 <div style="margin-bottom: 45px;">
                     <a href="{{ config('app.url') }}" style="text-decoration: none;">
-                        <span style="display: inline-block; padding: 10px 18px; border-radius: 12px; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #ffffff; font-size: 20px; font-weight: 700;">
+                        <span style="display: inline-block; padding: 10px 18px; border-radius: 12px; background: #4f46e5; color: #ffffff; font-size: 20px; font-weight: 700;">
                             {{ config('app.name') }}
                         </span>
                     </a>

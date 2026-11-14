@@ -30,7 +30,8 @@
                 <div class="flex gap-2.5 overflow-x-auto max-h-[calc(100vh-300px)]">
                     <!-- Stage Cards -->
                     <div
-                        class="flex min-w-[275px] max-w-[275px] flex-col gap-1 rounded-lg border border-gray-300 bg-white dark:border-gray-800 dark:bg-gray-900"
+                        class="ct-stage flex min-w-[275px] max-w-[275px] flex-col gap-1 rounded-lg border border-gray-300 bg-white dark:border-gray-800 dark:bg-gray-900"
+                        :style="{ '--tone': ['#6366F1', '#0EA5E9', '#F59E0B', '#8B5CF6', '#10B981', '#F43F5E', '#14B8A6', '#EC4899'][index % 8] }"
                         v-for="(stage, index) in stageLeads"
                     >
                         {!! view_render_event('admin.leads.index.kanban.content.stage.header.before') !!}
@@ -39,7 +40,7 @@
                         <div class="flex flex-col px-2 py-3">
                             <!-- Stage Title and Action -->
                             <div class="flex items-center justify-between">
-                                <span class="text-xs font-medium dark:text-white">
+                                <span class="ct-stage-name text-xs font-medium dark:text-white">
                                     @{{ stage.name }} (@{{ stage.leads.meta.total }})
                                 </span>
 
@@ -62,7 +63,7 @@
                                 <!-- Progress Bar -->
                                 <div class="h-1 w-36 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
                                     <div
-                                        class="h-1 bg-green-500"
+                                        class="ct-stage-fill h-1 bg-green-500"
                                         :style="{ width: (stage.lead_value / totalStagesAmount) * 100 + '%' }"
                                     ></div>
                                 </div>
@@ -124,7 +125,7 @@
                                 {!! view_render_event('admin.leads.index.kanban.content.stage.body.card.before') !!}
 
                                 <a
-                                    class="lead-item flex cursor-pointer flex-col gap-5 rounded-lg border border-gray-300 shadow-xl shadow-slate-200 bg-gray-100 p-2 dark:border-gray-400 dark:bg-gray-400"
+                                    class="lead-item ct-lead flex cursor-pointer flex-col gap-4 rounded-lg border border-gray-300 bg-white p-3 dark:border-gray-800 dark:bg-gray-900"
                                     :href="'{{ route('admin.leads.view', 'replaceId') }}'.replace('replaceId', element.id)"
                                 >
                                     {!! view_render_event('admin.leads.index.kanban.content.stage.body.card.header.before') !!}

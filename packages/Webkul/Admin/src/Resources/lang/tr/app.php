@@ -2229,6 +2229,7 @@ return [
             'start-date' => 'Başlangıç Tarihi',
             'end-date' => 'Bitiş Tarihi',
             'export-pdf' => 'PDF Dışa Aktar',
+            'vs-previous' => 'önceki döneme göre',
             'pdf' => [
                 'title' => 'Gösterge Paneli Raporu',
                 'filtered-date' => 'Filtrelenmiş Tarih',

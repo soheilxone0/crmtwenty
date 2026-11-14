@@ -2274,6 +2274,7 @@ return [
                 'empty-info' => '選択した期間のデータがありません',
             ],
             'export-pdf' => 'PDFエクスポート',
+            'vs-previous' => '前期間比',
             'pdf' => [
                 'title' => 'ダッシュボードレポート',
                 'filtered-date' => 'フィルター日付',

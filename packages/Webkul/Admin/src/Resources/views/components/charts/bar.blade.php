@@ -1,17 +1,16 @@
 <v-charts-bar {{ $attributes }}></v-charts-bar>
 
 @pushOnce('scripts')
-    <!-- SEO Vue Component Template -->
     <script
         type="text/x-template"
         id="v-charts-bar-template"
     >
-        <canvas
-            :id="$.uid + '_chart'"
-            class="flex w-full max-w-full items-end"
-            :style="'aspect-ratio:' + aspectRatio + '/1'"
-            style=""
-        ></canvas>
+        <div
+            class="relative w-full"
+            :style="{ height: height + 'px' }"
+        >
+            <canvas :id="$.uid + '_chart'"></canvas>
+        </div>
     </script>
 
     <script type="module">
@@ -21,14 +20,27 @@
             props: {
                 labels: {
                     type: Array,
-                    default: [],
+                    default: () => [],
                 },
 
                 datasets: {
                     type: Array,
-                    default: [],
+                    default: () => [],
                 },
 
+                height: {
+                    type: Number,
+                    default: 260,
+                },
+
+                stacked: {
+                    type: Boolean,
+                    default: false,
+                },
+
+                /**
+                 * Kept for templates that still pass it; the chart now fills a fixed height.
+                 */
                 aspectRatio: {
                     type: Number,
                     default: 3.23,
@@ -45,53 +57,96 @@
                 this.prepare();
             },
 
+            beforeUnmount() {
+                this.chart?.destroy();
+            },
+
             methods: {
                 prepare() {
-                    const barCount = this.datasets.length;
-                    
-                    this.datasets.forEach((dataset) => {
-                        dataset.barThickness = Math.max(4, 36 / barCount);
-                    });
-        
                     if (this.chart) {
                         this.chart.destroy();
                     }
 
+                    const count = Math.max(1, this.datasets.length);
+                    const points = Math.max(1, this.labels.length);
+
+                    const datasets = this.datasets.map((dataset) => ({
+                        borderRadius: this.stacked ? 4 : 999,
+                        borderSkipped: false,
+                        maxBarThickness: this.stacked ? 28 : Math.max(6, 22 - count * 2),
+                        categoryPercentage: points > 20 ? 0.8 : 0.62,
+                        barPercentage: 0.9,
+                        hoverBackgroundColor: dataset.backgroundColor,
+                        ...dataset,
+                    }));
+
                     this.chart = new Chart(document.getElementById(this.$.uid + '_chart'), {
                         type: 'bar',
-                        
+
                         data: {
                             labels: this.labels,
 
-                            datasets: this.datasets,
+                            datasets,
                         },
 
                         options: {
-                            aspectRatio: this.aspectRatio,
-                            
+                            maintainAspectRatio: false,
+
+                            interaction: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+
+                            animation: {
+                                delay: (context) => context.type === 'data' && context.mode === 'default'
+                                    ? context.dataIndex * 35 + context.datasetIndex * 90
+                                    : 0,
+                            },
+
                             plugins: {
                                 legend: {
-                                    display: false
+                                    display: false,
                                 },
                             },
-                            
+
                             scales: {
                                 x: {
-                                    beginAtZero: true,
+                                    stacked: this.stacked,
 
-                                    border: {
-                                        dash: [8, 4],
-                                    }
+                                    grid: {
+                                        display: false,
+                                    },
+
+                                    ticks: {
+                                        maxRotation: 0,
+                                        autoSkipPadding: 14,
+                                    },
                                 },
 
                                 y: {
+                                    stacked: this.stacked,
+
                                     beginAtZero: true,
+
+                                    grace: '8%',
+
+                                    grid: {
+                                        drawTicks: false,
+                                    },
+
                                     border: {
-                                        dash: [8, 4],
-                                    }
-                                }
-                            }
-                        }
+                                        display: false,
+                                        dash: [4, 4],
+                                    },
+
+                                    ticks: {
+                                        precision: 0,
+                                        maxTicksLimit: 5,
+                                        callback: (value) => window.ct ? window.ct.compact(value) : value,
+                                    },
+                                },
+                            },
+                        },
                     });
                 }
             }

@@ -134,7 +134,7 @@
 
             <div class="flex min-h-[calc(100vh-62px)] max-w-full flex-1 flex-col bg-gray-100 pt-3 transition-all duration-300 dark:bg-gray-950">
                 <!-- Page Content Blade Component -->
-                <div class="px-4 {{ $showPoweredBy ? 'pb-[72px]' : 'pb-4' }} transition-all duration-300 lg:ltr:pl-[215px] lg:group-[.sidebar-collapsed]/container:ltr:pl-[85px] lg:rtl:pr-[215px] lg:group-[.sidebar-collapsed]/container:rtl:pr-[85px]">
+                <div class="ct-content px-4 {{ $showPoweredBy ? 'pb-[72px]' : 'pb-4' }} transition-all duration-300 lg:ltr:pl-[215px] lg:group-[.sidebar-collapsed]/container:ltr:pl-[85px] lg:rtl:pr-[215px] lg:group-[.sidebar-collapsed]/container:rtl:pr-[85px]">
                     {{ $slot }}
                 </div>
 

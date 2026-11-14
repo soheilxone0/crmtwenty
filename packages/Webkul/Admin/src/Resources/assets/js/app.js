@@ -132,10 +132,12 @@ import VueCal from "./plugins/vue-cal";
 import Debounce from "./directives/debounce";
 import DOMPurify from "./directives/dompurify";
 import ToolTip from "./directives/tooltip";
+import CountUp from "./directives/count-up";
 
 app.directive("debounce", Debounce);
 app.directive("safe-html", DOMPurify);
 app.directive("tooltip", ToolTip);
+app.directive("count-up", CountUp);
 
 export default app;
 

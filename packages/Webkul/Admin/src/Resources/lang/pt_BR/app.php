@@ -2229,6 +2229,7 @@ return [
             'start-date' => 'Data de início',
             'end-date' => 'Data de término',
             'export-pdf' => 'Exportar PDF',
+            'vs-previous' => 'vs. período anterior',
             'pdf' => [
                 'title' => 'Relatório do Painel',
                 'filtered-date' => 'Data Filtrada',

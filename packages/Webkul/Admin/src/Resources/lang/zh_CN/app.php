@@ -2229,6 +2229,7 @@ return [
             'start-date' => '开始日期',
             'end-date' => '结束日期',
             'export-pdf' => '导出 PDF',
+            'vs-previous' => '较上一周期',
             'pdf' => [
                 'title' => '仪表盘报告',
                 'filtered-date' => '筛选日期',
