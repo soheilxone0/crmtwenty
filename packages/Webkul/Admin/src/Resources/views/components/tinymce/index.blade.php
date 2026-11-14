@@ -3,16 +3,8 @@
 <v-tinymce {{ $attributes }}></v-tinymce>
 
 @pushOnce('scripts')
-    <!--
-        TODO (@devansh-webkul): Only this portion is pending; it just needs to be integrated using the Vite bundler. Currently,
-        there is an issue with relative paths in the plugins. I intend to address this task at the end.
-    -->
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.6.2/tinymce.min.js"
-        integrity="sha384-NjD7Hj+XpRBVk0A/j+d7Kh0xbyxAq95RK6cAaDiV4U04K8h8paDAQFpsXJzt7ZwC"
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-    ></script>
+    {{-- crmtwenty: TinyMCE is served from this application (public/admin/tinymce), never from a CDN. --}}
+    <script defer src="{{ asset('admin/tinymce/tinymce.min.js') }}"></script>
 
     <script
         type="text/x-template"
@@ -69,6 +61,11 @@
 
                             let config = {
                                 relative_urls: false,
+                                base_url: '{{ asset('admin/tinymce') }}',
+                                suffix: '.min',
+                                promotion: false,
+                                branding: false,
+                                directionality: document.documentElement.dir || 'ltr',
                                 menubar: false,
                                 remove_script_host: false,
                                 document_base_url: '{{ asset('/') }}',

@@ -1,3 +1,5 @@
+// crmtwenty: the dark theme is bundled instead of being fetched from npmcdn.com.
+import flatpickrDarkTheme from "flatpickr/dist/themes/dark.css?url";
 import Flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.css";
 import { Spanish } from "flatpickr/dist/l10n/es.js";
@@ -47,7 +49,7 @@ export default {
 
             linkElement.rel = "stylesheet";
             linkElement.type = "text/css";
-            linkElement.href = `https://npmcdn.com/flatpickr/dist/themes/${theme}.css`;
+            linkElement.href = flatpickrDarkTheme;
             linkElement.id = 'flatpickr';
 
             document.head.appendChild(linkElement);

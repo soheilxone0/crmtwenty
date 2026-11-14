@@ -254,24 +254,8 @@
                             </div>
                         </div>
 
-                        <p class="mb-6 w-full place-self-end text-left">
-                            <a
-                                class="bg-white text-brandColor underline"
-                                href="https://krayincrm.com/"
-                                target="_blank"
-                            >
-                                @lang('installer::app.installer.index.krayin')
-                            </a>
-
-                            <span>@lang('installer::app.installer.index.krayin-info')</span>
-
-                            <a
-                                class="bg-white text-brandColor underline"
-                                href="https://webkul.com/"
-                                target="_blank"
-                            >
-                                @lang('installer::app.installer.index.webkul')
-                            </a>
+                        <p class="mb-6 w-full place-self-end text-left text-gray-500">
+                            &copy; {{ date('Y') }} {{ config('app.name') }}
                         </p>
                     </div>
                 </div>
@@ -733,7 +717,7 @@
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="app_name"
-                                        ::value="envData.app_name ?? 'Krayin'"
+                                        ::value="envData.app_name ?? 'CRM'"
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.application-name')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.krayin')"
@@ -1023,22 +1007,7 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between px-4 py-2.5">
-                        <a
-                            href="https://forums.krayincrm.com/"
-                            class="cursor-pointer text-xs font-semibold text-brandColor"
-                        >
-                            @lang('installer::app.installer.index.installation-completed.krayin-forums')
-                        </a>
-
-                        <a
-                            href="https://krayincrm.com/extensions/"
-                            class="cursor-pointer rounded-md border border-brandColor bg-white px-3 py-1.5 font-semibold text-brandColor hover:opacity-90"
-                        >
-                            @lang('installer::app.installer.index.installation-completed.explore-krayin-extensions')
-                        </a>
-                    </div>
-                </div>
+                                    </div>
             </script>
 
             <script type="module">
@@ -1101,17 +1070,17 @@
 
                                         this.envData = { ...this.envData, ...params };
                                     } else {
-                                        setErrors({ 'db_connection': ["Krayin currently supports MySQL and MariaDB only."] });
+                                        setErrors({ 'db_connection': ["Only MySQL and MariaDB are supported."] });
                                     }
                                 },
 
-                                readyForInstallation: (setErrors) => {
+                                readyForInstallation: () => {
                                     this.currentStep = 'installProgress';
 
                                     this.startMigration(setErrors);
                                 },
 
-                                createAdmin: (setErrors) => {
+                                createAdmin: () => {
                                     this.isLoading = true;
 
                                     this.saveAdmin(params, setErrors);

@@ -122,7 +122,7 @@ php artisan migrate --force
 composer install
 cp .env.example .env && php artisan key:generate
 # set DB_* in .env, then:
-php artisan krayin-crm:install
+php artisan crm:install
 cd packages/Webkul/Admin && npm ci && npm run build
 php artisan serve
 ```

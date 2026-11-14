@@ -130,7 +130,7 @@ return [
         'index' => [
             'create-administrator' => [
                 'admin' => 'Admin',
-                'krayin' => 'Krayin',
+                'krayin' => 'CRM',
                 'confirm-password' => '确认密码',
                 'email' => '邮箱',
                 'email-address' => 'admin@example.com',
@@ -145,7 +145,7 @@ return [
                 'application-name' => '应用名称',
                 'argentine-peso' => '阿根廷比索 (ARS)',
                 'australian-dollar' => '澳大利亚元 (AUD)',
-                'krayin' => 'Krayin',
+                'krayin' => 'CRM',
                 'bangladeshi-taka' => '孟加拉塔卡 (BDT)',
                 'brazilian-real' => '巴西雷亚尔 (BRL)',
                 'british-pound-sterling' => '英镑 (GBP)',
@@ -230,24 +230,24 @@ return [
             ],
 
             'installation-processing' => [
-                'krayin' => '正在安装 Krayin',
+                'krayin' => '正在安装 CRM',
                 'krayin-info' => '正在创建数据库表，这可能需要一些时间',
                 'title' => '安装',
             ],
 
             'installation-completed' => [
                 'admin-panel' => '管理面板',
-                'krayin-forums' => 'Krayin 论坛',
+                'krayin-forums' => 'CRM 论坛',
                 'customer-panel' => '客户面板',
-                'explore-krayin-extensions' => '探索 Krayin 扩展',
+                'explore-krayin-extensions' => '探索 CRM 扩展',
                 'title' => '安装完成',
-                'title-info' => 'Krayin 已成功安装到您的系统中。',
+                'title-info' => 'CRM 已成功安装到您的系统中。',
             ],
 
             'ready-for-installation' => [
                 'create-databsae-table' => '创建数据库表',
                 'install' => '安装',
-                'install-info' => 'Krayin 安装',
+                'install-info' => 'CRM 安装',
                 'install-info-button' => '点击下方按钮以',
                 'populate-database-table' => '填充数据库表',
                 'start-installation' => '开始安装',
@@ -258,8 +258,8 @@ return [
                 'locale' => '语言',
                 'main' => '开始',
                 'select-locale' => '选择语言',
-                'title' => '您的 Krayin 安装',
-                'welcome-title' => '欢迎使用 Krayin',
+                'title' => '您的 CRM 安装',
+                'welcome-title' => '欢迎使用 CRM',
             ],
 
             'server-requirements' => [
@@ -286,16 +286,16 @@ return [
             ],
 
             'back' => '返回',
-            'krayin' => 'Krayin',
+            'krayin' => 'CRM',
             'krayin-info' => '社区项目，由',
-            'krayin-logo' => 'Krayin 标志',
+            'krayin-logo' => 'CRM 标志',
             'continue' => '继续',
-            'installation-description' => 'Krayin 的安装通常包含若干步骤。以下是 Krayin 安装流程的总体概览',
+            'installation-description' => 'CRM 的安装通常包含若干步骤。以下是 CRM 安装流程的总体概览',
             'installation-info' => '很高兴在这里见到您！',
             'installation-title' => '欢迎进入安装向导',
             'installation-wizard' => '安装向导语言',
-            'title' => 'Krayin 安装程序',
-            'webkul' => 'Webkul',
+            'title' => 'CRM 安装程序',
+            'webkul' => 'CRM',
         ],
     ],
 ];

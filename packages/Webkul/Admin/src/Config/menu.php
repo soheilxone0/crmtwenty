@@ -287,15 +287,4 @@ return [
         'sort' => 9,
         'icon-class' => 'icon-configuration',
     ],
-
-    /**
-     * Help.
-     */
-    [
-        'key' => 'help',
-        'name' => 'admin::app.layouts.help',
-        'route' => 'admin.help.index',
-        'sort' => 10,
-        'icon-class' => 'icon-help',
-    ],
 ];

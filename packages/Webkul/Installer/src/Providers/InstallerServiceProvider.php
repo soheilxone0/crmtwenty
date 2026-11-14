@@ -3,7 +3,6 @@
 namespace Webkul\Installer\Providers;
 
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Installer\Console\Commands\Installer as InstallerCommand;
 use Webkul\Installer\Http\Middleware\CanInstall;
@@ -35,17 +34,13 @@ class InstallerServiceProvider extends ServiceProvider
 
         $router->aliasMiddleware('installer_locale', Locale::class);
 
-        Event::listen('krayin.installed', 'Webkul\Installer\Listeners\Installer@installed');
-
-        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'installer');
-
         /**
-         * Route to access template applied image file
+         * crmtwenty: the upstream "installed" listener reported the domain and the administrator's
+         * name and e-mail to a third-party server, and the image-cache route fetched a remote logo
+         * (sending the same details) on every page view. Both are removed: nothing leaves this
+         * installation.
          */
-        $this->app['router']->get('cache/{filename}', [
-            'uses' => 'Webkul\Installer\Http\Controllers\ImageCacheController@getImage',
-            'as' => 'image_cache',
-        ])->where(['filename' => '[ \w\\.\\/\\-\\@\(\)\=]+']);
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'installer');
     }
 
     /**

@@ -8,27 +8,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-        @if (app()->getLocale() !== 'fa')
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-        @endif
     </head>
 
     <body
         dir="{{ in_array(app()->getLocale(), ['fa', 'ar']) ? 'rtl' : 'ltr' }}"
-        style="font-family: {{ app()->getLocale() === 'fa' ? "Vazirmatn, Tahoma, 'Segoe UI', sans-serif" : 'inter' }}; text-align: {{ in_array(app()->getLocale(), ['fa', 'ar']) ? 'right' : 'left' }};"
+        style="font-family: Vazirmatn, Tahoma, 'Segoe UI', Arial, sans-serif; text-align: {{ in_array(app()->getLocale(), ['fa', 'ar']) ? 'right' : 'left' }};"
     >
         <div style="max-width: 640px; margin-left: auto; margin-right: auto;">
             <div style="padding: 30px;">
                 <!-- Email Header -->
                 <div style="margin-bottom: 45px;">
-                    <a href="{{ config('app.url') }}">
-                        <img
-                            src="{{ vite()->asset('images/logo.svg') }}"
-                            alt="{{ config('app.name') }}"
-                            style="height: 40px; width: 110px;"
-                        />
+                    <a href="{{ config('app.url') }}" style="text-decoration: none;">
+                        <span style="display: inline-block; padding: 10px 18px; border-radius: 12px; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #ffffff; font-size: 20px; font-weight: 700;">
+                            {{ config('app.name') }}
+                        </span>
                     </a>
                 </div>
 

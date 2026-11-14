@@ -75,12 +75,9 @@
             </div>
         </div>
 
-        <!-- Powered By -->
-        <div class="text-sm font-normal">
-            @lang('admin::app.components.layouts.powered-by.description', [
-                'krayin' => '<a class="text-brandColor hover:underline " href="https://krayincrm.com/">Krayin</a>',
-                'webkul' => '<a class="text-brandColor hover:underline " href="https://webkul.com/">Webkul</a>',
-            ]) 
+        <!-- Footer -->
+        <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+            &copy; {{ \Crmtwenty\Persian\Support\Jalali::format(now(), 'Y') }} {{ config('app.name') }}
         </div>
     </div>
 </x-admin::layouts.anonymous>

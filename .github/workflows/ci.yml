@@ -59,7 +59,7 @@ jobs:
           sed -i "s|^\(APP_TIMEZONE=\s*\).*$|\1Asia/Kolkata|" .env
 
       - name: Running Krayin Installer
-        run: php artisan krayin-crm:install --skip-env-check --skip-admin-creation
+        run: php artisan crm:install --skip-env-check --skip-admin-creation
 
       - name: Running Pest Test
         run: vendor/bin/pest --parallel --colors=always --log-junit junit.xml

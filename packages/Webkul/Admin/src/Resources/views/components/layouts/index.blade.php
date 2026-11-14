@@ -63,19 +63,7 @@
         vite()->set(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
     }}
 
-    {{-- crmtwenty: Persian uses the bundled Vazirmatn font instead of Google Fonts. --}}
-    @if (app()->getLocale() !== 'fa')
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-            rel="stylesheet"
-        />
-    @endif
-
-    <link
-        rel="preload"
-        as="image"
-        href="{{ url('cache/logo/bagisto.png') }}"
-    >
+    {{-- crmtwenty: the bundled Vazirmatn font is used for every locale; nothing is loaded from third-party CDNs. --}}
 
     @if ($favicon = core()->getConfigData('general.general.admin_logo.favicon_image'))
         <link
@@ -172,12 +160,12 @@
 
     <script>
         /**
-         * Load event, the purpose of using the event is to mount the application
-         * after all of our `Vue` components which is present in blade file have
-         * been registered in the app. No matter what `app.mount()` should be
-         * called in the last.
+         * crmtwenty: mount once the document has been parsed and every deferred/module script
+         * (where the Vue components are registered) has run. Waiting for window "load" also
+         * waited for every image, font and third-party file, so one slow or blocked request kept
+         * the whole panel on its loading skeleton.
          */
-        window.addEventListener("load", function(event) {
+        document.addEventListener("DOMContentLoaded", function () {
             app.mount("#app");
         });
     </script>

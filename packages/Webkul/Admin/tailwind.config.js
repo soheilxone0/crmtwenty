@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./src/Resources/**/*.blade.php", "./src/Resources/**/*.js"],
+    content: [
+        "./src/Resources/**/*.blade.php",
+        "./src/Resources/**/*.js",
+        "../../Crmtwenty/*/src/Resources/**/*.blade.php",
+    ],
 
     theme: {
         container: {
@@ -32,7 +36,7 @@ module.exports = {
 
             fontFamily: {
                 inter: ['Inter'],
-                icon: ['icomoon']
+                icon: ['Phosphor']
             }
         },
     },

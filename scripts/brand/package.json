@@ -1,0 +1,19 @@
+{
+  "name": "assets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@phosphor-icons/web": "^2.1.1",
+    "@resvg/resvg-js": "^2.6.2",
+    "codemirror": "^5.65.18",
+    "subset-font": "^2.9.0",
+    "tinymce": "^6.6.2"
+  }
+}
