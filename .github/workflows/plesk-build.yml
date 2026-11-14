@@ -75,6 +75,9 @@ jobs:
           /public/hot
           EOF
 
+          # Store every file byte-for-byte (no line-ending conversion).
+          printf '* -text\n' > "$OUT/.gitattributes"
+
           printf '%s\n' "${GITHUB_SHA}" > "$OUT/REVISION"
 
       - name: Publish to the production branch
