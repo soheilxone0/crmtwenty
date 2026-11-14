@@ -1,0 +1,5 @@
+/.env
+/storage/*.key
+/storage/installed
+/public/storage
+/public/hot

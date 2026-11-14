@@ -1,0 +1,217 @@
+/* crmtwenty: Jalali date picker */
+.jdp-calendar {
+    --jdp-bg: #fff;
+    --jdp-text: #1f2937;
+    --jdp-muted: #9ca3af;
+    --jdp-border: #e5e7eb;
+    --jdp-hover: #f3f4f6;
+    --jdp-accent: #0e90d9;
+    --jdp-accent-soft: #e0f2fe;
+    --jdp-danger: #dc2626;
+
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--jdp-text);
+    background: var(--jdp-bg);
+    direction: rtl;
+    user-select: none;
+}
+
+.dark .jdp-calendar {
+    --jdp-bg: #111827;
+    --jdp-text: #e5e7eb;
+    --jdp-muted: #6b7280;
+    --jdp-border: #1f2937;
+    --jdp-hover: #030712;
+    --jdp-accent-soft: #0c4a6e;
+    --jdp-danger: #f87171;
+}
+
+.jdp-calendar:not(.jdp-inline) {
+    position: absolute;
+    z-index: 10050;
+    display: none;
+    padding: 10px;
+    border: 1px solid var(--jdp-border);
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.jdp-calendar.jdp-open {
+    display: block;
+}
+
+.jdp-months {
+    display: flex;
+    gap: 16px;
+}
+
+.jdp-month {
+    width: 252px;
+}
+
+.jdp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    margin-bottom: 6px;
+}
+
+.jdp-title {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-weight: 600;
+}
+
+.jdp-select {
+    padding: 2px 4px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.jdp-select:hover,
+.jdp-select:focus {
+    border-color: var(--jdp-border);
+    outline: none;
+}
+
+.jdp-select option {
+    background: var(--jdp-bg);
+    color: var(--jdp-text);
+}
+
+.jdp-nav {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--jdp-text);
+}
+
+.jdp-nav:hover,
+.jdp-action:hover,
+.jdp-day:not(.jdp-disabled):not(.jdp-selected):hover {
+    background: var(--jdp-hover);
+}
+
+.jdp-weekdays,
+.jdp-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+
+.jdp-weekdays span {
+    padding: 4px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--jdp-muted);
+}
+
+.jdp-day {
+    height: 34px;
+    margin: 1px 0;
+    border-radius: 6px;
+    color: var(--jdp-text);
+    font: inherit;
+    cursor: pointer;
+}
+
+.jdp-friday,
+.jdp-weekdays .jdp-friday {
+    color: var(--jdp-danger);
+}
+
+.jdp-outside {
+    opacity: 0.4;
+}
+
+.jdp-today {
+    box-shadow: inset 0 0 0 1px var(--jdp-accent);
+}
+
+.jdp-in-range {
+    border-radius: 0;
+    background: var(--jdp-accent-soft);
+}
+
+.jdp-range-start:not(.jdp-range-end) {
+    border-radius: 0 6px 6px 0;
+}
+
+.jdp-range-end:not(.jdp-range-start) {
+    border-radius: 6px 0 0 6px;
+}
+
+.jdp-range-start,
+.jdp-range-end,
+.jdp-selected {
+    background: var(--jdp-accent);
+    color: #fff;
+}
+
+.jdp-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.jdp-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--jdp-border);
+}
+
+.jdp-time {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+}
+
+.jdp-time-input {
+    width: 52px;
+    padding: 4px;
+    border: 1px solid var(--jdp-border);
+    border-radius: 4px;
+    background: transparent;
+    color: inherit;
+    text-align: center;
+    font: inherit;
+}
+
+.jdp-actions {
+    display: flex;
+    gap: 4px;
+    margin-inline-start: auto;
+}
+
+.jdp-action {
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: var(--jdp-accent);
+    font: inherit;
+    font-weight: 600;
+}
+
+.jdp-action.jdp-primary {
+    background: var(--jdp-accent);
+    color: #fff;
+}
+
+.jdp-alt-input {
+    text-align: right;
+}

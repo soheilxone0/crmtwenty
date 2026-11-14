@@ -1,0 +1,23 @@
+# crmtwenty: lets the app run when the web server's document root is the
+# repository folder itself (e.g. Plesk "Git pull & deploy" straight into
+# crm.arounidea.com). Everything is served from public/; nothing else in this
+# folder (.env, vendor, storage, ...) is ever reachable from the web.
+#
+# Better still: in Plesk → Hosting Settings set the Document root to
+# crm.arounidea.com/public — then this file is not used at all.
+
+Options -Indexes
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
