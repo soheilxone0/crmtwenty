@@ -1,14 +1,7 @@
 {
-    "name": "krayin/laravel-core",
+    "name": "crmtwenty/core",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Jitendra Singh",
-            "email": "jitendra@webkul.com"
-        }
-    ],
-    "require": {
-    },
+    "require": {},
     "autoload": {
         "psr-4": {
             "Webkul\\Core\\": "src/"

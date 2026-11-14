@@ -3,7 +3,7 @@
 /**
  * crmtwenty: extra sections under Configuration → Email.
  *
- * Merged into Krayin's `core_config` by PersianServiceProvider.
+ * Merged into the CRM's `core_config` by PersianServiceProvider.
  */
 return [
     [

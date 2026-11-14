@@ -24,7 +24,7 @@ const IMPORT_RANDOM_PATH = '/^imports\/[A-Za-z0-9]{40}\.(csv|txt)$/';
  * developer's storage and parallel processes do not clear each other's files.
  */
 beforeEach(function () {
-    $this->diskRoot = sys_get_temp_dir().'/krayin-import-'.bin2hex(random_bytes(8));
+    $this->diskRoot = sys_get_temp_dir().'/crm-import-'.bin2hex(random_bytes(8));
 
     config([
         'filesystems.disks.local.root' => $this->diskRoot.'/app',

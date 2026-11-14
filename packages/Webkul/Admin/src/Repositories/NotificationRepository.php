@@ -33,7 +33,7 @@ class NotificationRepository extends Repository
     /**
      * Which permission a user must hold to be told about each kind of record.
      *
-     * Data scope and role permissions are independent in Krayin: a user may have a global scope
+     * Data scope and role permissions are independent in the CRM: a user may have a global scope
      * and still have no access to a module at all. Scope alone therefore decides only *whose*
      * records a user may know about, not *which kinds* — both have to agree before a notification
      * is addressed to them.

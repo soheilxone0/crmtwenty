@@ -8,7 +8,7 @@ use Webkul\User\Models\User;
 /**
  * Who a notification is addressed to.
  *
- * Data scope and role permissions are independent in Krayin, so both are checked: a user with a
+ * Data scope and role permissions are independent in the CRM, so both are checked: a user with a
  * global scope but no access to a module would otherwise be told about every record in it — the
  * record's title and owner — while being unable to open any of them.
  */

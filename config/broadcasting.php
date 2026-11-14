@@ -32,7 +32,7 @@ return [
 
         /**
          * Laravel's own WebSocket server, run alongside the application with `reverb:start`.
-         * Krayin ships the connection so enabling it is an `.env` change rather than a config edit.
+         * The CRM ships the connection so enabling it is an `.env` change rather than a config edit.
          */
         'reverb' => [
             'driver' => 'reverb',

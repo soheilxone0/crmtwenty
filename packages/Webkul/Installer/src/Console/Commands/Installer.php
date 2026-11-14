@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Webkul\Core\Providers\CoreServiceProvider;
-use Webkul\Installer\Database\Seeders\DatabaseSeeder as KrayinDatabaseSeeder;
+use Webkul\Installer\Database\Seeders\DatabaseSeeder as InstallerDatabaseSeeder;
 use Webkul\Installer\Events\ComposerEvents;
 use Webkul\Installer\Helpers\DatabaseManager;
 
@@ -138,7 +138,7 @@ class Installer extends Command
         $this->call('migrate:fresh');
 
         $this->warn('Step: Seeding basic data...');
-        $this->info(app(KrayinDatabaseSeeder::class)->run([
+        $this->info(app(InstallerDatabaseSeeder::class)->run([
             'locale' => $applicationDetails['locale'] ?? 'en',
             'currency' => $applicationDetails['currency'] ?? 'USD',
         ]));

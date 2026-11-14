@@ -25,12 +25,12 @@ module.exports = {
 
         extend: {
             colors: {
-                brandColor: '#0E90D9',
+                brandColor: '#4F46E5',
             },
 
             fontFamily: {
                 inter: ['Inter'],
-                icon: ['icomoon']
+                icon: ['Phosphor']
             }
         },
     },

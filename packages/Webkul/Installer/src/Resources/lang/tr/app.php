@@ -130,7 +130,7 @@ return [
         'index' => [
             'create-administrator' => [
                 'admin' => 'Yönetici',
-                'krayin' => 'CRM',
+                'crm' => 'CRM',
                 'confirm-password' => 'Şifreyi Onayla',
                 'email' => 'E-posta',
                 'email-address' => 'admin@ornek.com',
@@ -145,7 +145,7 @@ return [
                 'application-name' => 'Uygulama Adı',
                 'argentine-peso' => 'Arjantin Pezosu (ARS)',
                 'australian-dollar' => 'Avustralya Doları (AUD)',
-                'krayin' => 'CRM',
+                'crm' => 'CRM',
                 'bangladeshi-taka' => 'Bangladeş Takası (BDT)',
                 'brazilian-real' => 'Brezilya Reali (BRL)',
                 'british-pound-sterling' => 'İngiliz Sterlini (GBP)',
@@ -230,16 +230,16 @@ return [
             ],
 
             'installation-processing' => [
-                'krayin' => 'CRM Kurulumu',
-                'krayin-info' => 'Veritabanı tabloları oluşturuluyor, bu birkaç dakika sürebilir',
+                'crm' => 'CRM Kurulumu',
+                'crm-info' => 'Veritabanı tabloları oluşturuluyor, bu birkaç dakika sürebilir',
                 'title' => 'Kurulum',
             ],
 
             'installation-completed' => [
                 'admin-panel' => 'Yönetici Paneli',
-                'krayin-forums' => 'CRM Forumu',
+                'crm-forums' => 'CRM Forumu',
                 'customer-panel' => 'Müşteri Paneli',
-                'explore-krayin-extensions' => 'CRM Uzantılarını Keşfedin',
+                'explore-crm-extensions' => 'CRM Uzantılarını Keşfedin',
                 'title' => 'Kurulum Tamamlandı',
                 'title-info' => 'CRM sisteminize başarıyla kuruldu.',
             ],
@@ -286,16 +286,16 @@ return [
             ],
 
             'back' => 'Geri',
-            'krayin' => 'CRM',
-            'krayin-info' => 'CRM tarafından geliştirilen bir Topluluk Projesi',
-            'krayin-logo' => 'CRM Logosu',
+            'crm' => 'CRM',
+            'crm-info' => 'CRM tarafından geliştirilen bir Topluluk Projesi',
+            'crm-logo' => 'CRM Logosu',
             'continue' => 'Devam Et',
             'installation-description' => 'CRM kurulumu genellikle birkaç adım içerir. İşte CRM\'nun kurulum sürecine genel bir bakış',
             'installation-info' => 'Sizi burada görmekten mutluluk duyuyoruz!',
             'installation-title' => 'Kurulum\'a Hoş Geldiniz',
             'installation-wizard' => 'Kurulum Sihirbazı dili',
             'title' => 'CRM Kurulum Sihirbazı',
-            'webkul' => 'CRM',
+            'crm-vendor' => 'CRM',
         ],
     ],
 ];

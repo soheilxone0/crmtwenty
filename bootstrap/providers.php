@@ -41,7 +41,7 @@ return [
     AppServiceProvider::class,
 
     /*
-     * Webkul Service Providers...
+     * CRM Service Providers...
      */
     ActivityServiceProvider::class,
     AdminServiceProvider::class,

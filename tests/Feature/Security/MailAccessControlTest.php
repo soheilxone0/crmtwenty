@@ -39,7 +39,7 @@ const MAIL_PERMISSIONS = [
 ];
 
 beforeEach(function () {
-    $this->diskRoot = sys_get_temp_dir().'/krayin-mail-'.bin2hex(random_bytes(8));
+    $this->diskRoot = sys_get_temp_dir().'/crm-mail-'.bin2hex(random_bytes(8));
 
     config([
         'filesystems.disks.local.root' => $this->diskRoot.'/app',

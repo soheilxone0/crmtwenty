@@ -130,7 +130,7 @@ return [
         'index' => [
             'create-administrator' => [
                 'admin' => 'مدير',
-                'krayin' => 'CRM',
+                'crm' => 'CRM',
                 'confirm-password' => 'تأكيد كلمة المرور',
                 'email' => 'البريد الإلكتروني',
                 'email-address' => 'admin@example.com',
@@ -145,7 +145,7 @@ return [
                 'application-name' => 'اسم التطبيق',
                 'argentine-peso' => 'البيزو الأرجنتيني (ARS)',
                 'australian-dollar' => 'الدولار الأسترالي (AUD)',
-                'krayin' => 'CRM',
+                'crm' => 'CRM',
                 'bangladeshi-taka' => 'التاكا البنغلاديشي (BDT)',
                 'brazilian-real' => 'الريال البرازيلي (BRL)',
                 'british-pound-sterling' => 'الجنيه الإسترليني البريطاني (GBP)',
@@ -230,16 +230,16 @@ return [
             ],
 
             'installation-processing' => [
-                'krayin' => 'تثبيت CRM',
-                'krayin-info' => 'إنشاء جداول قاعدة البيانات، وقد يستغرق ذلك بضع دقائق',
+                'crm' => 'تثبيت CRM',
+                'crm-info' => 'إنشاء جداول قاعدة البيانات، وقد يستغرق ذلك بضع دقائق',
                 'title' => 'التثبيت',
             ],
 
             'installation-completed' => [
                 'admin-panel' => 'لوحة المشرف',
-                'krayin-forums' => 'منتديات CRM',
+                'crm-forums' => 'منتديات CRM',
                 'customer-panel' => 'لوحة العميل',
-                'explore-krayin-extensions' => 'استكشاف امتدادات CRM',
+                'explore-crm-extensions' => 'استكشاف امتدادات CRM',
                 'title' => 'اكتمال التثبيت',
                 'title-info' => 'تم تثبيت CRM بنجاح على نظامك.',
             ],
@@ -286,16 +286,16 @@ return [
             ],
 
             'back' => 'رجوع',
-            'krayin' => 'CRM',
-            'krayin-info' => 'مشروع مجتمعي من قبل',
-            'krayin-logo' => 'شعار CRM',
+            'crm' => 'CRM',
+            'crm-info' => 'مشروع مجتمعي من قبل',
+            'crm-logo' => 'شعار CRM',
             'continue' => 'متابعة',
             'installation-description' => 'عادة ما تتضمن عملية تثبيت CRM عدة خطوات. إليك نظرة عامة عامة على عملية التثبيت CRM',
             'installation-info' => 'نحن سعداء برؤيتك هنا!',
             'installation-title' => 'مرحبًا بك في التثبيت',
             'installation-wizard' => 'لغة معالج التثبيت',
             'title' => 'مثبت CRM',
-            'webkul' => 'CRM',
+            'crm-vendor' => 'CRM',
         ],
     ],
 ];

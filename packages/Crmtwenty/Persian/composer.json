@@ -1,6 +1,6 @@
 {
     "name": "crmtwenty/persian",
-    "description": "Persian (fa-IR) localisation for Krayin CRM: Jalali calendar, company e-mail (SMTP) settings, self sign-up and e-mail verification.",
+    "description": "Persian (fa-IR) localisation: Jalali calendar, company e-mail (SMTP) settings, self sign-up and e-mail verification.",
     "license": "MIT",
     "autoload": {
         "psr-4": {

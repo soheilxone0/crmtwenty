@@ -120,7 +120,7 @@
                 <!--
                     On a narrow screen the panel is pinned to the viewport rather than to the bell.
                     Anchored to the bell it kept its own width and ran off the left edge, cutting
-                    off the start of every line. The positioning is inline because Krayin's CSS is
+                    off the start of every line. The positioning is inline because the panel's CSS is
                     pre-built and carries no responsive position utilities.
                 -->
                 <div
@@ -188,7 +188,7 @@
                             <!--
                                 Unread is marked with a dot rather than a background tint, so the
                                 rows that still need attention are countable at a glance. The size
-                                is inline because Krayin's CSS is pre-built and carries no utility
+                                is inline because the panel's CSS is pre-built and carries no utility
                                 at this scale.
                             -->
                             <span

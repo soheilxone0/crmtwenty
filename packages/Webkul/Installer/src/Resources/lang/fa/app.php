@@ -130,7 +130,7 @@ return [
         'index' => [
             'create-administrator' => [
                 'admin' => 'مدیر',
-                'krayin' => 'CRM',
+                'crm' => 'CRM',
                 'confirm-password' => 'تایید رمز عبور',
                 'email' => 'ایمیل',
                 'email-address' => 'admin@example.com',
@@ -145,7 +145,7 @@ return [
                 'application-name' => 'نام برنامه',
                 'argentine-peso' => 'پزو آرژانتین (ARS)',
                 'australian-dollar' => 'دلار استرالیا (AUD)',
-                'krayin' => 'CRM',
+                'crm' => 'CRM',
                 'bangladeshi-taka' => 'تاکا بنگلادش (BDT)',
                 'brazilian-real' => 'رئال برزیل (BRL)',
                 'british-pound-sterling' => 'پوند استرلینگ بریتانیا (GBP)',
@@ -230,16 +230,16 @@ return [
             ],
 
             'installation-processing' => [
-                'krayin' => 'نصب CRM',
-                'krayin-info' => 'در حال ایجاد جداول پایگاه داده، این ممکن است چند لحظه طول بکشد',
+                'crm' => 'نصب CRM',
+                'crm-info' => 'در حال ایجاد جداول پایگاه داده، این ممکن است چند لحظه طول بکشد',
                 'title' => 'نصب',
             ],
 
             'installation-completed' => [
                 'admin-panel' => 'پنل مدیریت',
-                'krayin-forums' => 'انجمن CRM',
+                'crm-forums' => 'انجمن CRM',
                 'customer-panel' => 'پنل مشتری',
-                'explore-krayin-extensions' => 'کاوش افزونه‌های CRM',
+                'explore-crm-extensions' => 'کاوش افزونه‌های CRM',
                 'title' => 'نصب کامل شد',
                 'title-info' => 'CRM با موفقیت بر روی سیستم شما نصب شد.',
             ],
@@ -286,16 +286,16 @@ return [
             ],
 
             'back' => 'بازگشت',
-            'krayin' => 'CRM',
-            'krayin-info' => 'یک پروژه اجتماعی توسط',
-            'krayin-logo' => 'لوگوی CRM',
+            'crm' => 'CRM',
+            'crm-info' => 'یک پروژه اجتماعی توسط',
+            'crm-logo' => 'لوگوی CRM',
             'continue' => 'ادامه',
             'installation-description' => 'نصب CRM معمولاً شامل چندین مرحله است. در اینجا یک طرح کلی از فرآیند نصب CRM آمده است',
             'installation-info' => 'خوشحالیم که شما را اینجا می‌بینیم!',
             'installation-title' => 'به نصب خوش آمدید',
             'installation-wizard' => 'زبان جادوگر نصب',
             'title' => 'نصب‌کننده CRM',
-            'webkul' => 'CRM',
+            'crm-vendor' => 'CRM',
         ],
     ],
 ];

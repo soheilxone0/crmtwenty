@@ -15,11 +15,11 @@ class Core
     use Sanitizer;
 
     /**
-     * The Krayin version.
+     * The application version.
      *
      * @var string
      */
-    const KRAYIN_VERSION = '2.2.8';
+    const VERSION = '2.2.8';
 
     /**
      * Create a new instance.
@@ -33,13 +33,13 @@ class Core
     ) {}
 
     /**
-     * Get the version number of the Krayin.
+     * Get the version number of the application.
      *
      * @return string
      */
     public function version()
     {
-        return static::KRAYIN_VERSION;
+        return static::VERSION;
     }
 
     /**

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * crmtwenty: Persian edition of Krayin CRM.
+ * crmtwenty: Persian edition of the CRM.
  *
  *  - Jalali (شمسی) calendar helpers (core()->formatDate() uses them in fa),
  *  - «ایمیل شرکت»: SMTP settings editable from Configuration → Email, with a
