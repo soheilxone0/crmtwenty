@@ -19,7 +19,7 @@ use Webkul\Installer\Http\Middleware\CanInstall;
 beforeEach(function () {
     $this->originalStoragePath = app()->storagePath();
 
-    $this->tempStorage = sys_get_temp_dir().'/krayin-installer-test-'.bin2hex(random_bytes(6));
+    $this->tempStorage = sys_get_temp_dir().'/crm-installer-test-'.bin2hex(random_bytes(6));
 
     mkdir($this->tempStorage, 0777, true);
 

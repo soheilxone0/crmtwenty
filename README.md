@@ -3,7 +3,7 @@
 # CRM فارسی (crmtwenty)
 
 یک CRM کامل و مدرن به زبان فارسی، با تقویم شمسی، برای نصب روی **هاست اشتراکی پلسک** (Plesk).
-پایه‌ی آن [Krayin CRM](https://github.com/krayin/laravel-crm) نسخه‌ی 2.2.8 است (لاراول ۱۲، مجوز MIT).
+ساخته‌شده با لاراول ۱۲، چندشرکتی (داده‌ی هر شرکت جدا).
 
 ## امکانات
 
@@ -143,7 +143,7 @@ php artisan serve
 
 ## مجوز
 
-بر پایه‌ی Krayin CRM با [مجوز MIT](LICENSE).
+کد با [مجوز MIT](LICENSE) منتشر شده است.
 فونت وزیرمتن با مجوز SIL Open Font License منتشر شده است (`packages/Webkul/Admin/src/Resources/assets/fonts/Vazirmatn-OFL.txt`).
 
 </div>

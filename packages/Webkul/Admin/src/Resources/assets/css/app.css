@@ -427,6 +427,55 @@ button {
         content: "\e3e8";
     }
 
+    .icon-arrow-down:before {
+        content: "\e136";
+    }
+
+    .icon-arrow-up:before {
+        content: "\e13c";
+    }
+
+    .icon-cross-large-large:before {
+        content: "\e4f6";
+    }
+
+    .icon-down-stat:before {
+        content: "\e4ac";
+    }
+
+    .icon-up-stat:before {
+        content: "\e4ae";
+    }
+
+    .icon-export:before {
+        content: "\eaf0";
+    }
+
+    .icon-import:before {
+        content: "\e010";
+    }
+
+    .icon-pause:before {
+        content: "\e39e";
+    }
+
+    .icon-play:before {
+        content: "\e3d0";
+    }
+
+    .icon-resetting:before {
+        content: "\e094";
+    }
+
+    .icon-settings:before {
+        content: "\e272";
+    }
+
+    .icon-toast-done:before {
+        content: "\e184";
+        font-family: 'PhosphorFill';
+    }
+
       
     .label-active {
         @apply max-w-max rounded-md bg-emerald-200 px-3 py-1.5 text-xs font-medium text-emerald-900;

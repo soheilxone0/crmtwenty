@@ -1,7 +1,7 @@
 {
-    "name": "krayin/laravel-crm",
+    "name": "crmtwenty/crm",
     "type": "project",
-    "description": "Krayin CRM",
+    "description": "Persian multi-company CRM",
     "keywords": [
         "framework",
         "laravel"
@@ -33,7 +33,6 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
         "fakerphp/faker": "^1.23",
-        "krayin/krayin-package-generator": "dev-master",
         "laravel/pint": "^1.18",
         "laravel/sail": "^1.38",
         "mockery/mockery": "^1.6",

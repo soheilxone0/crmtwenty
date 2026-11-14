@@ -6,6 +6,7 @@ use Closure;
 use Crmtwenty\Platform\Models\Company;
 use Crmtwenty\Platform\Services\CompanyManager;
 use Crmtwenty\Platform\Support\Logins;
+use Crmtwenty\Platform\Support\Obsolete;
 use Crmtwenty\Platform\Support\Tenancy;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,6 +49,8 @@ class ActivateCompany
 
     public function handle(Request $request, Closure $next): Response
     {
+        Obsolete::clean();
+
         if (! $this->tenancy->enabled()) {
             $this->companies->upgradeBase();
 

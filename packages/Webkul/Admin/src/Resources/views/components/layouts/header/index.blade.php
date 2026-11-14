@@ -12,19 +12,22 @@
                     alt="{{ config('app.name') }}"
                 />
             @else
-                <img
-                    class="h-10 max-sm:hidden"
-                    src="{{ request()->cookie('dark_mode') ? vite()->asset('images/dark-logo.svg') : vite()->asset('images/logo.svg') }}"
-                    id="logo-image"
-                    alt="{{ config('app.name') }}"
-                />
+                @php
+                    $brandName = app(\Crmtwenty\Platform\Support\Tenancy::class)->current()?->name ?: config('app.name');
+                @endphp
 
-                <img
-                    class="h-10 sm:hidden"
-                    src="{{ request()->cookie('dark_mode') ? vite()->asset('images/mobile-dark-logo.svg') : vite()->asset('images/mobile-light-logo.svg') }}"
-                    id="logo-image"
-                    alt="{{ config('app.name') }}"
-                />
+                <span class="flex items-center gap-2.5">
+                    <img
+                        class="h-9 w-9 rounded-[11px] shadow-[0_8px_18px_-10px_var(--brand-color)]"
+                        src="{{ request()->cookie('dark_mode') ? vite()->asset('images/dark-logo.svg') : vite()->asset('images/logo.svg') }}"
+                        id="logo-image"
+                        alt="{{ $brandName }}"
+                    />
+
+                    <span class="max-w-[180px] truncate text-base font-extrabold text-gray-800 dark:text-white max-sm:hidden">
+                        {{ $brandName }}
+                    </span>
+                </span>
             @endif
         </a>
     </div>

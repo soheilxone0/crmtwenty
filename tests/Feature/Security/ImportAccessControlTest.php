@@ -34,7 +34,7 @@ const IMPORT_PERMISSIONS = [
 const IMPORT_VIEW = 'settings.automation.data_transfer.imports';
 
 beforeEach(function () {
-    $this->diskRoot = sys_get_temp_dir().'/krayin-import-acl-'.bin2hex(random_bytes(8));
+    $this->diskRoot = sys_get_temp_dir().'/crm-import-acl-'.bin2hex(random_bytes(8));
 
     config([
         'filesystems.disks.local.root' => $this->diskRoot.'/app',

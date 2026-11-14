@@ -25,7 +25,7 @@ uses(DatabaseTransactions::class);
  */
 function isolatePublicDisk(): void
 {
-    $root = sys_get_temp_dir().'/krayin-upload-'.bin2hex(random_bytes(8));
+    $root = sys_get_temp_dir().'/crm-upload-'.bin2hex(random_bytes(8));
 
     config([
         'filesystems.disks.public.root' => $root,

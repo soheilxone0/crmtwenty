@@ -132,7 +132,7 @@ it('accepts the token as basic auth, which is what SendGrid allows in the URL', 
     config(['mail-receiver.inbound_token' => 'the-configured-token']);
 
     $response = test()->withHeaders([
-        'Authorization' => 'Basic '.base64_encode('krayin:the-configured-token'),
+        'Authorization' => 'Basic '.base64_encode('crm:the-configured-token'),
     ])->post(inboundParseUrl(), ['email' => forgedEmail()]);
 
     expect($response->getStatusCode())->toBe(200);

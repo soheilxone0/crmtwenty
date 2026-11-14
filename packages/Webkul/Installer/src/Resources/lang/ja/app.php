@@ -130,7 +130,7 @@ return [
         'index' => [
             'create-administrator' => [
                 'admin' => '管理者',
-                'krayin' => 'CRM',
+                'crm' => 'CRM',
                 'confirm-password' => 'パスワード（確認）',
                 'email' => 'メールアドレス',
                 'email-address' => 'admin@example.com',
@@ -145,7 +145,7 @@ return [
                 'application-name' => 'アプリケーション名',
                 'argentine-peso' => 'アルゼンチン・ペソ (ARS)',
                 'australian-dollar' => 'オーストラリア・ドル (AUD)',
-                'krayin' => 'CRM',
+                'crm' => 'CRM',
                 'bangladeshi-taka' => 'バングラデシュ・タカ (BDT)',
                 'brazilian-real' => 'ブラジル・レアル (BRL)',
                 'british-pound-sterling' => '英ポンド (GBP)',
@@ -230,16 +230,16 @@ return [
             ],
 
             'installation-processing' => [
-                'krayin' => 'CRMのインストール',
-                'krayin-info' => 'データベーステーブルを作成しています。しばらくお待ちください',
+                'crm' => 'CRMのインストール',
+                'crm-info' => 'データベーステーブルを作成しています。しばらくお待ちください',
                 'title' => 'インストール',
             ],
 
             'installation-completed' => [
                 'admin-panel' => '管理パネル',
-                'krayin-forums' => 'CRMフォーラム',
+                'crm-forums' => 'CRMフォーラム',
                 'customer-panel' => '顧客パネル',
-                'explore-krayin-extensions' => 'CRM拡張機能を探す',
+                'explore-crm-extensions' => 'CRM拡張機能を探す',
                 'title' => 'インストール完了',
                 'title-info' => 'CRMのインストールが正常に完了しました。',
             ],
@@ -286,16 +286,16 @@ return [
             ],
 
             'back' => '戻る',
-            'krayin' => 'CRM',
-            'krayin-info' => 'コミュニティプロジェクト by',
-            'krayin-logo' => 'CRMロゴ',
+            'crm' => 'CRM',
+            'crm-info' => 'コミュニティプロジェクト by',
+            'crm-logo' => 'CRMロゴ',
             'continue' => '続行',
             'installation-description' => 'CRMのインストールは通常いくつかのステップで行います。以下はCRMのインストール手順の概要です',
             'installation-info' => 'ようこそ！お会いできてうれしいです。',
             'installation-title' => 'インストールへようこそ',
             'installation-wizard' => 'インストールウィザードの言語',
             'title' => 'CRMインストーラー',
-            'webkul' => 'CRM',
+            'crm-vendor' => 'CRM',
         ],
     ],
 ];

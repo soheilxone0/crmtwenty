@@ -1,4 +1,4 @@
-// Builds the Phosphor-based icon set that replaces Krayin's icomoon font.
+// Builds the Phosphor-based icon set that replaces the original icon font.
 // Usage (from a folder with the packages of scripts/brand/package.json installed):
 //   node icons.mjs <admin-assets-dir> <platform-public-dir>
 // The admin icon CSS is written next to the assets dir, to be pasted into css/app.css.
@@ -21,7 +21,7 @@ function codes(weight) {
 const regular = codes("regular");
 const fill = codes("fill");
 
-// Krayin class => [phosphor name, weight]
+// panel class => [phosphor name, weight]
 const admin = {
     activity: ["pulse"], "add-2": ["plus-circle"], add: ["plus"], "attached-file": ["paperclip"],
     attachment: ["paperclip-horizontal"], attribute: ["sliders-horizontal"],
@@ -49,7 +49,10 @@ const admin = {
     "settings-webforms": ["browser"], "settings-webhooks": ["webhooks-logo"], "stats-down": ["trend-down"],
     "stats-up": ["trend-up"], success: ["check-circle", "fill"], "system-generate": ["sparkle"], tag: ["tag"],
     tick: ["check"], "up-arrow": ["caret-up"], user: ["user"], video: ["video-camera"], warning: ["warning", "fill"],
-    help: ["question"],
+    help: ["question"], "arrow-down": ["caret-down"], "arrow-up": ["caret-up"],
+    "cross-large-large": ["x"], "down-stat": ["trend-down"], "up-stat": ["trend-up"], export: ["export"],
+    import: ["tray-arrow-down"], pause: ["pause"], play: ["play"], resetting: ["arrows-clockwise"],
+    settings: ["gear-six"], "toast-done": ["check-circle", "fill"],
 };
 
 // Icons used by the platform (super admin) panel: class "pi pi-<name>"

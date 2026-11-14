@@ -130,7 +130,7 @@ return [
         'index' => [
             'create-administrator' => [
                 'admin' => 'Administrador',
-                'krayin' => 'CRM',
+                'crm' => 'CRM',
                 'confirm-password' => 'Confirmar Senha',
                 'email' => 'E-mail',
                 'email-address' => 'admin@example.com',
@@ -145,7 +145,7 @@ return [
                 'application-name' => 'Nome do Aplicativo',
                 'argentine-peso' => 'Peso Argentino (ARS)',
                 'australian-dollar' => 'Dólar Australiano (AUD)',
-                'krayin' => 'CRM',
+                'crm' => 'CRM',
                 'bangladeshi-taka' => 'Taka de Bangladesh (BDT)',
                 'brazilian-real' => 'Real Brasileiro (BRL)',
                 'british-pound-sterling' => 'Libra Esterlina (GBP)',
@@ -230,16 +230,16 @@ return [
             ],
 
             'installation-processing' => [
-                'krayin' => 'Instalação do CRM',
-                'krayin-info' => 'Criando as tabelas do banco de dados, isso pode levar alguns momentos',
+                'crm' => 'Instalação do CRM',
+                'crm-info' => 'Criando as tabelas do banco de dados, isso pode levar alguns momentos',
                 'title' => 'Instalação',
             ],
 
             'installation-completed' => [
                 'admin-panel' => 'Painel de Administração',
-                'krayin-forums' => 'Fórum CRM',
+                'crm-forums' => 'Fórum CRM',
                 'customer-panel' => 'Painel do Cliente',
-                'explore-krayin-extensions' => 'Explorar Extensões CRM',
+                'explore-crm-extensions' => 'Explorar Extensões CRM',
                 'title' => 'Instalação Concluída',
                 'title-info' => 'CRM foi instalado com sucesso no seu sistema.',
             ],
@@ -286,16 +286,16 @@ return [
             ],
 
             'back' => 'Voltar',
-            'krayin' => 'CRM',
-            'krayin-info' => 'um projeto comunitário de',
-            'krayin-logo' => 'Logotipo CRM',
+            'crm' => 'CRM',
+            'crm-info' => 'um projeto comunitário de',
+            'crm-logo' => 'Logotipo CRM',
             'continue' => 'Continuar',
             'installation-description' => 'A instalação do CRM geralmente envolve várias etapas. Aqui está uma visão geral do processo de instalação do CRM',
             'installation-info' => 'Estamos felizes em ver você aqui!',
             'installation-title' => 'Bem-vindo à Instalação',
             'installation-wizard' => 'Assistente de Instalação - Idioma',
             'title' => 'Instalador do CRM',
-            'webkul' => 'CRM',
+            'crm-vendor' => 'CRM',
         ],
     ],
 ];

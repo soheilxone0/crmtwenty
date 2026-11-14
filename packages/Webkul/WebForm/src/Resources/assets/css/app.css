@@ -4,18 +4,52 @@
 
 /* -------------------------------- new css -------------------------------- */
 
+/*
+ * crmtwenty: Vazirmatn (SIL OFL 1.1) and Phosphor Icons (MIT), served locally.
+ */
 @font-face {
-    font-family: "icomoon";
-    src: url("../fonts/icomoon.woff?w2trdd") format("woff");
+    font-family: "Vazirmatn";
+    src: url("../fonts/Vazirmatn-Variable.woff2") format("woff2-variations"),
+         url("../fonts/Vazirmatn-Variable.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Phosphor";
+    src: url("../fonts/phosphor.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: block;
 }
 
+@font-face {
+    font-family: "PhosphorFill";
+    src: url("../fonts/phosphor-fill.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+body,
+.font-inter,
+.font-poppins,
+.font-dm-serif {
+    font-family: "Vazirmatn", Tahoma, sans-serif;
+}
+
+input,
+textarea,
+select,
+button {
+    font-family: inherit;
+}
+
 [class^="icon-"],
 [class*=" icon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: "icomoon", sans-serif !important;
+    font-family: "Phosphor", sans-serif !important;
     speak: never;
     font-style: normal;
     font-weight: normal;
@@ -29,8 +63,51 @@
 }
 
 @layer components {
+    .icon-checkbox-outline:before {
+        content: "\e45e";
+    }
+
+    .icon-checkbox-select:before {
+        content: "\e186";
+        font-family: 'PhosphorFill';
+    }
+
     .icon-cross-large:before {
-        content: "\e91c";
+        content: "\e4f6";
+    }
+
+    .icon-error:before {
+        content: "\e4f8";
+        font-family: 'PhosphorFill';
+    }
+
+    .icon-info:before {
+        content: "\e2ce";
+        font-family: 'PhosphorFill';
+    }
+
+    .icon-radio-normal:before {
+        content: "\e18a";
+    }
+
+    .icon-radio-selected:before {
+        content: "\eb08";
+        font-family: 'PhosphorFill';
+    }
+
+    .icon-success:before {
+        content: "\e184";
+        font-family: 'PhosphorFill';
+    }
+
+    .icon-warning:before {
+        content: "\e4e0";
+        font-family: 'PhosphorFill';
+    }
+
+    .icon-toast-done:before {
+        content: "\e184";
+        font-family: 'PhosphorFill';
     }
 
     [dir="rtl"] .stage::before {

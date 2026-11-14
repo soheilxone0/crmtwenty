@@ -1,32 +1,32 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-D6toK770.css",
+    "file": "assets/app-D5plPh8A.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
-  "src/Resources/assets/fonts/icomoon.eot": {
-    "file": "assets/icomoon-BFKbaEOo.eot",
-    "src": "src/Resources/assets/fonts/icomoon.eot"
+  "src/Resources/assets/fonts/Vazirmatn-OFL.txt": {
+    "file": "assets/Vazirmatn-OFL-DmtN2C-d.txt",
+    "src": "src/Resources/assets/fonts/Vazirmatn-OFL.txt"
   },
-  "src/Resources/assets/fonts/icomoon.svg": {
-    "file": "assets/icomoon-r7Xq6sz-.svg",
-    "src": "src/Resources/assets/fonts/icomoon.svg"
+  "src/Resources/assets/fonts/Vazirmatn-Variable.woff2": {
+    "file": "assets/Vazirmatn-Variable-BeciDpKm.woff2",
+    "src": "src/Resources/assets/fonts/Vazirmatn-Variable.woff2"
   },
-  "src/Resources/assets/fonts/icomoon.ttf": {
-    "file": "assets/icomoon-BgFe9HIr.ttf",
-    "src": "src/Resources/assets/fonts/icomoon.ttf"
+  "src/Resources/assets/fonts/phosphor-fill.woff2": {
+    "file": "assets/phosphor-fill-19RX2XMN.woff2",
+    "src": "src/Resources/assets/fonts/phosphor-fill.woff2"
   },
-  "src/Resources/assets/fonts/icomoon.woff": {
-    "file": "assets/icomoon-B5aogpno.woff",
-    "src": "src/Resources/assets/fonts/icomoon.woff"
+  "src/Resources/assets/fonts/phosphor.woff2": {
+    "file": "assets/phosphor-ChALDfUu.woff2",
+    "src": "src/Resources/assets/fonts/phosphor.woff2"
   },
   "src/Resources/assets/images/favicon.ico": {
-    "file": "assets/favicon-BtbgZBji.ico",
+    "file": "assets/favicon-BBTAb_86.ico",
     "src": "src/Resources/assets/images/favicon.ico"
   },
-  "src/Resources/assets/images/krayin-logo.svg": {
-    "file": "assets/krayin-logo-D5SO44Ys.svg",
-    "src": "src/Resources/assets/images/krayin-logo.svg"
+  "src/Resources/assets/images/logo.svg": {
+    "file": "assets/logo-CGX-3nWB.svg",
+    "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/images/spinner.svg": {
     "file": "assets/spinner-CWS6ej98.svg",

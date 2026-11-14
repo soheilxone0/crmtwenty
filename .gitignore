@@ -33,3 +33,4 @@ node_modules/
 /test-results/
 /blob-report/
 /playwright/.cache/
+/packages/Webkul/Admin/tests/e2e-pw/.state/

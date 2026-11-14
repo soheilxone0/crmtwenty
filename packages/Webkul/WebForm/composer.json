@@ -1,12 +1,6 @@
 {
-    "name": "krayin/laravel-webform",
+    "name": "crmtwenty/webform",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Jitendra Singh",
-            "email": "jitendra@webkul.com"
-        }
-    ],
     "require": {},
     "autoload": {
         "psr-4": {

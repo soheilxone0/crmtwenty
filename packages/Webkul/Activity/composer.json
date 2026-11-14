@@ -1,15 +1,9 @@
 {
-    "name": "krayin/laravel-activity",
+    "name": "crmtwenty/activity",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Jitendra Singh",
-            "email": "jitendra@webkul.com"
-        }
-    ],
     "require": {
-        "krayin/laravel-core": "^1.0",
-        "krayin/laravel-user": "^1.0"
+        "crmtwenty/core": "^1.0",
+        "crmtwenty/user": "^1.0"
     },
     "autoload": {
         "psr-4": {

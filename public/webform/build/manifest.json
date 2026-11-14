@@ -1,15 +1,27 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-CWW-WGL4.css",
+    "file": "assets/app-_Ae0p03a.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
-  "src/Resources/assets/fonts/icomoon.woff": {
-    "file": "assets/icomoon-CO37Y6g-.woff",
-    "src": "src/Resources/assets/fonts/icomoon.woff"
+  "src/Resources/assets/fonts/Vazirmatn-OFL.txt": {
+    "file": "assets/Vazirmatn-OFL-DmtN2C-d.txt",
+    "src": "src/Resources/assets/fonts/Vazirmatn-OFL.txt"
+  },
+  "src/Resources/assets/fonts/Vazirmatn-Variable.woff2": {
+    "file": "assets/Vazirmatn-Variable-BeciDpKm.woff2",
+    "src": "src/Resources/assets/fonts/Vazirmatn-Variable.woff2"
+  },
+  "src/Resources/assets/fonts/phosphor-fill.woff2": {
+    "file": "assets/phosphor-fill-19RX2XMN.woff2",
+    "src": "src/Resources/assets/fonts/phosphor-fill.woff2"
+  },
+  "src/Resources/assets/fonts/phosphor.woff2": {
+    "file": "assets/phosphor-ChALDfUu.woff2",
+    "src": "src/Resources/assets/fonts/phosphor.woff2"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-Di8tgz7D.js",
+    "file": "assets/app-NOnVcFG8.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,

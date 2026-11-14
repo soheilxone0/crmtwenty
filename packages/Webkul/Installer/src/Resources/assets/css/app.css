@@ -3,22 +3,52 @@
 @tailwind utilities;
 
 /* -------------------------------- new css -------------------------------- */
+/*
+ * crmtwenty: Vazirmatn (SIL OFL 1.1) and Phosphor Icons (MIT), served locally.
+ */
 @font-face {
-	font-family: "icomoon";
-	src: url("../fonts/icomoon.eot?w2trdd");
-	src: url("../fonts/icomoon.eot?w2trdd#iefix") format("embedded-opentype"),
-		url("../fonts/icomoon.ttf?w2trdd") format("truetype"),
-		url("../fonts/icomoon.woff?w2trdd") format("woff"),
-		url("../fonts/icomoon.svg?w2trdd#icomoon") format("svg");
+	font-family: "Vazirmatn";
+	src: url("../fonts/Vazirmatn-Variable.woff2") format("woff2-variations"),
+		url("../fonts/Vazirmatn-Variable.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Phosphor";
+	src: url("../fonts/phosphor.woff2") format("woff2");
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
 }
 
+@font-face {
+	font-family: "PhosphorFill";
+	src: url("../fonts/phosphor-fill.woff2") format("woff2");
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+body,
+.font-inter,
+.font-poppins,
+.font-dm-serif {
+	font-family: "Vazirmatn", Tahoma, sans-serif;
+}
+
+input,
+textarea,
+select,
+button {
+	font-family: inherit;
+}
+
 [class^="icon-"],
 [class*=" icon-"] {
 	/* use !important to prevent issues with browser extensions that change fonts */
-	font-family: "icomoon", sans-serif !important;
+	font-family: "Phosphor", sans-serif !important;
 	speak: never;
 	font-style: normal;
 	font-weight: normal;
@@ -93,35 +123,41 @@
 
 	/* -------------------------------- new css -------------------------------- */
 	.icon-checkbox-select:before {
-		content: "\e908";
+		content: "\e186";
+		font-family: "PhosphorFill";
 	}
 
 	.icon-checkbox-outline:before {
-		content: "\e909";
+		content: "\e45e";
 	}
 
 	.icon-tick:before {
-		content: "\e931";
+		content: "\e182";
 	}
 
 	.icon-cross-large:before {
-		content: "\e91c";
+		content: "\e4f6";
 	}
 
 	.icon-left-arrow:before {
-		content: "\e91d";
+		content: "\e138";
 	}
 
 	.icon-right-arrow:before {
-		content: "\e91e";
+		content: "\e13a";
 	}
 
 	.icon-up-arrow:before {
-		content: "\e91f";
+		content: "\e13c";
+	}
+
+	.icon-limited:before {
+		content: "\e4e0";
+		font-family: "PhosphorFill";
 	}
 
 	.icon-down-arrow:before {
-		content: "\e920";
+		content: "\e136";
 	}
 
 	/* -------------------------------- new css end -------------------------------- */
