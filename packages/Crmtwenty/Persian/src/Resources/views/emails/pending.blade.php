@@ -7,7 +7,7 @@
         <p style="text-align: center; padding: 20px 0;">
             <a
                 href="{{ $url }}"
-                style="display: inline-block; padding: 12px 24px; background: #0E90D9; color: #ffffff; text-decoration: none; font-size: 16px; border-radius: 6px;"
+                style="display: inline-block; padding: 12px 24px; background: #4F46E5; color: #ffffff; text-decoration: none; font-size: 16px; border-radius: 6px;"
             >
                 @lang('persian::app.emails.pending.button')
             </a>

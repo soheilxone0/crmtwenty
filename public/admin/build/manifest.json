@@ -272,7 +272,7 @@
     "isDynamicEntry": true
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-Bm_Rgv73.css",
+    "file": "assets/app-DL4NACwc.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -385,7 +385,7 @@
     "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-BYDQFoZV.js",
+    "file": "assets/app-D1cQC4KT.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
@@ -439,7 +439,7 @@
       "node_modules/vue-cal/dist/drag-and-drop.es.js"
     ],
     "css": [
-      "assets/app-DzjJ7DH1.css"
+      "assets/app-C88ELFxY.css"
     ],
     "assets": [
       "assets/dark-CLxH30By.css"
