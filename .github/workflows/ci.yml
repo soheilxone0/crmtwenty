@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.operating-system }}
+
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-versions: ["8.3"]
+
+    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-system }}
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: krayin
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: curl, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+
+      - name: Running Composer Install
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Set Testing Environment
+        run: |
+          cp .env.example .env
+          sed -i "s|^\(APP_ENV=\s*\).*$|\1testing|" .env
+          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
+          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env
+          sed -i "s|^\(DB_DATABASE=\s*\).*$|\1krayin|" .env
+          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1root|" .env
+          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1root|" .env
+          # Upstream tests assert English texts; the Persian edition is covered by tests/Feature/Persian.
+          sed -i "s|^\(APP_LOCALE=\s*\).*$|\1en|" .env
+          sed -i "s|^\(APP_CURRENCY=\s*\).*$|\1USD|" .env
+          sed -i "s|^\(APP_TIMEZONE=\s*\).*$|\1Asia/Kolkata|" .env
+
+      - name: Running Krayin Installer
+        run: php artisan krayin-crm:install --skip-env-check --skip-admin-creation
+
+      - name: Running Pest Test
+        run: vendor/bin/pest --parallel --colors=always --log-junit junit.xml
+
+      - name: Report failed tests
+        if: failure()
+        run: |
+          cat > /tmp/report.php <<'PHP'
+          <?php
+          if (! is_file('junit.xml')) {
+              exit(0);
+          }
+          $clean = fn ($text) => str_replace(['%', ':', ','], ['%25', ' ', ' '], preg_replace('/\s+/', ' ', $text));
+          foreach (simplexml_load_file('junit.xml')->xpath('//testcase[failure or error]') as $case) {
+              $node = $case->failure ?: $case->error;
+              echo '::error title='.$clean($case['class'].' > '.$case['name']).'::'
+                  .str_replace('%', '%25', preg_replace('/\s+/', ' ', substr((string) $node, 0, 900)))."\n";
+          }
+          PHP
+          php /tmp/report.php
