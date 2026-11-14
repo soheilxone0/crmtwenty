@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\URL;
@@ -19,8 +20,14 @@ it('diagnoses login throttling', function () {
             .' attempts='.RateLimiter::attempts($key)
             .' store='.config('cache.default').' limiter='.var_export(config('cache.limiter'), true)
             .' errors='.json_encode(session('errors')?->all()).' flash='.json_encode(session('error'))
-            .' now='.now()->toIso8601String();
+            .' now='.now()->toIso8601String().' carbonLocale='.Carbon::getLocale()
+            .' testNow='.var_export(Carbon::hasTestNow(), true).' tz='.date_default_timezone_get()
+            .' locale='.app()->getLocale().' ip='.request()->ip();
     }
 
-    expect(implode(' | ', $log))->toBe('');
+    if (! str_starts_with(end($log), '6:429')) {
+        throw new RuntimeException(implode(' | ', $log));
+    }
+
+    expect(true)->toBeTrue();
 });

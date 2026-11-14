@@ -64,7 +64,7 @@ jobs:
       - name: Diagnose (temporary)
         continue-on-error: true
         run: |
-          vendor/bin/pest tests/Feature/Persian/RateLimitDiagnosticTest.php tests/Feature/Security/AuthenticationHardeningTest.php --log-junit junit.xml || php /dev/stdin <<'PHP'
+          vendor/bin/pest --log-junit junit.xml || php /dev/stdin <<'PHP'
           <?php
           foreach (simplexml_load_file('junit.xml')->xpath('//testcase[failure or error]') as $case) {
               $node = $case->failure ?: $case->error;
