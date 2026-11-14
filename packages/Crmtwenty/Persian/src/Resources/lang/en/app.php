@@ -114,4 +114,8 @@ return [
             'button' => 'Manage users',
         ],
     ],
+
+    'errors' => [
+        'session-expired' => 'Your session had expired. Please try again.',
+    ],
 ];

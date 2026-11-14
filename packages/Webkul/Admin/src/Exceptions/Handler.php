@@ -6,8 +6,10 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
 use PDOException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -47,11 +49,51 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        if (! config('app.debug')) {
-            return $this->renderCustomResponse($exception);
+        if (config('app.debug') || $this->shouldRenderNatively($exception)) {
+            return parent::render($request, $exception);
         }
 
-        return parent::render($request, $exception);
+        return $this->renderCustomResponse($exception);
+    }
+
+    /**
+     * crmtwenty: exceptions that already carry their own response (a redirect, validation
+     * errors, a 419 or a 429) keep it. Mapping them to the generic error page, as happened
+     * whenever APP_DEBUG was off, broke rate limiting, "session expired" and redirects.
+     */
+    protected function shouldRenderNatively(Throwable $exception): bool
+    {
+        if (
+            $exception instanceof HttpResponseException
+            || $exception instanceof AuthenticationException
+            || $exception instanceof ValidationException
+            || $exception instanceof TokenMismatchException
+        ) {
+            return true;
+        }
+
+        return $exception instanceof HttpException
+            && ! in_array($exception->getStatusCode(), [401, 403, 404, 500, 503]);
+    }
+
+    /**
+     * crmtwenty: an expired form (CSRF token mismatch) sends the user back to the form
+     * with a message instead of an English "Page Expired" screen.
+     */
+    protected function prepareResponse($request, Throwable $e)
+    {
+        if (
+            ! config('app.debug')
+            && $e instanceof HttpException
+            && $e->getStatusCode() === 419
+            && ! $request->expectsJson()
+        ) {
+            return redirect()->back()
+                ->withInput($request->except(['password', 'password_confirmation', '_token']))
+                ->with('warning', trans('persian::app.errors.session-expired'));
+        }
+
+        return parent::prepareResponse($request, $e);
     }
 
     /**
@@ -66,7 +108,7 @@ class Handler extends ExceptionHandler
             return response()->json(['message' => $this->jsonErrorMessages[401]], 401);
         }
 
-        return redirect()->guest(route('customer.session.index'));
+        return redirect()->guest(route('admin.session.create'));
     }
 
     /**
@@ -114,6 +156,6 @@ class Handler extends ExceptionHandler
             ], $errorCode);
         }
 
-        return response()->view('admin::errors.index', compact('errorCode'));
+        return response()->view('admin::errors.index', compact('errorCode'), (int) $errorCode);
     }
 }
