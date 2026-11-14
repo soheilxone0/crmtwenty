@@ -5,6 +5,7 @@ namespace Crmtwenty\Platform\Models;
 use Crmtwenty\Platform\Support\Tenancy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * A company (workspace) on the platform. Its CRM data lives in its own set of tables,
@@ -21,8 +22,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $phone
  * @property string|null $notes
  * @property string|null $migrated_revision
- * @property \Illuminate\Support\Carbon|null $last_activity_at
- * @property \Illuminate\Support\Carbon|null $created_at
+ * @property Carbon|null $last_activity_at
+ * @property Carbon|null $created_at
  */
 class Company extends Model
 {

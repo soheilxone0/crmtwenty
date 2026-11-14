@@ -6,6 +6,7 @@ use Crmtwenty\Platform\Notifications\PlatformResetPassword;
 use Crmtwenty\Platform\Support\Tenancy;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 
 /**
  * Administrator of the platform (manages companies, not CRM data).
@@ -16,7 +17,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string $email
  * @property string $password
  * @property bool $status
- * @property \Illuminate\Support\Carbon|null $last_login_at
+ * @property Carbon|null $last_login_at
  */
 class PlatformAdmin extends Authenticatable
 {

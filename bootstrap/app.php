@@ -1,8 +1,8 @@
 <?php
 
+use Crmtwenty\Platform\Http\Middleware\ActivateCompany;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
-use Crmtwenty\Platform\Http\Middleware\ActivateCompany;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Session\Middleware\StartSession;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
