@@ -74,7 +74,7 @@ export async function loginAsCustomer(page) {
 export async function addAddress(page) {
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Profile" }).click();
-    await page.getByRole("link", { name: " Address " }).click();
+    await page.getByRole("link", { name: " Address " }).click();
     await page.getByRole("link", { name: "Add Address" }).click();
     await page.getByPlaceholder("Company Name").click();
     await page.getByPlaceholder("Company Name").fill(generateName());

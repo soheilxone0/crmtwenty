@@ -38,5 +38,6 @@ jobs:
       - name: Report Pint fixes
         if: failure()
         run: |
-          vendor/bin/pint --test --format=json > pint.json || true
-          jq -r '.files[] | "::error file=\(.name)::\(.appliedFixers | join(", "))"' pint.json
+          vendor/bin/pint --test -v --format=json > pint.json 2>&1 || true
+          echo "::error::$(head -c 6000 pint.json | tr '\n' ' ')"
+          vendor/bin/pint --test -v 2>&1 | grep -E '\.php|✗|⨯|FAIL' | head -40 | while read -r line; do echo "::error::$line"; done
