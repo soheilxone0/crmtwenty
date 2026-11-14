@@ -3283,36 +3283,6 @@ parameters:
 			path: packages/Webkul/Installer/src/Helpers/EnvironmentManager.php
 
 		-
-			message: '#^Method Webkul\\Installer\\Http\\Controllers\\ImageCacheController\:\:buildResponse\(\) has invalid return type Webkul\\Installer\\Http\\Controllers\\Illuminate\\Http\\Response\.$#'
-			identifier: class.notFound
-			count: 1
-			path: packages/Webkul/Installer/src/Http/Controllers/ImageCacheController.php
-
-		-
-			message: '#^Method Webkul\\Installer\\Http\\Controllers\\ImageCacheController\:\:buildResponse\(\) should return Webkul\\Installer\\Http\\Controllers\\Illuminate\\Http\\Response but returns Illuminate\\Http\\Response\.$#'
-			identifier: return.type
-			count: 1
-			path: packages/Webkul/Installer/src/Http/Controllers/ImageCacheController.php
-
-		-
-			message: '#^Method Webkul\\Installer\\Http\\Controllers\\ImageCacheController\:\:getImage\(\) has invalid return type Webkul\\Installer\\Http\\Controllers\\Illuminate\\Http\\Response\.$#'
-			identifier: class.notFound
-			count: 1
-			path: packages/Webkul/Installer/src/Http/Controllers/ImageCacheController.php
-
-		-
-			message: '#^Method Webkul\\Installer\\Http\\Controllers\\ImageCacheController\:\:getImageFromUrl\(\) has invalid return type Intervention\\Image\\Image\.$#'
-			identifier: class.notFound
-			count: 1
-			path: packages/Webkul/Installer/src/Http/Controllers/ImageCacheController.php
-
-		-
-			message: '#^Method Webkul\\Installer\\Http\\Controllers\\ImageCacheController\:\:getImageFromUrl\(\) should return Intervention\\Image\\Image but returns string\.$#'
-			identifier: return.type
-			count: 1
-			path: packages/Webkul/Installer/src/Http/Controllers/ImageCacheController.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$code\.$#'
 			identifier: property.notFound
 			count: 1
