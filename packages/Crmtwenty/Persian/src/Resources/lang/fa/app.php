@@ -118,4 +118,11 @@ return [
     'errors' => [
         'session-expired' => 'نشست شما منقضی شده بود؛ لطفاً دوباره تلاش کنید.',
     ],
+
+    'users' => [
+        'username' => 'نام کاربری',
+        'username-placeholder' => 'مثلاً ali.rezaei',
+        'login' => 'ایمیل یا نام کاربری',
+        'login-placeholder' => 'ایمیل یا نام کاربری خود را وارد کنید',
+    ],
 ];

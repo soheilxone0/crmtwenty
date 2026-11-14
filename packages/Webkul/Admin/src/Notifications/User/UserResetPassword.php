@@ -23,6 +23,7 @@ class UserResetPassword extends ResetPassword
             ->view('admin::emails.users.forget-password', [
                 'user_name' => $notifiable->name,
                 'token' => $this->token,
+                'email' => $notifiable->email,
             ]);
     }
 }

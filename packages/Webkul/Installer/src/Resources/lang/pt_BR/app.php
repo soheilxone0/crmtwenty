@@ -130,7 +130,7 @@ return [
         'index' => [
             'create-administrator' => [
                 'admin' => 'Administrador',
-                'krayin' => 'Krayin',
+                'krayin' => 'CRM',
                 'confirm-password' => 'Confirmar Senha',
                 'email' => 'E-mail',
                 'email-address' => 'admin@example.com',
@@ -145,7 +145,7 @@ return [
                 'application-name' => 'Nome do Aplicativo',
                 'argentine-peso' => 'Peso Argentino (ARS)',
                 'australian-dollar' => 'Dólar Australiano (AUD)',
-                'krayin' => 'Krayin',
+                'krayin' => 'CRM',
                 'bangladeshi-taka' => 'Taka de Bangladesh (BDT)',
                 'brazilian-real' => 'Real Brasileiro (BRL)',
                 'british-pound-sterling' => 'Libra Esterlina (GBP)',
@@ -230,24 +230,24 @@ return [
             ],
 
             'installation-processing' => [
-                'krayin' => 'Instalação do Krayin',
+                'krayin' => 'Instalação do CRM',
                 'krayin-info' => 'Criando as tabelas do banco de dados, isso pode levar alguns momentos',
                 'title' => 'Instalação',
             ],
 
             'installation-completed' => [
                 'admin-panel' => 'Painel de Administração',
-                'krayin-forums' => 'Fórum Krayin',
+                'krayin-forums' => 'Fórum CRM',
                 'customer-panel' => 'Painel do Cliente',
-                'explore-krayin-extensions' => 'Explorar Extensões Krayin',
+                'explore-krayin-extensions' => 'Explorar Extensões CRM',
                 'title' => 'Instalação Concluída',
-                'title-info' => 'Krayin foi instalado com sucesso no seu sistema.',
+                'title-info' => 'CRM foi instalado com sucesso no seu sistema.',
             ],
 
             'ready-for-installation' => [
                 'create-databsae-table' => 'Adicionar tabela do banco de dados',
                 'install' => 'Instalação',
-                'install-info' => 'Krayin Para Instalação',
+                'install-info' => 'CRM Para Instalação',
                 'install-info-button' => 'Clique no botão abaixo para',
                 'populate-database-table' => 'Preencher as tabelas do banco de dados',
                 'start-installation' => 'Iniciar Instalação',
@@ -258,8 +258,8 @@ return [
                 'locale' => 'Idioma',
                 'main' => 'Início',
                 'select-locale' => 'Selecionar Idioma',
-                'title' => 'Instalação do Krayin',
-                'welcome-title' => 'Bem-vindo ao Krayin',
+                'title' => 'Instalação do CRM',
+                'welcome-title' => 'Bem-vindo ao CRM',
             ],
 
             'server-requirements' => [
@@ -286,16 +286,16 @@ return [
             ],
 
             'back' => 'Voltar',
-            'krayin' => 'Krayin',
+            'krayin' => 'CRM',
             'krayin-info' => 'um projeto comunitário de',
-            'krayin-logo' => 'Logotipo Krayin',
+            'krayin-logo' => 'Logotipo CRM',
             'continue' => 'Continuar',
-            'installation-description' => 'A instalação do Krayin geralmente envolve várias etapas. Aqui está uma visão geral do processo de instalação do Krayin',
+            'installation-description' => 'A instalação do CRM geralmente envolve várias etapas. Aqui está uma visão geral do processo de instalação do CRM',
             'installation-info' => 'Estamos felizes em ver você aqui!',
             'installation-title' => 'Bem-vindo à Instalação',
             'installation-wizard' => 'Assistente de Instalação - Idioma',
-            'title' => 'Instalador do Krayin',
-            'webkul' => 'Webkul',
+            'title' => 'Instalador do CRM',
+            'webkul' => 'CRM',
         ],
     ],
 ];

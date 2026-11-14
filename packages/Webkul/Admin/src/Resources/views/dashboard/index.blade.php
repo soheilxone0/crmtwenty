@@ -93,11 +93,10 @@
         >
         </script>
 
+        <!-- Self-hosted funnel plugin (UMD, needs the global Chart from chart.js above). -->
         <script
-            type="module"
-            src="https://cdn.jsdelivr.net/npm/chartjs-chart-funnel@4.2.1/build/index.umd.min.js"
-            integrity="sha384-3s9Buv17hNMrULiw1fw1xLUac5oZZitue3rXD5XSWw8WACZcFJk1N79K4WeKwkDZ"
-            crossorigin="anonymous"
+            defer
+            src="{{ asset('admin/vendor/chart-funnel.umd.js') }}"
         >
         </script>
 

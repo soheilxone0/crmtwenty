@@ -680,12 +680,10 @@
             });
         </script>
 
-        <!-- Code mirror script CDN -->
+        <!-- Code mirror (served locally) -->
         <script
             type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.js"
-            integrity="sha384-hDVkc0yoFxTaExu/IngSbi+ypUS7emvIIw+XanqgRo8oSu1ey0CR6uAzV22fezg/"
-            crossorigin="anonymous"
+            src="{{ asset('admin/codemirror/codemirror.js') }}"
         ></script>
 
         <!-- 
@@ -694,27 +692,21 @@
         -->
         <script
             type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/mode/javascript/javascript.js"
-            integrity="sha384-S1JCkuNZec6d8+uXKJ+JdsXNBEZiozl0my2uuNcATHr+SVZJUqianMyjxhS+F2oS"
-            crossorigin="anonymous"
+            src="{{ asset('admin/codemirror/javascript.js') }}"
         ></script>
     @endPushOnce
 
     @pushOnce('styles')
-        <!-- Code mirror style cdn -->
+        <!-- Code mirror style (served locally) -->
         <link 
             rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.css"
-            integrity="sha384-ayAY1F4W6brs1DOW3MU0j8FjIBc+thLUxbZVU2CXb4PnGnXfLw6zLVg4KzIAznNz"
-            crossorigin="anonymous"
+            href="{{ asset('admin/codemirror/codemirror.css') }}"
         ></link>
 
         <!-- Dark theme css -->
         <link
             rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/theme/ayu-dark.min.css"
-            integrity="sha384-xWcgiCs8RKifYguldASXfXhT717Ys5Pi3bCjgToFTInA9uIjKSsT62Peojdnp3Oz"
-            crossorigin="anonymous"
+            href="{{ asset('admin/codemirror/ayu-dark.css') }}"
         >
     @endPushOnce
 </x-admin::layouts>

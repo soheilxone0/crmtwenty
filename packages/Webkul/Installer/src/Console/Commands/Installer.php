@@ -22,7 +22,7 @@ class Installer extends Command
      *
      * @var string
      */
-    protected $signature = 'krayin-crm:install
+    protected $signature = 'crm:install
         { --skip-env-check : Skip env check. }
         { --skip-admin-creation : Skip admin creation. }';
 
@@ -31,7 +31,7 @@ class Installer extends Command
      *
      * @var string
      */
-    protected $description = 'krayin installer.';
+    protected $description = 'CRM installer.';
 
     /**
      * Locales list.
@@ -121,12 +121,10 @@ class Installer extends Command
     ];
 
     /**
-     * Install and configure krayin.
+     * Install and configure the CRM.
      */
     public function handle()
     {
-        $this->output->writeln(ComposerEvents::cloudHostingBox());
-
         $applicationDetails = ! $this->option('skip-env-check')
             ? $this->checkForEnvFile()
             : [];
@@ -139,7 +137,7 @@ class Installer extends Command
         $this->warn('Step: Migrating all tables...');
         $this->call('migrate:fresh');
 
-        $this->warn('Step: Seeding basic data for Krayin kickstart...');
+        $this->warn('Step: Seeding basic data...');
         $this->info(app(KrayinDatabaseSeeder::class)->run([
             'locale' => $applicationDetails['locale'] ?? 'en',
             'currency' => $applicationDetails['currency'] ?? 'USD',
@@ -211,7 +209,7 @@ class Installer extends Command
         $this->updateEnvVariable(
             'APP_NAME',
             'Please enter the application name',
-            env('APP_NAME', 'Krayin CRM')
+            env('APP_NAME', 'CRM')
         );
 
         $this->updateEnvVariable(
@@ -376,7 +374,7 @@ class Installer extends Command
 
             $filePath = storage_path('installed');
 
-            File::put($filePath, 'Krayin is successfully installed');
+            File::put($filePath, 'Installed');
 
             /**
              * Recorded in the database as well as on disk, so losing the marker file cannot reopen
@@ -388,13 +386,13 @@ class Installer extends Command
 
             $this->info('-----------------------------');
             $this->info('Congratulations!');
-            $this->info('The installation has been finished and you can now use Krayin.');
+            $this->info('The installation has been finished and you can now use the CRM.');
             $this->info('Go to '.env('APP_URL').'/admin/dashboard'.' and authenticate with:');
             $this->info('Email: '.$adminEmail);
             $this->info('Password: the one you just set.');
             $this->info('Cheers!');
 
-            Event::dispatch('krayin.installed');
+            Event::dispatch('crm.installed');
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }

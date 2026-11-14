@@ -79,7 +79,7 @@ class DatabaseManager
      */
     public function markInstallationInProgress(): void
     {
-        @file_put_contents(storage_path('installing'), 'Krayin installation in progress');
+        @file_put_contents(storage_path('installing'), 'Installation in progress');
     }
 
     /**

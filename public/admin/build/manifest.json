@@ -1,4 +1,8 @@
 {
+  "/home/user/crmtwenty/packages/Webkul/Admin/node_modules/flatpickr/dist/themes/dark.css": {
+    "file": "assets/dark-CLxH30By.css",
+    "src": "/home/user/crmtwenty/packages/Webkul/Admin/node_modules/flatpickr/dist/themes/dark.css"
+  },
   "__commonjsHelpers-C4iS2aBk.js": {
     "file": "assets/_commonjsHelpers-C4iS2aBk.js",
     "name": "_commonjsHelpers"
@@ -268,7 +272,7 @@
     "isDynamicEntry": true
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-DuqfIaDD.css",
+    "file": "assets/app-DL4NACwc.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -280,9 +284,13 @@
     "file": "assets/Vazirmatn-Variable-BeciDpKm.woff2",
     "src": "src/Resources/assets/fonts/Vazirmatn-Variable.woff2"
   },
-  "src/Resources/assets/fonts/icomoon.woff": {
-    "file": "assets/icomoon-BbY1GX-d.woff",
-    "src": "src/Resources/assets/fonts/icomoon.woff"
+  "src/Resources/assets/fonts/phosphor-fill.woff2": {
+    "file": "assets/phosphor-fill-19RX2XMN.woff2",
+    "src": "src/Resources/assets/fonts/phosphor-fill.woff2"
+  },
+  "src/Resources/assets/fonts/phosphor.woff2": {
+    "file": "assets/phosphor-ChALDfUu.woff2",
+    "src": "src/Resources/assets/fonts/phosphor.woff2"
   },
   "src/Resources/assets/images/corner-clip.svg": {
     "file": "assets/corner-clip-DsfWoKt7.svg",
@@ -293,8 +301,8 @@
     "src": "src/Resources/assets/images/dark-corner-clip.svg"
   },
   "src/Resources/assets/images/dark-logo.svg": {
-    "file": "assets/dark-logo-Dnw3cpYj.svg",
-    "src": "src/Resources/assets/images/dark-logo.svg"
+    "file": "assets/logo-CGX-3nWB.svg",
+    "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/images/empty-placeholders/activities.svg": {
     "file": "assets/activities-DpB2XKqX.svg",
@@ -361,23 +369,23 @@
     "src": "src/Resources/assets/images/error.svg"
   },
   "src/Resources/assets/images/favicon.ico": {
-    "file": "assets/favicon-BtbgZBji.ico",
+    "file": "assets/favicon-BBTAb_86.ico",
     "src": "src/Resources/assets/images/favicon.ico"
   },
   "src/Resources/assets/images/logo.svg": {
-    "file": "assets/logo-Bjh7YAuF.svg",
+    "file": "assets/logo-CGX-3nWB.svg",
     "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/images/mobile-dark-logo.svg": {
-    "file": "assets/mobile-dark-logo-COPgCide.svg",
-    "src": "src/Resources/assets/images/mobile-dark-logo.svg"
+    "file": "assets/logo-CGX-3nWB.svg",
+    "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/images/mobile-light-logo.svg": {
-    "file": "assets/mobile-light-logo-CjoobCkl.svg",
-    "src": "src/Resources/assets/images/mobile-light-logo.svg"
+    "file": "assets/logo-CGX-3nWB.svg",
+    "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-B-NBjza6.js",
+    "file": "assets/app-D1cQC4KT.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
@@ -431,7 +439,10 @@
       "node_modules/vue-cal/dist/drag-and-drop.es.js"
     ],
     "css": [
-      "assets/app-DzjJ7DH1.css"
+      "assets/app-C88ELFxY.css"
+    ],
+    "assets": [
+      "assets/dark-CLxH30By.css"
     ]
   },
   "src/Resources/assets/js/chart.js": {

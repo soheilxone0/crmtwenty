@@ -89,7 +89,7 @@ jobs:
         run: composer install
 
       - name: Running Krayin Installer
-        run: php artisan krayin-crm:install --skip-env-check --skip-admin-creation
+        run: php artisan crm:install --skip-env-check --skip-admin-creation
 
       - name: Clear Laravel Caches
         run: php artisan optimize:clear

@@ -130,6 +130,14 @@ jobs:
           ls -lh "$RUNNER_TEMP/crm-plesk.zip"
           echo "ZIP_SIZE=$(du -m "$RUNNER_TEMP/crm-plesk.zip" | cut -f1)" >> "$GITHUB_ENV"
 
+          # Small update package: everything except the third-party libraries in vendor/
+          # (their autoloader in vendor/composer is included, so new app classes are found).
+          zip -q -r -9 -X "$RUNNER_TEMP/crm-update.zip" . \
+            -x 'vendor/*' -x 'public/fonts/*' -x '.gitignore' -x '.gitattributes'
+          zip -q -r -9 -X "$RUNNER_TEMP/crm-update.zip" vendor/autoload.php vendor/composer
+          ls -lh "$RUNNER_TEMP/crm-update.zip"
+          echo "UPDATE_SIZE=$(du -m "$RUNNER_TEMP/crm-update.zip" | cut -f1)" >> "$GITHUB_ENV"
+
       - name: Publish the ZIP as the latest release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -141,13 +149,15 @@ jobs:
             echo
             echo "نصب یا به‌روزرسانی: فایل crm-plesk.zip را در File Manager پلسک داخل پوشه‌ی crm.arounidea.com آپلود کنید، روی آن Extract Files بزنید (با بازنویسی فایل‌ها) و بعد خود فایل ZIP را پاک کنید. فایل .env و اطلاعات شما دست نمی‌خورد."
             echo
+            echo "به‌روزرسانی سریع (حدود ${UPDATE_SIZE} مگابایت): اگر CRM از قبل نصب است، به‌جای فایل بزرگ کافی است crm-update.zip را به همان روش آپلود و Extract کنید."
+            echo
             echo "راهنمای کامل در README.md مخزن است."
             echo
             echo "Source: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
           } > "$RUNNER_TEMP/notes.md"
 
           gh release delete plesk-latest --yes --cleanup-tag --repo "$GITHUB_REPOSITORY" || true
-          gh release create plesk-latest "$RUNNER_TEMP/crm-plesk.zip" \
+          gh release create plesk-latest "$RUNNER_TEMP/crm-plesk.zip" "$RUNNER_TEMP/crm-update.zip" \
             --repo "$GITHUB_REPOSITORY" \
             --target "$GITHUB_SHA" \
             --title "CRM فارسی برای پلسک (${GITHUB_SHA::7})" \

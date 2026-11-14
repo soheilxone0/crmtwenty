@@ -70,6 +70,7 @@
         "psr-4": {
             "App\\": "app/",
             "Crmtwenty\\Persian\\": "packages/Crmtwenty/Persian/src",
+            "Crmtwenty\\Platform\\": "packages/Crmtwenty/Platform/src",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Webkul\\Activity\\": "packages/Webkul/Activity/src",

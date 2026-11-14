@@ -164,7 +164,7 @@ class InstallerController extends Controller
     {
         $filePath = storage_path('installed');
 
-        File::put($filePath, 'Your Krayin App is Successfully Installed');
+        File::put($filePath, 'Installed');
 
         /**
          * Recorded in the database as well as on disk, so losing the marker file cannot reopen the
@@ -174,7 +174,7 @@ class InstallerController extends Controller
 
         $this->databaseManager->clearInstallationInProgress();
 
-        Event::dispatch('krayin.installed');
+        Event::dispatch('crm.installed');
 
         return $filePath;
     }

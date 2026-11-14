@@ -130,7 +130,7 @@ return [
         'index' => [
             'create-administrator' => [
                 'admin' => 'مدیر',
-                'krayin' => 'کرایین',
+                'krayin' => 'CRM',
                 'confirm-password' => 'تایید رمز عبور',
                 'email' => 'ایمیل',
                 'email-address' => 'admin@example.com',
@@ -145,7 +145,7 @@ return [
                 'application-name' => 'نام برنامه',
                 'argentine-peso' => 'پزو آرژانتین (ARS)',
                 'australian-dollar' => 'دلار استرالیا (AUD)',
-                'krayin' => 'کرایین',
+                'krayin' => 'CRM',
                 'bangladeshi-taka' => 'تاکا بنگلادش (BDT)',
                 'brazilian-real' => 'رئال برزیل (BRL)',
                 'british-pound-sterling' => 'پوند استرلینگ بریتانیا (GBP)',
@@ -230,24 +230,24 @@ return [
             ],
 
             'installation-processing' => [
-                'krayin' => 'نصب کرایین',
+                'krayin' => 'نصب CRM',
                 'krayin-info' => 'در حال ایجاد جداول پایگاه داده، این ممکن است چند لحظه طول بکشد',
                 'title' => 'نصب',
             ],
 
             'installation-completed' => [
                 'admin-panel' => 'پنل مدیریت',
-                'krayin-forums' => 'انجمن کرایین',
+                'krayin-forums' => 'انجمن CRM',
                 'customer-panel' => 'پنل مشتری',
-                'explore-krayin-extensions' => 'کاوش افزونه‌های کرایین',
+                'explore-krayin-extensions' => 'کاوش افزونه‌های CRM',
                 'title' => 'نصب کامل شد',
-                'title-info' => 'کرایین با موفقیت بر روی سیستم شما نصب شد.',
+                'title-info' => 'CRM با موفقیت بر روی سیستم شما نصب شد.',
             ],
 
             'ready-for-installation' => [
                 'create-databsae-table' => 'ایجاد جدول پایگاه داده',
                 'install' => 'نصب',
-                'install-info' => 'کرایین برای نصب',
+                'install-info' => 'CRM برای نصب',
                 'install-info-button' => 'برای شروع، دکمه زیر را کلیک کنید',
                 'populate-database-table' => 'پر کردن جداول پایگاه داده',
                 'start-installation' => 'شروع نصب',
@@ -258,8 +258,8 @@ return [
                 'locale' => 'زبان',
                 'main' => 'شروع',
                 'select-locale' => 'انتخاب زبان',
-                'title' => 'نصب کرایین شما',
-                'welcome-title' => 'به کرایین خوش آمدید',
+                'title' => 'نصب CRM شما',
+                'welcome-title' => 'به CRM خوش آمدید',
             ],
 
             'server-requirements' => [
@@ -286,16 +286,16 @@ return [
             ],
 
             'back' => 'بازگشت',
-            'krayin' => 'کرایین',
+            'krayin' => 'CRM',
             'krayin-info' => 'یک پروژه اجتماعی توسط',
-            'krayin-logo' => 'لوگوی کرایین',
+            'krayin-logo' => 'لوگوی CRM',
             'continue' => 'ادامه',
-            'installation-description' => 'نصب کرایین معمولاً شامل چندین مرحله است. در اینجا یک طرح کلی از فرآیند نصب کرایین آمده است',
+            'installation-description' => 'نصب CRM معمولاً شامل چندین مرحله است. در اینجا یک طرح کلی از فرآیند نصب CRM آمده است',
             'installation-info' => 'خوشحالیم که شما را اینجا می‌بینیم!',
             'installation-title' => 'به نصب خوش آمدید',
             'installation-wizard' => 'زبان جادوگر نصب',
-            'title' => 'نصب‌کننده کرایین',
-            'webkul' => 'وبکول',
+            'title' => 'نصب‌کننده CRM',
+            'webkul' => 'CRM',
         ],
     ],
 ];

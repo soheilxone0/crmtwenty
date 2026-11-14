@@ -82,6 +82,7 @@ class UserController extends Controller
     {
         $validated = $this->validate(request(), [
             'email' => 'required|email|unique:users,email',
+            'username' => 'nullable|string|min:3|max:60|regex:/^[A-Za-z0-9._-]+$/|unique:users,username',
             'name' => 'required',
             'password' => 'nullable',
             'confirm_password' => 'nullable|required_with:password|same:password',
@@ -108,8 +109,10 @@ class UserController extends Controller
          * Build the payload from the validated data only; never mass-assign the raw request.
          */
         $data = Arr::only($validated, [
-            'name', 'email', 'password', 'role_id', 'status', 'view_permission', 'groups',
+            'name', 'username', 'email', 'password', 'role_id', 'status', 'view_permission', 'groups',
         ]);
+
+        $data['username'] = filled($data['username'] ?? null) ? strtolower($data['username']) : null;
 
         if (! empty($data['password'])) {
             $data['password'] = bcrypt($data['password']);
@@ -190,6 +193,7 @@ class UserController extends Controller
 
         $validated = $this->validate(request(), [
             'email' => 'required|email|unique:users,email,'.$id,
+            'username' => 'nullable|string|min:3|max:60|regex:/^[A-Za-z0-9._-]+$/|unique:users,username,'.$id,
             'name' => 'required|string',
             'password' => 'nullable|string|min:6',
             'confirm_password' => 'nullable|required_with:password|same:password',
@@ -226,9 +230,13 @@ class UserController extends Controller
          * role, data scope, status and groups — all already constrained above to their own level.
          */
         $data = Arr::only($validated, ($isAdministrator || ! $isSelf)
-            ? ['name', 'email', 'password', 'role_id', 'status', 'view_permission', 'groups']
-            : ['name', 'email', 'password']
+            ? ['name', 'username', 'email', 'password', 'role_id', 'status', 'view_permission', 'groups']
+            : ['name', 'username', 'email', 'password']
         );
+
+        if (array_key_exists('username', $data)) {
+            $data['username'] = filled($data['username']) ? strtolower($data['username']) : null;
+        }
 
         if (empty($data['password'])) {
             unset($data['password']);

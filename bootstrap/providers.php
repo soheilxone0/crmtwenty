@@ -3,6 +3,7 @@
 use App\Providers\AppServiceProvider;
 use Barryvdh\DomPDF\ServiceProvider;
 use Crmtwenty\Persian\Providers\PersianServiceProvider;
+use Crmtwenty\Platform\Providers\PlatformServiceProvider;
 use Konekt\Concord\ConcordServiceProvider;
 use Prettus\Repository\Providers\RepositoryServiceProvider;
 use Webkul\Activity\Providers\ActivityServiceProvider;
@@ -67,4 +68,9 @@ return [
      * crmtwenty: Persian edition (Jalali calendar, company e-mail, sign-up).
      */
     PersianServiceProvider::class,
+
+    /*
+     * crmtwenty: multi-company platform (isolated company workspaces, platform panel).
+     */
+    PlatformServiceProvider::class,
 ];

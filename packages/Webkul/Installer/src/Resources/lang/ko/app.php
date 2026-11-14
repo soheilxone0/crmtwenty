@@ -130,7 +130,7 @@ return [
         'index' => [
             'create-administrator' => [
                 'admin' => '관리자',
-                'krayin' => 'Krayin',
+                'krayin' => 'CRM',
                 'confirm-password' => '비밀번호 확인',
                 'email' => '이메일',
                 'email-address' => 'admin@example.com',
@@ -145,7 +145,7 @@ return [
                 'application-name' => '애플리케이션 이름',
                 'argentine-peso' => '아르헨티나 페소 (ARS)',
                 'australian-dollar' => '호주 달러 (AUD)',
-                'krayin' => 'Krayin',
+                'krayin' => 'CRM',
                 'bangladeshi-taka' => '방글라데시 타카 (BDT)',
                 'brazilian-real' => '브라질 헤알 (BRL)',
                 'british-pound-sterling' => '영국 파운드 스털링 (GBP)',
@@ -230,24 +230,24 @@ return [
             ],
 
             'installation-processing' => [
-                'krayin' => 'Krayin 설치',
+                'krayin' => 'CRM 설치',
                 'krayin-info' => '데이터베이스 테이블을 생성하고 있습니다. 잠시 시간이 걸릴 수 있습니다',
                 'title' => '설치',
             ],
 
             'installation-completed' => [
                 'admin-panel' => '관리자 패널',
-                'krayin-forums' => 'Krayin 포럼',
+                'krayin-forums' => 'CRM 포럼',
                 'customer-panel' => '고객 패널',
-                'explore-krayin-extensions' => 'Krayin 확장 기능 살펴보기',
+                'explore-krayin-extensions' => 'CRM 확장 기능 살펴보기',
                 'title' => '설치 완료',
-                'title-info' => 'Krayin이 시스템에 성공적으로 설치되었습니다.',
+                'title-info' => 'CRM이 시스템에 성공적으로 설치되었습니다.',
             ],
 
             'ready-for-installation' => [
                 'create-databsae-table' => '데이터베이스 테이블 생성',
                 'install' => '설치',
-                'install-info' => '설치를 위한 Krayin',
+                'install-info' => '설치를 위한 CRM',
                 'install-info-button' => '아래 버튼을 클릭하여',
                 'populate-database-table' => '데이터베이스 테이블 채우기',
                 'start-installation' => '설치 시작',
@@ -258,8 +258,8 @@ return [
                 'locale' => '로케일',
                 'main' => '시작',
                 'select-locale' => '로케일 선택',
-                'title' => 'Krayin 설치',
-                'welcome-title' => 'Krayin에 오신 것을 환영합니다',
+                'title' => 'CRM 설치',
+                'welcome-title' => 'CRM에 오신 것을 환영합니다',
             ],
 
             'server-requirements' => [
@@ -286,16 +286,16 @@ return [
             ],
 
             'back' => '뒤로',
-            'krayin' => 'Krayin',
-            'krayin-info' => 'Webkul의 커뮤니티 프로젝트',
-            'krayin-logo' => 'Krayin 로고',
+            'krayin' => 'CRM',
+            'krayin-info' => 'CRM의 커뮤니티 프로젝트',
+            'krayin-logo' => 'CRM 로고',
             'continue' => '계속',
-            'installation-description' => 'Krayin 설치는 일반적으로 여러 단계로 진행됩니다. 다음은 Krayin 설치 과정에 대한 일반적인 개요입니다',
+            'installation-description' => 'CRM 설치는 일반적으로 여러 단계로 진행됩니다. 다음은 CRM 설치 과정에 대한 일반적인 개요입니다',
             'installation-info' => '만나서 반갑습니다!',
             'installation-title' => '설치를 환영합니다',
             'installation-wizard' => '설치 마법사 언어',
-            'title' => 'Krayin 설치 프로그램',
-            'webkul' => 'Webkul',
+            'title' => 'CRM 설치 프로그램',
+            'webkul' => 'CRM',
         ],
     ],
 ];

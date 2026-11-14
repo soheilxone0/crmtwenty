@@ -411,7 +411,7 @@ export default class CoreLocators {
         this.quoteLinkToLeadButton = page.locator('div:nth-child(2) > div > .relative.inline-block > .relative');
 
         // Activity modal selectors
-        this.addActivityButton = page.getByRole("button", { name: " Activity" });
+        this.addActivityButton = page.getByRole("button", { name: " Activity" });
         this.activityCallOption = page.getByText("Call", { exact: true });
         this.activityMeetingOption = page.getByText("Meeting", { exact: true });
         this.activityLunchOption = page.getByText("Lunch", { exact: true });
@@ -482,8 +482,8 @@ export default class CoreLocators {
 
         // General
         this.leadSuccessToast = page.getByText('Success', { exact: true });
-        this.editLeadButton = page.getByRole('link', { name: '' }).first();
-        this.listViewButton = page.getByRole('link', { name: '' });
+        this.editLeadButton = page.getByRole('link', { name: '' }).first();
+        this.listViewButton = page.getByRole('link', { name: '' });
         this.agreeButton = page.getByRole('button', { name: 'Agree', exact: true });
         this.deleteLeadButton = page.locator(
             '.cursor-pointer.rounded-md.p-1\\.5.text-2xl.transition-all.hover\\:bg-gray-200.dark\\:hover\\:bg-gray-800.max-sm\\:place-self-center.icon-delete'
@@ -492,10 +492,10 @@ export default class CoreLocators {
         this.searchInputExact = page.getByRole("textbox", { name: "Search", exact: true });
 
         // Tabs
-        this.mailButton = page.getByRole('button', { name: ' Mail' });
-        this.fileButton = page.getByRole('button', { name: ' File' });
-        this.noteButton = page.getByRole('button', { name: ' Note' });
-        this.activityButton = page.getByRole('button', { name: ' Activity' });
+        this.mailButton = page.getByRole('button', { name: ' Mail' });
+        this.fileButton = page.getByRole('button', { name: ' File' });
+        this.noteButton = page.getByRole('button', { name: ' Note' });
+        this.activityButton = page.getByRole('button', { name: ' Activity' });
 
         // Mail
         this.mailToInput = page.locator('input[name="temp-reply_to"]');

@@ -21,7 +21,7 @@ use Webkul\User\Models\User;
 |
  */
 
-uses(TestCase::class)->in('Feature');
+uses(TestCase::class)->in('Feature', 'Platform');
 
 /**
  * The configured APP_URL may point at a subdirectory (for example when the application is served

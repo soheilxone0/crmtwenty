@@ -454,7 +454,7 @@
 
                         <div
                             class="vuecal__event-content"
-                            :style="{ backgroundColor: event._bgColor || '#0e90d9' }"
+                            :style="{ backgroundColor: event._bgColor || '#4f46e5' }"
                             draggable="false"
                             @dragstart.prevent
                             v-tooltip="{

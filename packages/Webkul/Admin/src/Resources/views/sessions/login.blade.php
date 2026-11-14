@@ -4,7 +4,7 @@
         @lang('admin::app.users.login.title')
     </x-slot>
 
-    <div class="flex h-[100vh] flex-col items-center justify-center gap-10">
+    <div class="ct-auth flex min-h-[100vh] flex-col items-center justify-center gap-8 px-4 py-10">
         <div class="flex flex-col items-center gap-5">
             <!-- Logo -->
             @if ($logo = core()->getConfigData('general.general.admin_logo.logo_image'))
@@ -14,14 +14,17 @@
                     alt="{{ config('app.name') }}"
                 />
             @else
-                <img
-                    class="w-max"
-                    src="{{ vite()->asset('images/logo.svg') }}"
-                    alt="{{ config('app.name') }}"
-                />
+                <div class="ct-auth-brand">
+                    <img
+                        src="{{ vite()->asset('images/logo.svg') }}"
+                        alt=""
+                    />
+
+                    <strong>{{ config('app.name') }}</strong>
+                </div>
             @endif
 
-            <div class="box-shadow flex min-w-[300px] flex-col rounded-md bg-white dark:bg-gray-900">
+            <div class="ct-auth-card flex w-full min-w-[300px] max-w-[400px] flex-col bg-white dark:bg-gray-900">
                 {!! view_render_event('admin.sessions.login.form_controls.before') !!}
 
                 <!-- Login Form -->
@@ -34,17 +37,20 @@
                         <!-- Email -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.users.login.email')
+                                @lang('persian::app.users.login')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
-                                type="email"
-                                class="w-[254px] max-w-full"
+                                type="text"
+                                class="w-full"
                                 id="email"
                                 name="email"
-                                rules="required|email"
-                                :label="trans('admin::app.users.login.email')"
-                                :placeholder="trans('admin::app.users.login.email')"
+                                dir="ltr"
+                                autocomplete="username"
+                                rules="required"
+                                :value="old('email')"
+                                :label="trans('persian::app.users.login')"
+                                :placeholder="trans('persian::app.users.login-placeholder')"
                             />
 
                             <x-admin::form.control-group.error control-name="email" />
@@ -58,7 +64,7 @@
 
                             <x-admin::form.control-group.control
                                 type="password"
-                                class="w-[254px] max-w-full ltr:pr-10 rtl:pl-10"
+                                class="w-full ltr:pr-10 rtl:pl-10"
                                 id="password"
                                 name="password"
                                 rules="required|min:6"
@@ -102,12 +108,9 @@
             </div>
         </div>
 
-        <!-- Powered By -->
-        <div class="text-sm font-normal">
-            @lang('admin::app.components.layouts.powered-by.description', [
-                'krayin' => '<a class="text-brandColor hover:underline " href="https://krayincrm.com/">Krayin</a>',
-                'webkul' => '<a class="text-brandColor hover:underline " href="https://webkul.com/">Webkul</a>',
-            ]) 
+        <!-- Footer -->
+        <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+            &copy; {{ \Crmtwenty\Persian\Support\Jalali::format(now(), 'Y') }} {{ config('app.name') }}
         </div>
     </div>
 

@@ -13,11 +13,15 @@ jobs:
     runs-on: ${{ matrix.operating-system }}
 
     strategy:
+      fail-fast: false
       matrix:
         operating-system: [ubuntu-latest]
         php-versions: ["8.3"]
+        # A company in the multi-company edition lives under a table prefix, so the whole
+        # suite also runs with one to catch raw SQL that ignores the prefix.
+        db-prefix: ["", "c1_"]
 
-    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-system }}
+    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-system }}${{ matrix.db-prefix && format(' (prefix {0})', matrix.db-prefix) || '' }}
 
     services:
       mysql:
@@ -57,12 +61,20 @@ jobs:
           sed -i "s|^\(APP_LOCALE=\s*\).*$|\1en|" .env
           sed -i "s|^\(APP_CURRENCY=\s*\).*$|\1USD|" .env
           sed -i "s|^\(APP_TIMEZONE=\s*\).*$|\1Asia/Kolkata|" .env
+          if grep -q '^DB_PREFIX=' .env; then
+            sed -i "s|^\(DB_PREFIX=\s*\).*$|\1${{ matrix.db-prefix }}|" .env
+          else
+            echo "DB_PREFIX=${{ matrix.db-prefix }}" >> .env
+          fi
 
       - name: Running Krayin Installer
-        run: php artisan krayin-crm:install --skip-env-check --skip-admin-creation
+        run: php artisan crm:install --skip-env-check --skip-admin-creation
 
       - name: Running Pest Test
-        run: vendor/bin/pest --parallel --colors=always --log-junit junit.xml
+        run: vendor/bin/pest --testsuite=Unit,Feature --parallel --colors=always --log-junit junit.xml
+
+      - name: Running Platform Tests
+        run: vendor/bin/pest --testsuite=Platform --colors=always --log-junit junit.xml
 
       - name: Report failed tests
         if: failure()

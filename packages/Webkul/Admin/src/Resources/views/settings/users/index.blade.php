@@ -267,6 +267,26 @@
 
                             {!! view_render_event('admin.settings.users.index.form.name.after') !!}
 
+                            <!-- Username -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('persian::app.users.username')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    dir="ltr"
+                                    autocomplete="off"
+                                    v-model="user.username"
+                                    :label="trans('persian::app.users.username')"
+                                    :placeholder="trans('persian::app.users.username-placeholder')"
+                                />
+
+                                <x-admin::form.control-group.error control-name="username" />
+                            </x-admin::form.control-group>
+
                             {!! view_render_event('admin.settings.users.index.form.email.before') !!}
 
                             <!-- Email -->

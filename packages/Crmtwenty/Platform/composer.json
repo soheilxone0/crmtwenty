@@ -1,0 +1,10 @@
+{
+    "name": "crmtwenty/platform",
+    "description": "Multi-company platform: isolated company workspaces, platform administration panel.",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Crmtwenty\\Platform\\": "src/"
+        }
+    }
+}

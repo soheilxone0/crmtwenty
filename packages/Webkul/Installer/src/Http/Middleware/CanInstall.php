@@ -69,7 +69,7 @@ class CanInstall
              */
             $databaseManager->markInstallationCompleted();
 
-            Event::dispatch('krayin.installed');
+            Event::dispatch('crm.installed');
 
             return true;
         }

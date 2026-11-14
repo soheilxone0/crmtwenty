@@ -1,8 +1,10 @@
 <?php
 
+use Crmtwenty\Platform\Http\Middleware\ActivateCompany;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Session\Middleware\StartSession;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 use Webkul\Installer\Http\Middleware\CanInstall;
 
@@ -38,6 +40,16 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->api(prepend: [
             EnsureFrontendRequestsAreStateful::class,
         ]);
+
+        /**
+         * crmtwenty: point each request at the signed-in user's company. It must run right
+         * after the session starts — before route model binding and authentication.
+         */
+        $middleware->web(append: [
+            ActivateCompany::class,
+        ]);
+
+        $middleware->appendToPriorityList(StartSession::class, ActivateCompany::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
