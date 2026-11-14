@@ -30,6 +30,10 @@ import {
 } from 'twenty-ui/icon';
 import { themeCssVariables } from 'twenty-ui/theme';
 import { useLingui } from '@lingui/react/macro';
+import { getPersianMonthSelectOptions } from '@/localization/utils/persian-calendar/getPersianMonthSelectOptions';
+import { getPersianYearSelectOptions } from '@/localization/utils/persian-calendar/getPersianYearSelectOptions';
+import { getPersianYearMonthFromViewedMonth } from '@/localization/utils/persian-calendar/persianViewedMonth';
+import { useIsPersianCalendar } from '@/ui/input/components/internal/date/hooks/useIsPersianCalendar';
 
 const TIME_INPUT_ICON_SIZE = 16;
 
@@ -103,7 +107,10 @@ export const DateTimePickerHeader = ({
   const { t } = useLingui();
   const { timeFormat } = useDateTimeFormat();
   const { formatTime, parseTime, isHour12 } = useTimeInput(timeFormat);
-  const displayedMonth = Temporal.PlainYearMonth.from(viewedMonth);
+  const isPersianCalendar = useIsPersianCalendar();
+  const displayedMonth = isPersianCalendar
+    ? getPersianYearMonthFromViewedMonth(viewedMonth)
+    : Temporal.PlainYearMonth.from(viewedMonth);
   const formattedTime = isDefined(date)
     ? formatTime(date.hour, date.minute)
     : undefined;
@@ -189,7 +196,11 @@ export const DateTimePickerHeader = ({
               <StyledMonthYearSelector>
                 <Select
                   dropdownId={monthSelectDropdownId}
-                  options={getMonthSelectOptions(userLocale)}
+                  options={
+                    isPersianCalendar
+                      ? getPersianMonthSelectOptions()
+                      : getMonthSelectOptions(userLocale)
+                  }
                   onChange={onChangeMonth}
                   value={displayedMonth.month}
                   fullWidth={false}
@@ -199,7 +210,11 @@ export const DateTimePickerHeader = ({
                   dropdownId={yearSelectDropdownId}
                   onChange={onChangeYear}
                   value={displayedMonth.year}
-                  options={DATE_PICKER_YEAR_SELECT_OPTIONS}
+                  options={
+                    isPersianCalendar
+                      ? getPersianYearSelectOptions()
+                      : DATE_PICKER_YEAR_SELECT_OPTIONS
+                  }
                   fullWidth={false}
                   dropdownWidth={160}
                 />

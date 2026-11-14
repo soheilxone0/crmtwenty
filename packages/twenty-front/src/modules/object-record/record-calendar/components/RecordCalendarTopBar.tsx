@@ -35,6 +35,11 @@ import { themeCssVariables } from 'twenty-ui/theme';
 import { ViewCalendarLayout } from '~/generated-metadata/graphql';
 import { dateLocaleState } from '@/localization/states/dateLocaleState';
 import { useLingui } from '@lingui/react/macro';
+import { formatPersianMonthYear } from '@/localization/utils/persian-calendar/formatPersianMonthYear';
+import { formatPersianPlainDate } from '@/localization/utils/persian-calendar/formatPersianPlainDate';
+import { toIsoPlainDate } from '@/localization/utils/persian-calendar/toIsoPlainDate';
+import { toPersianPlainDate } from '@/localization/utils/persian-calendar/toPersianPlainDate';
+import { useIsPersianCalendar } from '@/ui/input/components/internal/date/hooks/useIsPersianCalendar';
 
 const StyledContainer = styled.div`
   align-items: center;
@@ -84,6 +89,12 @@ export const RecordCalendarTopBar = () => {
     useAtomComponentState(recordIndexCalendarLayoutComponentState);
 
   const dateLocale = useAtomStateValue(dateLocaleState);
+  const isPersianCalendar = useIsPersianCalendar();
+  // Month navigation follows Jalali months in Persian mode.
+  const shiftMonths = (date: Temporal.PlainDate, months: number) =>
+    isPersianCalendar
+      ? toIsoPlainDate(toPersianPlainDate(date).add({ months }))
+      : date.add({ months });
   const { timeZone } = useDateTimeFormat();
   const { firstDay: firstDayOfWeek, lastDay: lastDayOfWeek } =
     useRecordCalendarDaysRange(
@@ -109,7 +120,7 @@ export const RecordCalendarTopBar = () => {
         ? recordCalendarSelectedDate.subtract({ days: 1 })
         : recordIndexCalendarLayout === ViewCalendarLayout.WEEK
           ? recordCalendarSelectedDate.subtract({ weeks: 1 })
-          : recordCalendarSelectedDate.subtract({ months: 1 });
+          : shiftMonths(recordCalendarSelectedDate, -1);
 
     setRecordCalendarSelectedDate(previousDate);
   };
@@ -120,7 +131,7 @@ export const RecordCalendarTopBar = () => {
         ? recordCalendarSelectedDate.add({ days: 1 })
         : recordIndexCalendarLayout === ViewCalendarLayout.WEEK
           ? recordCalendarSelectedDate.add({ weeks: 1 })
-          : recordCalendarSelectedDate.add({ months: 1 });
+          : shiftMonths(recordCalendarSelectedDate, 1);
 
     setRecordCalendarSelectedDate(nextDate);
   };
@@ -134,8 +145,24 @@ export const RecordCalendarTopBar = () => {
     setRecordCalendarSelectedDate(Temporal.Now.plainDateISO(timeZone));
   };
 
-  const formattedDate =
+  const persianFormattedDate =
     recordIndexCalendarLayout === ViewCalendarLayout.DAY
+      ? formatPersianPlainDate(recordCalendarSelectedDate, {
+          weekday: 'long',
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        })
+      : recordIndexCalendarLayout === ViewCalendarLayout.WEEK
+        ? `${formatPersianPlainDate(firstDayOfWeek, {
+            day: 'numeric',
+            month: 'long',
+          })} – ${formatPersianPlainDate(lastDayOfWeek)}`
+        : formatPersianMonthYear(recordCalendarSelectedDate);
+
+  const formattedDate = isPersianCalendar
+    ? persianFormattedDate
+    : recordIndexCalendarLayout === ViewCalendarLayout.DAY
       ? recordCalendarSelectedDate.toLocaleString(dateLocale.locale, {
           dateStyle: 'full',
         })

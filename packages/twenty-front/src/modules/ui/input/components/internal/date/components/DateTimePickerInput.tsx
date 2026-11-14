@@ -1,5 +1,7 @@
 import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';
+import { PersianDateTimePickerInput } from '@/ui/input/components/internal/date/components/PersianDateTimePickerInput';
+import { useIsPersianCalendar } from '@/ui/input/components/internal/date/hooks/useIsPersianCalendar';
 import { useIMask } from 'react-imask';
 
 import { useDateTimeFormat } from '@/localization/hooks/useDateTimeFormat';
@@ -62,7 +64,7 @@ type DateTimePickerInputProps = {
   variant?: FormFieldInputVariant;
 };
 
-export const DateTimePickerInput = ({
+const GregorianDateTimePickerInput = ({
   date,
   onChange,
   onFocus,
@@ -197,5 +199,18 @@ export const DateTimePickerInput = ({
         timeZone={timeZone ?? userTimezone}
       />
     </StyledInputContainer>
+  );
+};
+
+// crmtwenty customization: Persian users type Jalali dates.
+export const DateTimePickerInput = (props: DateTimePickerInputProps) => {
+  const isPersianCalendar = useIsPersianCalendar();
+
+  return isPersianCalendar ? (
+    // oxlint-disable-next-line react/jsx-props-no-spreading
+    <PersianDateTimePickerInput {...props} />
+  ) : (
+    // oxlint-disable-next-line react/jsx-props-no-spreading
+    <GregorianDateTimePickerInput {...props} />
   );
 };

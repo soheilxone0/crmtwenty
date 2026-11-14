@@ -1,3 +1,5 @@
+import { i18n } from '@lingui/core';
+import { isPersianLocale } from '@/localization/utils/persian-calendar/isPersianLocale';
 import { detectCalendarStartDay } from '@/localization/utils/detection/detectCalendarStartDay';
 import { CalendarStartDay } from 'twenty-shared/constants';
 import { doNotTranslate } from 'twenty-shared/i18n';
@@ -17,7 +19,10 @@ export const getDatePickerWeekStartOrThrow = (
   calendarStartDay?: number | null,
 ): DatePickerProps['weekStart'] => {
   if (!isDefined(calendarStartDay)) {
-    return CalendarStartDay.SUNDAY;
+    // crmtwenty customization: Persian weeks start on Saturday.
+    return isPersianLocale(i18n.locale)
+      ? CalendarStartDay.SATURDAY
+      : CalendarStartDay.SUNDAY;
   }
 
   if (calendarStartDay === CalendarStartDay.SYSTEM) {

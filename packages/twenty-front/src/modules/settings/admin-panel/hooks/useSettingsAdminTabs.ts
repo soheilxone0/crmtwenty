@@ -6,6 +6,7 @@ import {
   IconApps,
   IconHeart,
   IconKey,
+  IconMail,
   IconSettings2,
   IconSparkles,
   IconVariable,
@@ -38,6 +39,13 @@ export const useSettingsAdminTabs = () => {
       id: SETTINGS_ADMIN_TABS.AI,
       title: t`AI`,
       Icon: IconSparkles,
+      disabled: !canAccessFullAdminPanel,
+    },
+    {
+      // crmtwenty customization
+      id: SETTINGS_ADMIN_TABS.COMPANY_EMAIL,
+      title: 'ایمیل شرکت',
+      Icon: IconMail,
       disabled: !canAccessFullAdminPanel,
     },
     {

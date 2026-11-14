@@ -14,6 +14,9 @@ import { RECORD_CALENDAR_CARD_DND_TYPE } from '@/object-record/record-calendar/c
 import { RECORD_CALENDAR_DAY_COLLISION_PRIORITY } from '@/object-record/record-calendar/constants/RecordCalendarDayCollisionPriority';
 import { DragDropItemDropTarget } from '@/ui/utilities/drag-and-drop/components/DragDropItemDropTarget';
 import { themeCssVariables } from 'twenty-ui/theme';
+import { formatPersianNumber } from '@/localization/utils/persian-calendar/formatPersianNumber';
+import { toPersianPlainDate } from '@/localization/utils/persian-calendar/toPersianPlainDate';
+import { useIsPersianCalendar } from '@/ui/input/components/internal/date/hooks/useIsPersianCalendar';
 
 const StyledContainer = styled.div<{
   isOtherMonth: boolean;
@@ -101,6 +104,7 @@ export const RecordCalendarGridDay = ({
   isOtherMonth,
 }: RecordCalendarGridDayProps) => {
   const { userTimezone } = useUserTimezone();
+  const isPersianCalendar = useIsPersianCalendar();
 
   const dayKey = day.toString();
 
@@ -119,7 +123,10 @@ export const RecordCalendarGridDay = ({
 
   const isToday = isSamePlainDate(day, todayInUserTimeZone);
 
-  const isDayOfWeekend = isPlainDateInWeekend(day);
+  // In Iran the weekend is Friday (dayOfWeek 5).
+  const isDayOfWeekend = isPersianCalendar
+    ? day.dayOfWeek === 5
+    : isPlainDateInWeekend(day);
 
   const { isDropTarget, ref: dropRef } = useDroppable({
     id: dayKey,
@@ -145,7 +152,11 @@ export const RecordCalendarGridDay = ({
       <StyledDayHeader>
         {hovered && <RecordCalendarAddNew cardDate={day} />}
         <StyledDayHeaderDayContainer>
-          <StyledDayHeaderDay isToday={isToday}>{day.day}</StyledDayHeaderDay>
+          <StyledDayHeaderDay isToday={isToday}>
+            {isPersianCalendar
+              ? formatPersianNumber(toPersianPlainDate(day).day)
+              : day.day}
+          </StyledDayHeaderDay>
         </StyledDayHeaderDayContainer>
       </StyledDayHeader>
       <StyledCardsContainer isDraggedOver={isDropTarget}>

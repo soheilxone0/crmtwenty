@@ -1,0 +1,61 @@
+# بررسی نوع‌ها (TypeScript) و تست‌های واحد بخش‌های شخصی‌سازی‌شده روی هر Pull Request
+# Type-check the frontend and the server and run the crmtwenty unit tests on
+# every pull request (the Docker build alone does not type-check the frontend).
+
+name: Checks
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Typecheck & tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      NODE_OPTIONS: --max-old-space-size=12288
+      NX_DAEMON: 'false'
+    steps:
+      - name: Add swap
+        run: |
+          sudo swapoff -a || true
+          sudo fallocate -l 8G /swapfile-checks
+          sudo chmod 600 /swapfile-checks
+          sudo mkswap /swapfile-checks
+          sudo swapon /swapfile-checks
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install yarn shim
+        run: |
+          printf '%s\n' '#!/bin/sh' "exec node \"$GITHUB_WORKSPACE/\$(sed -n 's/^yarnPath: //p' \"$GITHUB_WORKSPACE/.yarnrc.yml\")\" \"\$@\"" \
+            | sudo tee /usr/local/bin/yarn > /dev/null
+          sudo chmod +x /usr/local/bin/yarn
+          yarn --version
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Typecheck frontend
+        run: npx nx run twenty-front:typecheck --skip-nx-cache
+
+      - name: Frontend unit tests (Persian calendar & localization)
+        run: >-
+          npx nx test twenty-front --skip-nx-cache --coverage=false --silent=false
+          --testPathPattern="src/modules/(localization|ui/input/components/internal/date|object-record/record-calendar|settings/admin-panel)/"
+
+      - name: Typecheck server
+        run: npx nx run twenty-server:typecheck --skip-nx-cache

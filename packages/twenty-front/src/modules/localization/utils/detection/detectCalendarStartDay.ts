@@ -1,6 +1,15 @@
+import { i18n } from '@lingui/core';
 import { FirstDayOfTheWeek } from 'twenty-shared/types';
 
+import { isPersianLocale } from '@/localization/utils/persian-calendar/isPersianLocale';
+
 export const detectCalendarStartDay = (): FirstDayOfTheWeek => {
+  // crmtwenty customization: the Persian week starts on Saturday, whatever
+  // the browser language is.
+  if (isPersianLocale(i18n.locale)) {
+    return FirstDayOfTheWeek.SATURDAY;
+  }
+
   try {
     const locale = new Intl.Locale(navigator?.language || 'en-US');
 

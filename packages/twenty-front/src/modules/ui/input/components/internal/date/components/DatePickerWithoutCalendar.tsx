@@ -7,6 +7,9 @@ import { Temporal } from 'temporal-polyfill';
 import { type Nullable } from 'twenty-shared/types';
 import { isDefined } from 'twenty-shared/utils';
 import { themeCssVariables } from 'twenty-ui/theme';
+import { toIsoPlainDate } from '@/localization/utils/persian-calendar/toIsoPlainDate';
+import { toPersianPlainDate } from '@/localization/utils/persian-calendar/toPersianPlainDate';
+import { useIsPersianCalendar } from '@/ui/input/components/internal/date/hooks/useIsPersianCalendar';
 
 const StyledSpacer = styled.div`
   height: ${themeCssVariables.spacing[2]};
@@ -29,18 +32,37 @@ export const DatePickerWithoutCalendar = ({
   onChange,
   onClose,
 }: DatePickerWithoutCalendarProps) => {
+  const isPersianCalendar = useIsPersianCalendar();
   const plainDate = isDefined(date) ? Temporal.PlainDate.from(date) : null;
+
+  // In Persian mode month/year values are Jalali, so the arithmetic is done in
+  // the Persian calendar and converted back to an ISO date.
+  const updatePlainDate = (
+    update: (date: Temporal.PlainDate) => Temporal.PlainDate,
+  ) => {
+    if (!isDefined(plainDate)) {
+      onChange?.(null);
+      return;
+    }
+
+    const updatedDate = isPersianCalendar
+      ? toIsoPlainDate(update(toPersianPlainDate(plainDate)))
+      : update(plainDate);
+
+    onChange?.(updatedDate.toString());
+  };
+
   const handleChangeMonth = (month: number) => {
-    onChange?.(plainDate?.with({ month }).toString() ?? null);
+    updatePlainDate((date) => date.with({ month }));
   };
   const handleChangeYear = (year: number) => {
-    onChange?.(plainDate?.with({ year }).toString() ?? null);
+    updatePlainDate((date) => date.with({ year }));
   };
   const handleAddMonth = () => {
-    onChange?.(plainDate?.add({ months: 1 }).toString() ?? null);
+    updatePlainDate((date) => date.add({ months: 1 }));
   };
   const handleSubtractMonth = () => {
-    onChange?.(plainDate?.subtract({ months: 1 }).toString() ?? null);
+    updatePlainDate((date) => date.subtract({ months: 1 }));
   };
 
   return (

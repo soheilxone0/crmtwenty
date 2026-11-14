@@ -7,6 +7,8 @@ import { Card } from 'twenty-ui/primitives/surfaces';
 import { themeCssVariables } from 'twenty-ui/theme';
 import { type TimelineCalendarEvent } from '~/generated/graphql';
 import { doNotTranslate } from 'twenty-shared/i18n';
+import { PERSIAN_INTL_LOCALE } from '@/localization/utils/persian-calendar/PersianCalendar';
+import { useIsPersianCalendar } from '@/ui/input/components/internal/date/hooks/useIsPersianCalendar';
 
 type CalendarDayCardContentProps = {
   calendarEvents: TimelineCalendarEvent[];
@@ -63,8 +65,17 @@ export const CalendarDayCardContent = ({
   const endOfDayDate = endOfDay(getCalendarEventStartDate(calendarEvents[0]));
   const dayEndsIn = differenceInSeconds(endOfDayDate, Date.now());
 
-  const weekDayLabel = format(endOfDayDate, doNotTranslate('EE'));
-  const monthDayLabel = format(endOfDayDate, 'dd');
+  const isPersianCalendar = useIsPersianCalendar();
+  const weekDayLabel = isPersianCalendar
+    ? new Intl.DateTimeFormat(PERSIAN_INTL_LOCALE, { weekday: 'short' }).format(
+        endOfDayDate,
+      )
+    : format(endOfDayDate, doNotTranslate('EE'));
+  const monthDayLabel = isPersianCalendar
+    ? new Intl.DateTimeFormat(PERSIAN_INTL_LOCALE, { day: '2-digit' }).format(
+        endOfDayDate,
+      )
+    : format(endOfDayDate, 'dd');
 
   return (
     <StyledDayCardContent

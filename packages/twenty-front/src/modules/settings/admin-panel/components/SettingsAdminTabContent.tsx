@@ -1,5 +1,6 @@
 import { SettingsAdminAI } from '@/settings/admin-panel/ai/components/SettingsAdminAI';
 import { SettingsAdminApps } from '@/settings/admin-panel/apps/components/SettingsAdminApps';
+import { SettingsAdminCompanyEmail } from '@/settings/admin-panel/company-email/components/SettingsAdminCompanyEmail';
 import { SettingsAdminGeneral } from '@/settings/admin-panel/components/SettingsAdminGeneral';
 import { SettingsAdminConfigVariables } from '@/settings/admin-panel/config-variables/components/SettingsAdminConfigVariables';
 import { SETTINGS_ADMIN_TABS } from '@/settings/admin-panel/constants/SettingsAdminTabs';
@@ -24,6 +25,8 @@ export const SettingsAdminTabContent = ({
       return <SettingsAdminApps />;
     case SETTINGS_ADMIN_TABS.AI:
       return <SettingsAdminAI />;
+    case SETTINGS_ADMIN_TABS.COMPANY_EMAIL:
+      return <SettingsAdminCompanyEmail />;
     case SETTINGS_ADMIN_TABS.CONFIG_VARIABLES:
       return <SettingsAdminConfigVariables />;
     case SETTINGS_ADMIN_TABS.HEALTH_STATUS:

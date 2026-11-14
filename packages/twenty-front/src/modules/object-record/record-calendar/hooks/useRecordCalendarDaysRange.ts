@@ -9,6 +9,7 @@ import { turnPlainDateToShiftedDateInSystemTimeZone } from 'twenty-shared/utils'
 import { doNotTranslate } from 'twenty-shared/i18n';
 import { type ViewCalendarLayout } from '~/generated-metadata/graphql';
 import { dateLocaleState } from '@/localization/states/dateLocaleState';
+import { useIsPersianCalendar } from '@/ui/input/components/internal/date/hooks/useIsPersianCalendar';
 
 export const useRecordCalendarDaysRange = (
   selectedDate: Temporal.PlainDate,
@@ -16,6 +17,7 @@ export const useRecordCalendarDaysRange = (
 ) => {
   const currentWorkspaceMember = useAtomStateValue(currentWorkspaceMemberState);
   const dateLocale = useAtomStateValue(dateLocaleState);
+  const isPersianCalendar = useIsPersianCalendar();
   const calendarStartDay =
     currentWorkspaceMember?.calendarStartDay ?? CalendarStartDay.SYSTEM;
   const weekStartsOnDayIndex =
@@ -26,10 +28,12 @@ export const useRecordCalendarDaysRange = (
     selectedDate,
     calendarLayout,
     weekStartsOnDayIndex,
+    isPersianCalendar,
   });
 
   return {
     ...range,
+    isPersianCalendar,
     weekDayLabels: range.days[0].map((day) =>
       format(
         turnPlainDateToShiftedDateInSystemTimeZone(day),

@@ -14,6 +14,13 @@ import { LightIconButton } from 'twenty-ui/components/input';
 import { IconChevronLeft, IconChevronRight } from 'twenty-ui/icon';
 import { themeCssVariables } from 'twenty-ui/theme';
 import { useLingui } from '@lingui/react/macro';
+import { getPersianMonthSelectOptions } from '@/localization/utils/persian-calendar/getPersianMonthSelectOptions';
+import { getPersianYearSelectOptions } from '@/localization/utils/persian-calendar/getPersianYearSelectOptions';
+import {
+  getPersianViewedMonthFromPlainDate,
+  getPersianYearMonthFromViewedMonth,
+} from '@/localization/utils/persian-calendar/persianViewedMonth';
+import { useIsPersianCalendar } from '@/ui/input/components/internal/date/hooks/useIsPersianCalendar';
 
 const StyledCustomDatePickerHeader = styled.div`
   align-items: center;
@@ -61,9 +68,19 @@ export const DatePickerHeader = ({
     getDatePickerDropdownIds(instanceId);
 
   const dateParsed = isDefined(date) ? Temporal.PlainDate.from(date) : null;
-  const displayedMonth = isDefined(viewedMonth)
-    ? Temporal.PlainYearMonth.from(viewedMonth)
-    : dateParsed;
+  const isPersianCalendar = useIsPersianCalendar();
+  const persianViewedMonth = isDefined(viewedMonth)
+    ? viewedMonth
+    : isDefined(date)
+      ? getPersianViewedMonthFromPlainDate(date)
+      : null;
+  const displayedMonth = isPersianCalendar
+    ? isDefined(persianViewedMonth)
+      ? getPersianYearMonthFromViewedMonth(persianViewedMonth)
+      : null
+    : isDefined(viewedMonth)
+      ? Temporal.PlainYearMonth.from(viewedMonth)
+      : dateParsed;
 
   return (
     <>
@@ -71,7 +88,11 @@ export const DatePickerHeader = ({
       <StyledCustomDatePickerHeader>
         <Select
           dropdownId={monthSelectDropdownId}
-          options={getMonthSelectOptions(userLocale)}
+          options={
+            isPersianCalendar
+              ? getPersianMonthSelectOptions()
+              : getMonthSelectOptions(userLocale)
+          }
           onChange={onChangeMonth}
           value={displayedMonth?.month}
           fullWidth
@@ -80,7 +101,11 @@ export const DatePickerHeader = ({
           dropdownId={yearSelectDropdownId}
           onChange={onChangeYear}
           value={displayedMonth?.year}
-          options={DATE_PICKER_YEAR_SELECT_OPTIONS}
+          options={
+            isPersianCalendar
+              ? getPersianYearSelectOptions()
+              : DATE_PICKER_YEAR_SELECT_OPTIONS
+          }
           fullWidth
         />
         <LightIconButton

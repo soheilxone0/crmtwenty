@@ -6,6 +6,9 @@ import { LightIconButton } from 'twenty-ui/components/input';
 import { IconChevronLeft, IconChevronRight } from 'twenty-ui/icon';
 import { themeCssVariables } from 'twenty-ui/theme';
 import { useLingui } from '@lingui/react/macro';
+import { formatPersianMonthYear } from '@/localization/utils/persian-calendar/formatPersianMonthYear';
+import { Temporal } from 'temporal-polyfill';
+import { useIsPersianCalendar } from '@/ui/input/components/internal/date/hooks/useIsPersianCalendar';
 
 const StyledContainer = styled.div`
   align-items: center;
@@ -40,10 +43,22 @@ export const RelativeDatePickerCalendarNavigation = ({
   const currentWorkspaceMember = useAtomStateValue(currentWorkspaceMemberState);
   const userLocale = currentWorkspaceMember?.locale ?? SOURCE_LOCALE;
 
-  const monthYearLabel = new Intl.DateTimeFormat(userLocale, {
-    month: 'long',
-    year: 'numeric',
-  }).format(monthLabelDate);
+  const isPersianCalendar = useIsPersianCalendar();
+
+  // In Persian mode the viewed month is a Gregorian proxy whose 10th day
+  // always falls inside the displayed Jalali month (see persianViewedMonth).
+  const monthYearLabel = isPersianCalendar
+    ? formatPersianMonthYear(
+        Temporal.PlainDate.from({
+          year: monthLabelDate.getFullYear(),
+          month: monthLabelDate.getMonth() + 1,
+          day: 10,
+        }),
+      )
+    : new Intl.DateTimeFormat(userLocale, {
+        month: 'long',
+        year: 'numeric',
+      }).format(monthLabelDate);
 
   return (
     <StyledContainer>
