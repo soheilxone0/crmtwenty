@@ -1,4 +1,8 @@
 import { type DateFormat } from '@/localization/constants/DateFormat';
+import {
+  formatDateWithPersianCalendar,
+  isPersianCalendarLocale,
+} from '@/localization/utils/formatDateWithPersianCalendar';
 import { formatPlainDateISOString } from '@/localization/utils/formatPlainDateISOString';
 import { type Locale } from 'date-fns';
 import { formatInTimeZone } from 'date-fns-tz';
@@ -17,6 +21,10 @@ export const formatDateISOStringToDate = ({
 }) => {
   if (isDateWithoutTime(date)) {
     return formatPlainDateISOString({ date, dateFormat, localeCatalog });
+  }
+
+  if (isPersianCalendarLocale(localeCatalog)) {
+    return formatDateWithPersianCalendar({ date: new Date(date), timeZone });
   }
 
   return formatInTimeZone(new Date(date), timeZone, dateFormat, {

@@ -1,5 +1,9 @@
 import { type DateFormat } from '@/localization/constants/DateFormat';
 import { type TimeFormat } from '@/localization/constants/TimeFormat';
+import {
+  formatDateWithPersianCalendar,
+  isPersianCalendarLocale,
+} from '@/localization/utils/formatDateWithPersianCalendar';
 import { isValid, type Locale } from 'date-fns';
 import { formatInTimeZone } from 'date-fns-tz';
 
@@ -20,6 +24,15 @@ export const formatDateISOStringToDateTime = ({
 
   if (!isValid(parsedDate)) {
     return '';
+  }
+
+  if (isPersianCalendarLocale(localeCatalog)) {
+    return formatDateWithPersianCalendar({
+      date: parsedDate,
+      timeZone,
+      withTime: true,
+      hour12: timeFormat.includes('a'),
+    });
   }
 
   // TODO: replace this with shiftPointInTimeToFromTimezoneDifference to remove date-fns-tz, which formatInTimeZone is doig under the hood :

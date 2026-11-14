@@ -1,8 +1,22 @@
 @import './viewport-zoom.css';
 
+/* Persian (fa-IR) customization: self-hosted Vazirmatn (SIL OFL 1.1, see
+   public/fonts/vazirmatn/OFL.txt). The "Non-Latin" build only contains
+   Arabic-script glyphs, so Latin text keeps rendering with Inter while
+   Persian text falls back to Vazirmatn. */
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/fonts/vazirmatn/Vazirmatn-NL-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+200C-200F,
+    U+FB50-FDFF, U+FE70-FEFF;
+}
+
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'Vazirmatn', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--t-background-tertiary);
