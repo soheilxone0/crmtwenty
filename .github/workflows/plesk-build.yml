@@ -1,10 +1,15 @@
-name: Build for Plesk (production branch)
+name: Build for Plesk
 
 # crmtwenty: shared hosting cannot run `composer install` or `npm run build`,
 # so this workflow does it on GitHub and publishes a ready-to-run copy of the
-# app (with vendor/ and the compiled assets) to the `production` branch.
-# In Plesk → Git, point "crm.arounidea.com" at the `production` branch and
-# use "Pull updates" / automatic deployment.
+# app (with vendor/ and the compiled assets):
+#
+# one ZIP file attached to the "plesk-latest" release. Upload it with Plesk's
+# File Manager and extract it in the site folder. Always available at
+# https://github.com/soheilxone0/crmtwenty/releases/latest/download/crm-plesk.zip
+#
+# (Plesk's Git deployment clones the whole repository history, which is too
+# large for the hosting's connection, so the ZIP is the supported way.)
 
 on:
   push:
@@ -21,7 +26,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build production branch
+    name: Build the Plesk ZIP
     runs-on: ubuntu-latest
 
     steps:
@@ -66,6 +71,15 @@ jobs:
           # … plus what was built above.
           tar -cf - vendor public/admin/build | tar -xf - -C "$OUT"
 
+          # Drop what is never used at run time, to keep the download small:
+          # tests, documentation and examples shipped inside packages, and the
+          # ar-php .phar (the library is loaded from its src/ folder).
+          find "$OUT/vendor" -mindepth 3 -maxdepth 3 -type d \
+            \( -name tests -o -name Tests -o -name test -o -name docs -o -name doc -o -name examples \) \
+            -prune -exec rm -rf {} +
+          rm -f "$OUT/vendor/khaled.alshamaa/ar-php/ArPHP.phar"
+          rm -rf "$OUT/.phpunit.cache"
+
           # Everything in this copy is meant to be deployed, including vendor/.
           cat > "$OUT/.gitignore" <<'EOF'
           /.env
@@ -80,42 +94,62 @@ jobs:
 
           printf '%s\n' "${GITHUB_SHA}" > "$OUT/REVISION"
 
-      - name: Publish to the production branch
+      - name: Smoke-test the production copy
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/out"
+          cat > "$RUNNER_TEMP/smoke.php" <<'PHP'
+          <?php
+          require 'vendor/autoload.php';
+          $classes = [
+              Illuminate\Foundation\Application::class,
+              ArPHP\I18N\Arabic::class,
+              Mpdf\Mpdf::class,
+              Barryvdh\DomPDF\PDF::class,
+              Crmtwenty\Persian\Support\Jalali::class,
+              Google\Service\PeopleService::class,
+          ];
+          foreach ($classes as $class) {
+              if (! class_exists($class)) {
+                  fwrite(STDERR, "missing {$class}\n");
+                  exit(1);
+              }
+          }
+          new ArPHP\I18N\Arabic;
+          echo Crmtwenty\Persian\Support\Jalali::format('2026-11-14', 'Y/m/d', true, 'Asia/Tehran'), "\n";
+          echo "classes ok\n";
+          PHP
+          php "$RUNNER_TEMP/smoke.php"
+          php artisan --version
+
+      - name: Create the ZIP
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/out"
+          zip -q -r -9 -X "$RUNNER_TEMP/crm-plesk.zip" .
+          ls -lh "$RUNNER_TEMP/crm-plesk.zip"
+          echo "ZIP_SIZE=$(du -m "$RUNNER_TEMP/crm-plesk.zip" | cut -f1)" >> "$GITHUB_ENV"
+
+      - name: Publish the ZIP as the latest release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
 
-          OUT="$RUNNER_TEMP/out"
-          PUB="$RUNNER_TEMP/publish"
-          REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          {
+            echo "نسخه‌ی آماده‌ی اجرای CRM فارسی برای هاست پلسک (حدود ${ZIP_SIZE} مگابایت)."
+            echo
+            echo "نصب یا به‌روزرسانی: فایل crm-plesk.zip را در File Manager پلسک داخل پوشه‌ی crm.arounidea.com آپلود کنید، روی آن Extract Files بزنید (با بازنویسی فایل‌ها) و بعد خود فایل ZIP را پاک کنید. فایل .env و اطلاعات شما دست نمی‌خورد."
+            echo
+            echo "راهنمای کامل در README.md مخزن است."
+            echo
+            echo "Source: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
+          } > "$RUNNER_TEMP/notes.md"
 
-          git init -q "$PUB"
-          cd "$PUB"
-          git config user.name "crmtwenty build"
-          git config user.email "crmtwenty@users.noreply.github.com"
-          git remote add origin "$REMOTE"
-
-          # Keep a linear history on `production` so a plain `git pull` in Plesk
-          # always fast-forwards.
-          if git ls-remote --exit-code --heads origin production >/dev/null 2>&1; then
-            git fetch -q --depth=1 origin production
-            git checkout -q -b production FETCH_HEAD
-          else
-            git checkout -q --orphan production
-          fi
-
-          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          (cd "$OUT" && tar -cf - .) | tar -xf -
-
-          git add -A -f
-          git reset -q -- .env 2>/dev/null || true
-
-          if git diff --cached --quiet; then
-            echo "production is already up to date."
-            exit 0
-          fi
-
-          git commit -q -m "Build ${GITHUB_SHA::7} for Plesk" -m "Source: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
-          git push -q origin production
-          echo "Published $(git rev-parse --short HEAD) to production."
+          gh release delete plesk-latest --yes --cleanup-tag --repo "$GITHUB_REPOSITORY" || true
+          gh release create plesk-latest "$RUNNER_TEMP/crm-plesk.zip" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "CRM فارسی برای پلسک (${GITHUB_SHA::7})" \
+            --notes-file "$RUNNER_TEMP/notes.md" \
+            --latest
