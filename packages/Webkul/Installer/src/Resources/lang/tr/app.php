@@ -175,6 +175,7 @@ return [
                 'hong-kong-dollar' => 'Hong Kong Doları (HKD)',
                 'hungarian-forint' => 'Macar Forinti (HUF)',
                 'indian-rupee' => 'Hint Rupisi (INR)',
+                'iranian-rial' => 'İran Riyali (IRR)',
                 'indonesian-rupiah' => 'Endonezya Rupisi (IDR)',
                 'israeli-new-shekel' => 'İsrail Yeni Şekeli (ILS)',
                 'japanese-yen' => 'Japon Yeni (JPY)',

@@ -175,6 +175,7 @@ return [
                 'hong-kong-dollar' => '港元 (HKD)',
                 'hungarian-forint' => '匈牙利福林 (HUF)',
                 'indian-rupee' => '印度卢比 (INR)',
+                'iranian-rial' => '伊朗里亚尔 (IRR)',
                 'indonesian-rupiah' => '印尼盾 (IDR)',
                 'israeli-new-shekel' => '以色列新谢克尔 (ILS)',
                 'japanese-yen' => '日元 (JPY)',
