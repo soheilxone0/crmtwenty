@@ -216,8 +216,13 @@ class Tenancy
 
         $like = str_replace(['\\', '_', '%'], ['\\\\', '\\_', '\\%'], $prefix).'%';
 
-        return collect(DB::connection(self::CONNECTION)->select('SHOW TABLES LIKE ?', [$like]))
-            ->map(fn ($row) => array_values((array) $row)[0])
+        $rows = DB::connection(self::CONNECTION)->select(
+            'select table_name as name from information_schema.tables where table_schema = database() and table_name like ?',
+            [$like]
+        );
+
+        return collect($rows)
+            ->map(fn ($row) => (string) array_values((array) $row)[0])
             ->filter(fn ($table) => str_starts_with($table, $prefix))
             ->values()
             ->all();

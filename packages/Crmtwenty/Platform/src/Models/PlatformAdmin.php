@@ -14,6 +14,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string $name
  * @property string $username
  * @property string $email
+ * @property string $password
  * @property bool $status
  * @property \Illuminate\Support\Carbon|null $last_login_at
  */

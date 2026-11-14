@@ -34,3 +34,9 @@ jobs:
 
       - name: Run Pint
         run: vendor/bin/pint --test
+
+      - name: Report Pint fixes
+        if: failure()
+        run: |
+          vendor/bin/pint --test --format=json > pint.json || true
+          jq -r '.files[] | "::error file=\(.name)::\(.appliedFixers | join(", "))"' pint.json

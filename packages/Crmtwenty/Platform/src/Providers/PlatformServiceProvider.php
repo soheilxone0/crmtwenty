@@ -115,7 +115,7 @@ class PlatformServiceProvider extends ServiceProvider
 
             $errors = [];
 
-            if ($logins->taken('email', $user->email, $company?->id, $user->getKey())) {
+            if ($logins->taken('email', $user->getAttribute('email'), $company?->id, $user->getKey())) {
                 $errors['email'] = trans('platform::app.validation.email-taken');
             }
 
@@ -138,7 +138,7 @@ class PlatformServiceProvider extends ServiceProvider
             $logins = $this->app->make(Logins::class);
 
             if ($company = $logins->currentCompany()) {
-                $logins->put($company, (int) $user->getKey(), (string) $user->email, $user->getAttribute('username'));
+                $logins->put($company, (int) $user->getKey(), (string) $user->getAttribute('email'), $user->getAttribute('username'));
             }
         });
 

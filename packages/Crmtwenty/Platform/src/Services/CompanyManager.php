@@ -112,7 +112,7 @@ class CompanyManager
             return;
         }
 
-        $lock = Cache::store('file')->lock('platform-upgrade-'.$company->id, 600);
+        $lock = Cache::lock('platform-upgrade-'.$company->id, 600);
 
         if (! $lock->get()) {
             return;
@@ -153,7 +153,7 @@ class CompanyManager
             return;
         }
 
-        $lock = Cache::store('file')->lock('platform-upgrade-base', 600);
+        $lock = Cache::lock('platform-upgrade-base', 600);
 
         if (! $lock->get()) {
             return;

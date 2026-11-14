@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $user_id
  * @property string $email
  * @property string|null $username
+ * @property-read Company|null $company
  */
 class Login extends Model
 {
@@ -29,6 +30,9 @@ class Login extends Model
         'username',
     ];
 
+    /**
+     * @return BelongsTo<Company, $this>
+     */
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class, 'company_id');

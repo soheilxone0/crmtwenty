@@ -865,12 +865,6 @@ parameters:
 			path: packages/Webkul/Admin/src/Http/Middleware/Bouncer.php
 
 		-
-			message: '#^Access to an undefined property Webkul\\User\\Models\\User\:\:\$status\.$#'
-			identifier: property.notFound
-			count: 1
-			path: packages/Webkul/Admin/src/Http/Middleware/Bouncer.php
-
-		-
 			message: '#^Strict comparison using \!\=\= between mixed~''all'' and ''all'' will always evaluate to true\.$#'
 			identifier: notIdentical.alwaysTrue
 			count: 1

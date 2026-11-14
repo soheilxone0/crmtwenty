@@ -165,8 +165,8 @@ it('creates a company with its own isolated tables and manager', function () {
     /**
      * Data written while the company is active stays inside it.
      */
-    app(Tenancy::class)->run($company, function () {
-        DB::table('tags')->insert(['name' => 'only-in-company-a', 'color' => '#000', 'created_at' => now(), 'updated_at' => now()]);
+    app(Tenancy::class)->run($company, function () use ($manager) {
+        DB::table('tags')->insert(['name' => 'only-in-company-a', 'color' => '#000', 'user_id' => $manager->id, 'created_at' => now(), 'updated_at' => now()]);
     });
 
     expect(DB::table('tags')->where('name', 'only-in-company-a')->exists())->toBeFalse()
