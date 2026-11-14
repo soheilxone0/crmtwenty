@@ -45,13 +45,23 @@ class SessionController extends Controller
     public function store(): RedirectResponse
     {
         $this->validate(request(), [
-            'email' => 'required|email',
+            'email' => 'required|string|max:255',
             'password' => 'required',
         ]);
 
         $this->ensureIsNotRateLimited();
 
-        if (! auth()->guard('user')->attempt(request(['email', 'password']), request('remember'))) {
+        /**
+         * crmtwenty: users sign in with their e-mail address or their username.
+         */
+        $login = trim((string) request('email'));
+
+        $credentials = [
+            (str_contains($login, '@') ? 'email' : 'username') => $login,
+            'password' => (string) request('password'),
+        ];
+
+        if (! auth()->guard('user')->attempt($credentials, request('remember'))) {
             $this->recordFailedAttempt();
 
             session()->flash('error', trans('admin::app.users.login-error'));

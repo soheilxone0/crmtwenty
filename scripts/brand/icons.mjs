@@ -1,5 +1,7 @@
 // Builds the Phosphor-based icon set that replaces Krayin's icomoon font.
-// Usage: node icons.mjs <admin-assets-dir> <platform-public-dir>
+// Usage (from a folder with the packages of scripts/brand/package.json installed):
+//   node icons.mjs <admin-assets-dir> <platform-public-dir>
+// The admin icon CSS is written next to the assets dir, to be pasted into css/app.css.
 import fs from "node:fs";
 import path from "node:path";
 import subsetFont from "subset-font";
@@ -59,6 +61,7 @@ const platform = [
     "arrow-square-out", "arrows-clockwise", "dots-three-vertical", "list", "x", "image", "palette",
     "calendar-blank", "chart-line-up", "globe-hemisphere-east", "identification-card", "lightning",
     "rocket-launch", "sign-in", "user-plus", "user-switch", "clock", "hard-drives", "check",
+    "phone", "target", "address-book", "note-pencil", "house", "question",
 ];
 
 function glyphs(names, weight) {
@@ -86,7 +89,7 @@ for (const [cls, [name, weight = "regular"]] of Object.entries(admin)) {
     (weight === "fill" ? fil : reg).push(cp);
     css += `    .icon-${cls}:before {\n        content: "\\${cp.toString(16)}";${weight === "fill" ? "\n        font-family: 'PhosphorFill';" : ""}\n    }\n\n`;
 }
-fs.writeFileSync("/tmp/assets/admin-icons.css", css);
+fs.writeFileSync(path.join(adminAssets, "..", "admin-icons.generated.css"), css);
 await subset("regular", reg, `${adminAssets}/fonts/phosphor.woff2`);
 await subset("fill", fil, `${adminAssets}/fonts/phosphor-fill.woff2`);
 

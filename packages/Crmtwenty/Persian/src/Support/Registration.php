@@ -2,6 +2,7 @@
 
 namespace Crmtwenty\Persian\Support;
 
+use Crmtwenty\Platform\Support\Tenancy;
 use Throwable;
 use Webkul\User\Models\Role;
 
@@ -31,6 +32,14 @@ class Registration
      */
     public static function isEnabled(): bool
     {
+        /**
+         * On the multi-company platform accounts are created by company managers only.
+         */
+        if (class_exists(Tenancy::class)
+            && app(Tenancy::class)->enabled()) {
+            return false;
+        }
+
         return (bool) static::get('enabled', false);
     }
 

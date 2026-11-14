@@ -118,4 +118,11 @@ return [
     'errors' => [
         'session-expired' => 'Your session had expired. Please try again.',
     ],
+
+    'users' => [
+        'username' => 'Username',
+        'username-placeholder' => 'e.g. john.doe',
+        'login' => 'Email or username',
+        'login-placeholder' => 'Email Address',
+    ],
 ];

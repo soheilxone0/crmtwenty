@@ -34,17 +34,20 @@
                         <!-- Email -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.users.login.email')
+                                @lang('persian::app.users.login')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
-                                type="email"
+                                type="text"
                                 class="w-[254px] max-w-full"
                                 id="email"
                                 name="email"
-                                rules="required|email"
-                                :label="trans('admin::app.users.login.email')"
-                                :placeholder="trans('admin::app.users.login.email')"
+                                dir="ltr"
+                                autocomplete="username"
+                                rules="required"
+                                :value="old('email')"
+                                :label="trans('persian::app.users.login')"
+                                :placeholder="trans('persian::app.users.login-placeholder')"
                             />
 
                             <x-admin::form.control-group.error control-name="email" />

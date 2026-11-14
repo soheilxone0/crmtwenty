@@ -14,6 +14,11 @@
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
+
+        <!-- crmtwenty: creates and drops real tables, so it runs on its own (not in parallel). -->
+        <testsuite name="Platform">
+            <directory suffix="Test.php">./tests/Platform</directory>
+        </testsuite>
     </testsuites>
 
     <source>

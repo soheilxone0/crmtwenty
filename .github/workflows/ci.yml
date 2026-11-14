@@ -71,7 +71,10 @@ jobs:
         run: php artisan crm:install --skip-env-check --skip-admin-creation
 
       - name: Running Pest Test
-        run: vendor/bin/pest --parallel --colors=always --log-junit junit.xml
+        run: vendor/bin/pest --testsuite=Unit,Feature --parallel --colors=always --log-junit junit.xml
+
+      - name: Running Platform Tests
+        run: vendor/bin/pest --testsuite=Platform --colors=always --log-junit junit.xml
 
       - name: Report failed tests
         if: failure()

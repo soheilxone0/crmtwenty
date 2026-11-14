@@ -2,6 +2,7 @@
 
 namespace Crmtwenty\Persian\Support;
 
+use Closure;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -40,6 +41,17 @@ class MailSettings
     protected static ?array $values = null;
 
     /**
+     * Optional source of settings used when none are saved for the current workspace
+     * (the multi-company platform points it at the main installation's account).
+     */
+    public static ?Closure $fallback = null;
+
+    /**
+     * The mail configuration from .env, restored when no account applies.
+     */
+    protected static ?array $original = null;
+
+    /**
      * The values saved in the admin panel (empty array when none / no database yet).
      */
     public static function saved(): array
@@ -62,6 +74,14 @@ class MailSettings
 
         foreach (static::FIELDS as $field) {
             $values[$field] = $rows[static::PREFIX.$field] ?? null;
+        }
+
+        if (blank($values['host']) && static::$fallback) {
+            try {
+                $values = (static::$fallback)() ?: $values;
+            } catch (Throwable) {
+                // Keep the empty values.
+            }
         }
 
         return static::$values = $values;
@@ -111,13 +131,22 @@ class MailSettings
      */
     public static function apply(?array $settings = null): void
     {
+        static::$original ??= [
+            'mail.default' => config('mail.default'),
+            'mail.mailers.smtp' => config('mail.mailers.smtp'),
+            'mail.from.address' => config('mail.from.address'),
+            'mail.from.name' => config('mail.from.name'),
+        ];
+
         $settings ??= static::saved();
 
         if (blank($settings['host'] ?? null)) {
+            config(static::$original);
+
             return;
         }
 
-        config(static::toConfig($settings));
+        config(array_merge(static::$original, static::toConfig($settings)));
     }
 
     /**
