@@ -62,4 +62,21 @@ jobs:
         run: php artisan krayin-crm:install --skip-env-check --skip-admin-creation
 
       - name: Running Pest Test
-        run: vendor/bin/pest --parallel --colors=always
+        run: vendor/bin/pest --parallel --colors=always --log-junit junit.xml
+
+      - name: Report failed tests
+        if: failure()
+        run: |
+          cat > /tmp/report.php <<'PHP'
+          <?php
+          if (! is_file('junit.xml')) {
+              exit(0);
+          }
+          $clean = fn ($text) => str_replace(['%', ':', ','], ['%25', ' ', ' '], preg_replace('/\s+/', ' ', $text));
+          foreach (simplexml_load_file('junit.xml')->xpath('//testcase[failure or error]') as $case) {
+              $node = $case->failure ?: $case->error;
+              echo '::error title='.$clean($case['class'].' > '.$case['name']).'::'
+                  .str_replace('%', '%25', preg_replace('/\s+/', ' ', substr((string) $node, 0, 900)))."\n";
+          }
+          PHP
+          php /tmp/report.php
