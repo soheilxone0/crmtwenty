@@ -1,6 +1,5 @@
 {!! view_render_event('admin.dashboard.index.top_selling_proudcts.before') !!}
 
-<!-- Top Selling Products Vue Component -->
 <v-dashboard-top-selling-products>
     <!-- Shimmer -->
     <x-admin::shimmer.dashboard.index.top-selling-products />
@@ -18,70 +17,64 @@
             <x-admin::shimmer.dashboard.index.top-selling-products />
         </template>
 
-        <!-- Total Sales Section -->
         <template v-else>
-            <div class="w-full rounded-lg border border-gray-300 bg-white dark:border-gray-800 dark:bg-gray-900">
-                <div class="flex items-center justify-between p-4">
-                    <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
+            <div
+                class="ct-card ct-rise w-full"
+                style="--i: 3"
+            >
+                <div class="ct-card-head">
+                    <p class="ct-card-title">
+                        <span
+                            class="ct-chip sm icon-product"
+                            style="--tone: var(--ct-amber)"
+                        ></span>
+
                         @lang('admin::app.dashboard.index.top-selling-products.title')
                     </p>
                 </div>
 
-                <!-- Top Selling Products Details -->
+                <!-- Ranked list -->
                 <div
-                    class="flex flex-col"
+                    class="ct-rank -mx-2"
                     v-if="report.statistics.length"
                 >
                     <a
                         :href="'{{ route('admin.products.view', ':id') }}'.replace(':id', item.id)"
-                        class="flex gap-2.5 border-b p-4 transition-all last:border-b-0 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
+                        class="ct-rank-row"
                         target="_blank"
-                        v-for="item in report.statistics"
+                        v-for="(item, index) in report.statistics"
                     >
-                        <!-- Product Details -->
-                        <div class="flex w-full flex-col gap-1.5">
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="item.name"
-                            >
-                            </p>
+                        <span class="ct-rank-no">@{{ $ct.num(index + 1) }}</span>
 
-                            <div class="flex justify-between">
-                                <p class="font-medium text-gray-800 dark:text-white">
-                                    @{{ item.formatted_price }}
-                                </p>
+                        <div class="ct-rank-body gap-1.5">
+                            <div class="flex items-baseline justify-between gap-3">
+                                <b v-text="item.name"></b>
 
-                                <p class="font-normal text-gray-800 dark:text-white">
-                                    @{{ item.formatted_revenue }}
-                                </p>
+                                <span class="ct-rank-value">@{{ item.formatted_revenue }}</span>
                             </div>
+
+                            <div class="ct-bar-track !h-1.5">
+                                <div
+                                    class="ct-bar-fill"
+                                    :style="{ width: Math.max(4, (Number(item.revenue) || 0) / max * 100) + '%', '--i': index, '--tone': $ct.color(index) }"
+                                ></div>
+                            </div>
+
+                            <span>@{{ item.formatted_price }}</span>
                         </div>
                     </a>
                 </div>
 
-                <!-- Empty Product Design -->
+                <!-- Empty state -->
                 <div
-                    class="flex flex-col gap-8 p-4"
+                    class="ct-empty"
                     v-else
                 >
-                    <div class="grid justify-center justify-items-center gap-3.5 py-2.5">
-                        <!-- Placeholder Image -->
-                        <img
-                            src="{{ vite()->asset('images/empty-placeholders/products.svg') }}"
-                            class="dark:mix-blend-exclusion dark:invert"
-                        >
+                    <span class="ct-chip icon-product"></span>
 
-                        <!-- Add Variants Information -->
-                        <div class="flex flex-col items-center">
-                            <p class="text-base font-semibold text-gray-400">
-                                @lang('admin::app.dashboard.index.top-selling-products.empty-title')
-                            </p>
+                    <b>@lang('admin::app.dashboard.index.top-selling-products.empty-title')</b>
 
-                            <p class="text-gray-400">
-                                @lang('admin::app.dashboard.index.top-selling-products.empty-info')
-                            </p>
-                        </div>
-                    </div>
+                    <span>@lang('admin::app.dashboard.index.top-selling-products.empty-info')</span>
                 </div>
             </div>
         </template>
@@ -97,6 +90,12 @@
 
                     isLoading: true,
                 }
+            },
+
+            computed: {
+                max() {
+                    return Math.max(1, ...this.report.statistics.map((item) => Number(item.revenue) || 0));
+                },
             },
 
             mounted() {
@@ -122,7 +121,7 @@
                             this.isLoading = false;
                         })
                         .catch(error => {});
-                }
+                },
             }
         });
     </script>

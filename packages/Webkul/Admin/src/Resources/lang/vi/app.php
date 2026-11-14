@@ -2229,6 +2229,7 @@ return [
             'start-date' => 'Ngày bắt đầu',
             'end-date' => 'Ngày kết thúc',
             'export-pdf' => 'Xuất PDF',
+            'vs-previous' => 'so với kỳ trước',
             'pdf' => [
                 'title' => 'Báo Cáo Bảng Điều Khiển',
                 'filtered-date' => 'Ngày Đã Lọc',

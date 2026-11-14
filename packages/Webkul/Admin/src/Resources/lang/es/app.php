@@ -2229,6 +2229,7 @@ return [
             'start-date' => 'Fecha de inicio',
             'end-date' => 'Fecha de fin',
             'export-pdf' => 'Exportar PDF',
+            'vs-previous' => 'vs. periodo anterior',
             'pdf' => [
                 'title' => 'Informe del Tablero',
                 'filtered-date' => 'Fecha Filtrada',

@@ -1,21 +1,21 @@
-<div class="grid gap-4 rounded-lg border border-gray-300 bg-white p-4 dark:border-gray-800 dark:bg-gray-900">
-    <div class="flex items-center justify-between">
-        <div class="shimmer h-[17px] w-28"></div>
+<div class="ct-card">
+    <div class="ct-card-head">
+        <div class="flex items-center gap-2.5">
+            <div class="shimmer h-8 w-8 !rounded-[10px]"></div>
+
+            <div class="shimmer h-4 w-32"></div>
+        </div>
     </div>
 
-    <div class="flex flex-col gap-4 px-8 pt-8">
-        <div class="shimmer h-[280px] w-[280px] rounded-full"></div>
+    <div class="mx-auto my-2 h-[180px] w-[180px] animate-pulse rounded-full border-[22px] border-gray-100 dark:border-gray-800"></div>
 
-        <div class="flex justify-center gap-5">
-            <div class="flex items-center gap-2">
-                <div class="shimmer h-3.5 w-3.5 rounded-sm"></div>
-                <div class="shimmer h-[17px] w-[76px] rounded-sm"></div>
+    <div class="flex flex-col gap-3">
+        @for ($i = 0; $i < 3; $i++)
+            <div class="flex justify-between">
+                <div class="shimmer h-3.5 w-28"></div>
+
+                <div class="shimmer h-3.5 w-16"></div>
             </div>
-            
-            <div class="flex items-center gap-2">
-                <div class="shimmer h-3.5 w-3.5 rounded-sm"></div>
-                <div class="shimmer h-[17px] w-[76px] rounded-sm"></div>
-            </div>
-        </div>
+        @endfor
     </div>
 </div>

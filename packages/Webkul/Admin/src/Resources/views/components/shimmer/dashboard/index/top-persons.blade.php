@@ -1,24 +1,24 @@
-<div class="w-full rounded-lg border border-gray-300 bg-white dark:bg-gray-900 dark:border-gray-800">
-    <div class="flex items-center justify-between p-4">
-        <div class="shimmer h-[17px] w-28"></div>
+<div class="ct-card w-full">
+    <div class="ct-card-head">
+        <div class="flex items-center gap-2.5">
+            <div class="shimmer h-8 w-8 !rounded-[10px]"></div>
+
+            <div class="shimmer h-4 w-32"></div>
+        </div>
     </div>
 
-    <div class="flex flex-col">
+    <div class="flex flex-col gap-4">
         @for ($i = 1; $i <= 5; $i++)
-            <div class="flex gap-2.5 border-b p-4 last:border-b-0 dark:border-gray-800">
-                <!-- Product Details -->
-                <div class="flex w-full flex-col gap-1.5">
-                    <!-- Product Name -->
-                    <div class="shimmer h-[17px] w-full"></div>
+            <div class="flex items-center gap-3">
+                <div class="shimmer h-9 w-9 !rounded-full"></div>
 
-                    <div class="flex justify-between">
-                        <!-- Product Price -->
-                        <div class="shimmer h-[17px] w-[52px]"></div>
+                <div class="flex flex-1 flex-col gap-2">
+                    <div class="shimmer h-3.5 w-3/5"></div>
 
-                        <!-- Grand Total -->
-                        <div class="shimmer h-[17px] w-[72px]"></div>
-                    </div>
+                    <div class="shimmer h-3 w-2/5"></div>
                 </div>
+
+                <div class="shimmer h-3.5 w-16"></div>
             </div>
         @endfor
     </div>

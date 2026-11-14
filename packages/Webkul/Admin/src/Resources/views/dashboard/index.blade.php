@@ -6,12 +6,18 @@
     <!-- Head Details Section -->
     {!! view_render_event('admin.dashboard.index.header.before') !!}
 
-    <div class="mb-5 flex items-center justify-between gap-4 max-sm:flex-wrap">
+    <div class="mb-6 flex items-center justify-between gap-4 max-sm:flex-wrap">
         {!! view_render_event('admin.dashboard.index.header.left.before') !!}
 
-        <div class="grid gap-1.5">
-            <p class="text-2xl font-semibold dark:text-white">
+        <div class="ct-rise grid gap-0.5">
+            <p class="ct-hello">
                 {{ menu()->getLabel('dashboard', 'admin::app.dashboard.index.title') }}
+            </p>
+
+            <p class="ct-hello-sub">
+                {{ app()->getLocale() === 'fa'
+                    ? \Crmtwenty\Persian\Support\Jalali::format(now(), 'l j F Y', true, config('app.timezone'))
+                    : now()->translatedFormat('l, j F Y') }}
             </p>
         </div>
 
@@ -41,11 +47,11 @@
     <!-- Body Component -->
     {!! view_render_event('admin.dashboard.index.content.before') !!}
 
-    <div class="mt-3.5 flex gap-4 max-xl:flex-wrap">
+    <div class="mt-1 flex gap-5 max-xl:flex-wrap">
         <!-- Left Section -->
         {!! view_render_event('admin.dashboard.index.content.left.before') !!}
 
-        <div class="flex flex-1 flex-col gap-4 max-xl:flex-auto">
+        <div class="flex min-w-0 flex-1 flex-col gap-5 max-xl:flex-auto">
             <!-- Revenue Stats -->
             @include('admin::dashboard.index.revenue')
 
@@ -55,7 +61,7 @@
             <!-- Total Leads Stats -->
             @include('admin::dashboard.index.total-leads')
 
-            <div class="flex gap-4 max-lg:flex-wrap">
+            <div class="flex gap-5 max-lg:flex-wrap">
                 <!-- Total Products -->
                 @include('admin::dashboard.index.top-selling-products')
 
@@ -69,7 +75,7 @@
         <!-- Right Section -->
         {!! view_render_event('admin.dashboard.index.content.right.before') !!}
 
-        <div class="flex w-[378px] max-w-full flex-col gap-4 max-sm:w-full">
+        <div class="flex w-[360px] max-w-full flex-col gap-5 max-xl:w-full max-xl:grid max-xl:grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1">
             <!-- Revenue by Types -->
             @include('admin::dashboard.index.open-leads-by-states')
 
@@ -93,12 +99,8 @@
         >
         </script>
 
-        <!-- Self-hosted funnel plugin (UMD, needs the global Chart from chart.js above). -->
-        <script
-            defer
-            src="{{ asset('admin/vendor/chart-funnel.umd.js') }}"
-        >
-        </script>
+        <!-- Shared chart defaults, palette and number helpers for the widgets below. -->
+        @include('admin::dashboard.index.theme')
 
         <script
             type="text/x-template"

@@ -1,6 +1,5 @@
 {!! view_render_event('admin.dashboard.index.top_persons.before') !!}
 
-<!-- Top Selling Products Vue Component -->
 <v-dashboard-top-persons>
     <!-- Shimmer -->
     <x-admin::shimmer.dashboard.index.top-persons />
@@ -18,61 +17,60 @@
             <x-admin::shimmer.dashboard.index.top-persons />
         </template>
 
-        <!-- Total Sales Section -->
         <template v-else>
-            <div class="w-full rounded-lg border border-gray-300 bg-white dark:border-gray-800 dark:bg-gray-900">
-                <div class="flex items-center justify-between p-4">
-                    <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
+            <div
+                class="ct-card ct-rise w-full"
+                style="--i: 4"
+            >
+                <div class="ct-card-head">
+                    <p class="ct-card-title">
+                        <span
+                            class="ct-chip sm icon-perosnal"
+                            style="--tone: var(--ct-emerald)"
+                        ></span>
+
                         @lang('admin::app.dashboard.index.top-persons.title')
                     </p>
                 </div>
 
-                <!-- Top Selling Products Details -->
+                <!-- Ranked list -->
                 <div
-                    class="flex flex-col"
+                    class="ct-rank -mx-2"
                     v-if="report.statistics.length"
                 >
                     <a
                         :href="'{{ route('admin.contacts.persons.view', ':id') }}'.replace(':id', item.id)"
-                        class="flex gap-2.5 border-b p-4 transition-all last:border-b-0 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
+                        class="ct-rank-row"
                         target="_blank"
-                        v-for="item in report.statistics"
+                        v-for="(item, index) in report.statistics"
                     >
                         <!-- Person Initials -->
                         <x-admin::avatar ::name="item.name" />
 
                         <!-- Person Details -->
-                        <div class="flex flex-col gap-1">
-                            <p class="font-medium text-gray-800 dark:text-white">@{{ item.name }}</p>
+                        <div class="ct-rank-body">
+                            <b>@{{ item.name }}</b>
 
-                            <p class="font-normal text-gray-800 dark:text-white">@{{ item.emails.map(item => item.value).join(', ') }}</p>
+                            <span>@{{ (item.emails || []).map(item => item.value).join(', ') }}</span>
                         </div>
+
+                        <span
+                            class="ct-rank-value"
+                            v-if="item.formatted_revenue"
+                        >@{{ item.formatted_revenue }}</span>
                     </a>
                 </div>
 
-                <!-- Empty Product Design -->
+                <!-- Empty state -->
                 <div
-                    class="flex flex-col gap-8 p-4"
+                    class="ct-empty"
                     v-else
                 >
-                    <div class="grid justify-center justify-items-center gap-3.5 py-2.5">
-                        <!-- Placeholder Image -->
-                        <img
-                            src="{{ vite()->asset('images/empty-placeholders/users.svg') }}"
-                            class="dark:mix-blend-exclusion dark:invert"
-                        >
+                    <span class="ct-chip icon-perosnal"></span>
 
-                        <!-- Add Variants Information -->
-                        <div class="flex flex-col items-center">
-                            <p class="text-base font-semibold text-gray-400">
-                                @lang('admin::app.dashboard.index.top-persons.empty-title')
-                            </p>
+                    <b>@lang('admin::app.dashboard.index.top-persons.empty-title')</b>
 
-                            <p class="text-gray-400">
-                                @lang('admin::app.dashboard.index.top-persons.empty-info')
-                            </p>
-                        </div>
-                    </div>
+                    <span>@lang('admin::app.dashboard.index.top-persons.empty-info')</span>
                 </div>
             </div>
         </template>
@@ -88,6 +86,12 @@
 
                     isLoading: true,
                 }
+            },
+
+            computed: {
+                max() {
+                    return Math.max(1, ...this.report.statistics.map((item) => Number(item.revenue) || 0));
+                },
             },
 
             mounted() {
@@ -113,7 +117,7 @@
                             this.isLoading = false;
                         })
                         .catch(error => {});
-                }
+                },
             }
         });
     </script>

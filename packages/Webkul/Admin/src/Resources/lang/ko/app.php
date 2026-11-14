@@ -2229,6 +2229,7 @@ return [
             'start-date' => '시작일',
             'end-date' => '종료일',
             'export-pdf' => 'PDF 내보내기',
+            'vs-previous' => '이전 기간 대비',
             'pdf' => [
                 'title' => '대시보드 보고서',
                 'filtered-date' => '필터된 날짜',

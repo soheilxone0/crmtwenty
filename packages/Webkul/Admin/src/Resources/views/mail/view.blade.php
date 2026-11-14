@@ -283,7 +283,7 @@
                             </span>
 
                             <a
-                                class="icon-download absolute right-0 rounded-md bg-gradient-to-r from-transparent via-gray-50 to-gray-100 p-2 pl-8 text-xl opacity-0 transition-all group-hover:opacity-100 dark:via-gray-900 dark:to-gray-900"
+                                class="icon-download absolute right-0 rounded-md bg-gray-100 p-2 text-xl opacity-0 transition-all group-hover:opacity-100 dark:bg-gray-900"
                                 :href="'{{ route('admin.mail.attachment_download') }}/' + attachment.id"
                             ></a>
                         </div>

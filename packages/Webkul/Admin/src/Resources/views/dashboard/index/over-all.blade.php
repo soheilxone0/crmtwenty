@@ -18,169 +18,40 @@
             <x-admin::shimmer.dashboard.index.over-all />
         </template>
 
-        <!-- Total Sales Section -->
+        <!-- KPI tiles -->
         <template v-else>
-            <!-- Stats Cards -->
-            <div class="grid grid-cols-3 gap-4 max-md:grid-cols-2 max-sm:grid-cols-1">
-                <!-- Average Revenue Card -->
-                <div class="flex flex-col gap-2 rounded-lg border border-gray-300 bg-white px-4 py-5 dark:border-gray-800 dark:bg-gray-900">
-                    <p class="text-xs font-medium text-gray-600 dark:text-gray-300">
-                        @lang('admin::app.dashboard.index.over-all.average-lead-value')
-                    </p>
+            <div class="ct-kpis">
+                <div
+                    class="ct-card ct-kpi ct-rise"
+                    :style="{ '--i': index + 1, '--tone': card.tone }"
+                    v-for="(card, index) in cards"
+                    :key="card.key"
+                >
+                    <div class="ct-kpi-top">
+                        <span class="ct-kpi-label">@{{ card.label }}</span>
 
-                    <div class="flex gap-2">
-                        <p class="text-xl font-bold dark:text-gray-300">
-                            @{{ report.statistics.average_lead_value.formatted_total }}
-                        </p>
-
-                        <div class="flex items-center gap-0.5">
-                            <span
-                                class="text-base !font-semibold text-green-500"
-                                :class="[report.statistics.average_lead_value.progress < 0 ? 'icon-stats-down text-red-500 dark:!text-red-500' : 'icon-stats-up text-green-500 dark:!text-green-500']"
-                            ></span>
-
-                            <p
-                                class="text-xs font-semibold text-green-500"
-                                :class="[report.statistics.average_lead_value.progress < 0 ?  'text-red-500' : 'text-green-500']"
-                            >
-                                @{{ Math.abs(report.statistics.average_lead_value.progress.toFixed(2)) }}%
-                            </p>
-                        </div>
+                        <span
+                            class="ct-chip"
+                            :class="card.icon"
+                        ></span>
                     </div>
-                </div>
-                
-                <!-- Average Revenue Card -->
-                <div class="flex flex-col gap-2 rounded-lg border border-gray-300 bg-white px-4 py-5 dark:border-gray-800 dark:bg-gray-900">
-                    <p class="text-xs font-medium text-gray-600 dark:text-gray-300">
-                        @lang('admin::app.dashboard.index.over-all.total-leads')
-                    </p>
 
-                    <div class="flex gap-2">
-                        <p class="text-xl font-bold dark:text-gray-300">
-                            @{{ report.statistics.total_leads.current }}
-                        </p>
+                    <p
+                        class="ct-kpi-value md"
+                        v-count-up="card.value"
+                    ></p>
 
-                        <div class="flex items-center gap-0.5">
-                            <span
-                                class="text-base !font-semibold text-green-500"
-                                :class="[report.statistics.total_leads.progress < 0 ? 'icon-stats-down text-red-500 dark:!text-red-500' : 'icon-stats-up text-green-500 dark:!text-green-500']"
-                            ></span>
+                    <div class="ct-kpi-foot">
+                        <span
+                            class="ct-delta"
+                            :class="$ct.delta(card.progress)"
+                        >
+                            <span :class="$ct.deltaIcon(card.progress)"></span>
 
-                            <p
-                                class="text-xs font-semibold text-green-500"
-                                :class="[report.statistics.total_leads.progress < 0 ?  'text-red-500' : 'text-green-500']"
-                            >
-                                @{{ Math.abs(report.statistics.total_leads.progress.toFixed(2)) }}%
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Average Lead Per Day -->
-                <div class="flex flex-col gap-2 rounded-lg border border-gray-300 bg-white px-4 py-5 dark:border-gray-800 dark:bg-gray-900">
-                    <p class="text-xs font-medium text-gray-600 dark:text-gray-300">
-                        @lang('admin::app.dashboard.index.over-all.average-leads-per-day')
-                    </p>
+                            @{{ $ct.pct(card.progress) }}
+                        </span>
 
-                    <div class="flex gap-2">
-                        <p class="text-xl font-bold dark:text-gray-300">
-                            @{{ report.statistics.average_leads_per_day.current.toFixed(2) }}
-                        </p>
-
-                        <div class="flex items-center gap-0.5">
-                            <span
-                                class="text-base !font-semibold text-green-500"
-                                :class="[report.statistics.average_leads_per_day.progress < 0 ? 'icon-stats-down text-red-500 dark:!text-red-500' : 'icon-stats-up text-green-500 dark:!text-green-500']"
-                            ></span>
-
-                            <p
-                                class="text-xs font-semibold text-green-500"
-                                :class="[report.statistics.average_leads_per_day.progress < 0 ?  'text-red-500' : 'text-green-500']"
-                            >
-                                @{{ Math.abs(report.statistics.average_leads_per_day.progress.toFixed(2)) }}%
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Total Quotes -->
-                <div class="flex flex-col gap-2 rounded-lg border border-gray-300 bg-white px-4 py-5 dark:border-gray-800 dark:bg-gray-900">
-                    <p class="text-xs font-medium text-gray-600 dark:text-gray-300">
-                        @lang('admin::app.dashboard.index.over-all.total-quotations')
-                    </p>
-
-                    <div class="flex gap-2">
-                        <p class="text-xl font-bold dark:text-gray-300">
-                            @{{ report.statistics.total_quotations.current }}
-                        </p>
-
-                        <div class="flex items-center gap-0.5">
-                            <span
-                                class="text-base !font-semibold text-green-500"
-                                :class="[report.statistics.total_quotations.progress < 0 ? 'icon-stats-down text-red-500 dark:!text-red-500' : 'icon-stats-up text-green-500 dark:!text-green-500']"
-                            ></span>
-
-                            <p
-                                class="text-xs font-semibold text-green-500"
-                                :class="[report.statistics.total_quotations.progress < 0 ?  'text-red-500' : 'text-green-500']"
-                            >
-                                @{{ Math.abs(report.statistics.total_quotations.progress.toFixed(2)) }}%
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Total Persons -->
-                <div class="flex flex-col gap-2 rounded-lg border border-gray-300 bg-white px-4 py-5 dark:border-gray-800 dark:bg-gray-900">
-                    <p class="text-xs font-medium text-gray-600 dark:text-gray-300">
-                        @lang('admin::app.dashboard.index.over-all.total-persons')
-                    </p>
-
-                    <div class="flex gap-2">
-                        <p class="text-xl font-bold dark:text-gray-300">
-                            @{{ report.statistics.total_persons.current }}
-                        </p>
-
-                        <div class="flex items-center gap-0.5">
-                            <span
-                                class="text-base !font-semibold text-green-500"
-                                :class="[report.statistics.total_persons.progress < 0 ? 'icon-stats-down text-red-500 dark:!text-red-500' : 'icon-stats-up text-green-500 dark:!text-green-500']"
-                            ></span>
-
-                            <p
-                                class="text-xs font-semibold text-green-500"
-                                :class="[report.statistics.total_persons.progress < 0 ?  'text-red-500' : 'text-green-500']"
-                            >
-                                @{{ Math.abs(report.statistics.total_persons.progress.toFixed(2)) }}%
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Total Organizations -->
-                <div class="flex flex-col gap-2 rounded-lg border border-gray-300 bg-white px-4 py-5 dark:border-gray-800 dark:bg-gray-900">
-                    <p class="text-xs font-medium text-gray-600 dark:text-gray-300">
-                        @lang('admin::app.dashboard.index.over-all.total-organizations')
-                    </p>
-
-                    <div class="flex gap-2">
-                        <p class="text-xl font-bold dark:text-gray-300">
-                            @{{ report.statistics.total_organizations.current }}
-                        </p>
-
-                        <div class="flex items-center gap-0.5">
-                            <span
-                                class="text-base !font-semibold text-green-500"
-                                :class="[report.statistics.total_organizations.progress < 0 ? 'icon-stats-down text-red-500 dark:!text-red-500' : 'icon-stats-up text-green-500 dark:!text-green-500']"
-                            ></span>
-
-                            <p
-                                class="text-xs font-semibold text-green-500"
-                                :class="[report.statistics.total_organizations.progress < 0 ?  'text-red-500' : 'text-green-500']"
-                            >
-                                @{{ Math.abs(report.statistics.total_organizations.progress.toFixed(2)) }}%
-                            </p>
-                        </div>
+                        <span>@lang('admin::app.dashboard.index.vs-previous')</span>
                     </div>
                 </div>
             </div>
@@ -196,9 +67,59 @@
                     report: [],
 
                     isLoading: true,
-                    
-                    chart: undefined,
                 }
+            },
+
+            computed: {
+                cards() {
+                    const stats = this.report.statistics;
+
+                    return [
+                        {
+                            key: 'average_lead_value',
+                            label: @json(trans('admin::app.dashboard.index.over-all.average-lead-value')),
+                            icon: 'icon-dollar',
+                            tone: 'var(--ct-indigo)',
+                            value: stats.average_lead_value.formatted_total,
+                            progress: stats.average_lead_value.progress,
+                        }, {
+                            key: 'total_leads',
+                            label: @json(trans('admin::app.dashboard.index.over-all.total-leads')),
+                            icon: 'icon-leads',
+                            tone: 'var(--ct-sky)',
+                            value: this.$ct.num(stats.total_leads.current),
+                            progress: stats.total_leads.progress,
+                        }, {
+                            key: 'average_leads_per_day',
+                            label: @json(trans('admin::app.dashboard.index.over-all.average-leads-per-day')),
+                            icon: 'icon-activity',
+                            tone: 'var(--ct-violet)',
+                            value: this.$ct.num(Number(stats.average_leads_per_day.current || 0).toFixed(2)),
+                            progress: stats.average_leads_per_day.progress,
+                        }, {
+                            key: 'total_quotations',
+                            label: @json(trans('admin::app.dashboard.index.over-all.total-quotations')),
+                            icon: 'icon-quote',
+                            tone: 'var(--ct-amber)',
+                            value: this.$ct.num(stats.total_quotations.current),
+                            progress: stats.total_quotations.progress,
+                        }, {
+                            key: 'total_persons',
+                            label: @json(trans('admin::app.dashboard.index.over-all.total-persons')),
+                            icon: 'icon-perosnal',
+                            tone: 'var(--ct-emerald)',
+                            value: this.$ct.num(stats.total_persons.current),
+                            progress: stats.total_persons.progress,
+                        }, {
+                            key: 'total_organizations',
+                            label: @json(trans('admin::app.dashboard.index.over-all.total-organizations')),
+                            icon: 'icon-organization',
+                            tone: 'var(--ct-rose)',
+                            value: this.$ct.num(stats.total_organizations.current),
+                            progress: stats.total_organizations.progress,
+                        },
+                    ];
+                },
             },
 
             mounted() {

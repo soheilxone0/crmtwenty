@@ -1,6 +1,5 @@
 {!! view_render_event('admin.dashboard.index.revenue_by_types.before') !!}
 
-<!-- Total Leads Vue Component -->
 <v-dashboard-revenue-by-types>
     <!-- Shimmer -->
     <x-admin::shimmer.dashboard.index.revenue-by-types />
@@ -18,65 +17,71 @@
             <x-admin::shimmer.dashboard.index.revenue-by-types />
         </template>
 
-        <!-- Total Sales Section -->
         <template v-else>
-            <div class="grid gap-4 rounded-lg border border-gray-300 bg-white p-4 dark:border-gray-800 dark:bg-gray-900">
-                <div class="flex flex-col justify-between gap-1">
-                    <p class="text-base font-semibold dark:text-gray-300">
+            <div
+                class="ct-card ct-rise"
+                style="--i: 7"
+            >
+                <div class="ct-card-head">
+                    <p class="ct-card-title">
+                        <span
+                            class="ct-chip sm icon-settings-type"
+                            style="--tone: var(--ct-violet)"
+                        ></span>
+
                         @lang('admin::app.dashboard.index.revenue-by-types.title')
                     </p>
                 </div>
 
-                <!-- Doughnut Chart -->
-                <div
-                    class="flex w-full max-w-full flex-col gap-4 px-8 pt-8"
-                    v-if="report.statistics.length"
-                >
-                    <x-admin::charts.doughnut
-                        ::labels="chartLabels"
-                        ::datasets="chartDatasets"
-                    />
+                <template v-if="report.statistics.length">
+                    <!-- Doughnut with the total in the middle -->
+                    <div class="ct-donut">
+                        <x-admin::charts.doughnut
+                            ::labels="chartLabels"
+                            ::datasets="chartDatasets"
+                        />
 
-                    <div class="flex flex-wrap justify-center gap-5">
+                        <div class="ct-donut-center">
+                            <strong v-count-up="$ct.compact(total)"></strong>
+
+                            <span>@lang('admin::app.dashboard.index.pdf.total')</span>
+                        </div>
+                    </div>
+
+                    <!-- Legend with values and shares -->
+                    <div class="ct-bars !gap-3">
                         <div
-                            class="flex items-center gap-2 whitespace-nowrap"
+                            class="ct-bar-meta"
                             v-for="(stat, index) in report.statistics"
                         >
-                            <span
-                                class="h-3.5 w-3.5 rounded-sm"
-                                :style="{ backgroundColor: colors[index] }"
-                            ></span>
+                            <span class="flex min-w-0 items-center gap-2.5">
+                                <i
+                                    class="ct-dot"
+                                    :style="{ '--tone': $ct.color(index) }"
+                                ></i>
 
-                            <p class="text-xs dark:text-gray-300">
-                                @{{ stat.name }}
-                            </p>
+                                <b class="truncate">@{{ stat.name }}</b>
+                            </span>
+
+                            <span class="whitespace-nowrap">
+                                <em>@{{ $ct.num(stat.total) }}</em>
+
+                                <small>@{{ $ct.pct($ct.share(stat.total, total)) }}</small>
+                            </span>
                         </div>
                     </div>
-                </div>
+                </template>
 
-                <!-- Empty Product Design -->
+                <!-- Empty state -->
                 <div
-                    class="flex flex-col gap-8 p-4"
+                    class="ct-empty"
                     v-else
                 >
-                    <div class="grid justify-center justify-items-center gap-3.5 py-2.5">
-                        <!-- Placeholder Image -->
-                        <img
-                            src="{{ vite()->asset('images/empty-placeholders/default.svg') }}"
-                            class="dark:mix-blend-exclusion dark:invert"
-                        >
+                    <span class="ct-chip icon-settings-type"></span>
 
-                        <!-- Add Variants Information -->
-                        <div class="flex flex-col items-center">
-                            <p class="text-base font-semibold text-gray-400">
-                                @lang('admin::app.dashboard.index.revenue-by-sources.empty-title')
-                            </p>
+                    <b>@lang('admin::app.dashboard.index.revenue-by-types.empty-title')</b>
 
-                            <p class="text-gray-400">
-                                @lang('admin::app.dashboard.index.revenue-by-sources.empty-info')
-                            </p>
-                        </div>
-                    </div>
+                    <span>@lang('admin::app.dashboard.index.revenue-by-types.empty-info')</span>
                 </div>
             </div>
         </template>
@@ -90,26 +95,23 @@
                 return {
                     report: [],
 
-                    colors: [
-                        '#8979FF',
-                        '#FF928A',
-                        '#3CC3DF',
-                    ],
-
                     isLoading: true,
                 }
             },
 
             computed: {
+                total() {
+                    return this.report.statistics.reduce((sum, { total }) => sum + (Number(total) || 0), 0);
+                },
+
                 chartLabels() {
                     return this.report.statistics.map(({ name }) => name);
                 },
 
                 chartDatasets() {
                     return [{
-                        data: this.report.statistics.map(({ total }) => total),
-                        barThickness: 24,
-                        backgroundColor: this.colors,
+                        data: this.report.statistics.map(({ total }) => Number(total) || 0),
+                        backgroundColor: this.report.statistics.map((stat, index) => this.$ct.color(index)),
                     }];
                 }
             },
@@ -134,19 +136,9 @@
                         .then(response => {
                             this.report = response.data;
 
-                            this.extendColors(this.report.statistics.length);
-
                             this.isLoading = false;
                         })
                         .catch(error => {});
-                },
-
-                extendColors(length) {
-                    while (this.colors.length < length) {
-                        const hue = Math.floor(Math.random() * 360);
-                        const newColor = `hsl(${hue}, 70%, 60%)`;
-                        this.colors.push(newColor);
-                    }
                 },
             }
         });

@@ -65,7 +65,7 @@
                             <tr>
                                 <td>
                                     <div class="company-cell">
-                                        <div class="company-logo" style="{{ $company->isPrimary() ? 'background:linear-gradient(135deg,#0ea5e9,#6366f1)' : '' }}">{{ mb_substr($company->name, 0, 1) }}</div>
+                                        <div class="company-logo" style="{{ $company->isPrimary() ? 'background:#0ea5e9' : '' }}">{{ mb_substr($company->name, 0, 1) }}</div>
                                         <div>
                                             <strong>{{ $company->name }}</strong>
                                             <span>

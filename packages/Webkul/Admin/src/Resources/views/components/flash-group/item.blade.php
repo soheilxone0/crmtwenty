@@ -12,7 +12,7 @@
         id="v-flash-item-template"
     >
         <div
-            class="flex w-max items-start justify-between gap-2 rounded-lg bg-white p-3 shadow-[0px_10px_20px_0px_rgba(0,0,0,0.12)] dark:bg-gray-950"
+            class="ct-toast flex w-max items-start justify-between gap-2 rounded-lg bg-white p-3 shadow-[0px_10px_20px_0px_rgba(0,0,0,0.12)] dark:bg-gray-950"
             :style="typeStyles[flash.type]['container']"
             @mouseenter="pauseTimer"
             @mouseleave="resumeTimer"
@@ -104,7 +104,7 @@
 
                     typeStyles: {
                         success: {
-                            container: 'border-left: 8px solid #16A34A',
+                            container: 'border-inline-start: 4px solid #16A34A',
 
                             icon: 'color: #16A34A',
 
@@ -112,7 +112,7 @@
                         },
 
                         error: {
-                            container: 'border-left: 8px solid #FF4D50',
+                            container: 'border-inline-start: 4px solid #FF4D50',
 
                             icon: 'color: #FF4D50',
 
@@ -120,7 +120,7 @@
                         },
 
                         warning: {
-                            container: 'border-left: 8px solid #FBAD15',
+                            container: 'border-inline-start: 4px solid #FBAD15',
 
                             icon: 'color: #FBAD15',
 
@@ -128,7 +128,7 @@
                         },
 
                         info: {
-                            container: 'border-left: 8px solid #4F46E5',
+                            container: 'border-inline-start: 4px solid #4F46E5',
 
                             icon: 'color: #4F46E5',
 

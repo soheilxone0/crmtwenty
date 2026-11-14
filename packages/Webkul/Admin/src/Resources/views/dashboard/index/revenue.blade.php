@@ -18,85 +18,125 @@
             <x-admin::shimmer.dashboard.index.revenue />
         </template>
 
-        <!-- Total Sales Section -->
+        <!-- Inflow and outflow -->
         <template v-else>
-            <div class="box-shadow rounded-lg border border-gray-300 bg-white p-4 dark:border-gray-800 dark:bg-gray-900">
-                <div class="flex gap-4 max-md:flex-wrap">
-                    <!-- Total Revenue -->
-                    <div class="flex gap-2 max-md:flex-wrap md:flex-col">
-                        <!-- Won Revenue Card -->
-                        <div class="flex flex-col gap-2 rounded-lg border border-gray-300 px-4 py-5 dark:border-gray-800 max-sm:w-full">
-                            <p class="text-xs font-medium text-gray-600 dark:text-gray-300">
+            <div
+                class="ct-card ct-rise"
+                style="--i: 0"
+            >
+                <div class="ct-card-head">
+                    <p class="ct-card-title">
+                        <span
+                            class="ct-chip sm icon-dollar"
+                            style="--tone: var(--ct-brand)"
+                        ></span>
+
+                        @lang('admin::app.dashboard.index.pdf.revenue')
+                    </p>
+
+                    <div class="ct-legend max-sm:hidden">
+                        <span>
+                            <i
+                                class="ct-dot live"
+                                style="--tone: var(--ct-emerald)"
+                            ></i>
+
+                            @lang('admin::app.dashboard.index.revenue.won-revenue')
+                        </span>
+
+                        <span>
+                            <i
+                                class="ct-dot"
+                                style="--tone: var(--ct-rose)"
+                            ></i>
+
+                            @lang('admin::app.dashboard.index.revenue.lost-revenue')
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 max-sm:grid-cols-1">
+                    <!-- Inflow (won revenue) -->
+                    <div
+                        class="ct-tile"
+                        style="--tone: var(--ct-emerald)"
+                    >
+                        <div class="ct-kpi-top">
+                            <span class="ct-kpi-label">
                                 @lang('admin::app.dashboard.index.revenue.won-revenue')
-                            </p>
+                            </span>
 
-                            <div class="flex gap-2">
-                                <p class="text-xl font-bold text-green-600">
-                                    @{{ report.statistics.total_won_revenue.formatted_total }}
-                                </p>
-
-                                <div class="flex items-center gap-0.5">
-                                    <span
-                                        class="text-base !font-semibold text-green-500"
-                                        :class="[report.statistics.total_won_revenue.progress < 0 ? 'icon-stats-down text-red-500 dark:!text-red-500' : 'icon-stats-up text-green-500 dark:!text-green-500']"
-                                    ></span>
-
-                                    <p
-                                        class="text-xs font-semibold text-green-500"
-                                        :class="[report.statistics.total_won_revenue.progress < 0 ?  'text-red-500' : 'text-green-500']"
-                                    >
-                                        @{{ Math.abs(report.statistics.total_won_revenue.progress.toFixed(2)) }}%
-                                    </p>
-                                </div>
-                            </div>
+                            <span class="ct-chip sm icon-stats-up"></span>
                         </div>
 
-                        <!-- Lost Revenue Card -->
-                        <div class="flex flex-col gap-2 rounded-lg border border-gray-300 px-4 py-5 dark:border-gray-800 max-sm:w-full">
-                            <p class="text-xs font-medium text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.dashboard.index.revenue.lost-revenue')
-                            </p>
+                        <p
+                            class="ct-kpi-value"
+                            v-count-up="won.formatted_total"
+                        ></p>
 
-                            <div class="flex gap-2">
-                                <p class="text-xl font-bold text-red-500">
-                                    @{{ report.statistics.total_lost_revenue.formatted_total }}
-                                </p>
+                        <div class="ct-kpi-foot">
+                            <span
+                                class="ct-delta"
+                                :class="$ct.delta(won.progress)"
+                            >
+                                <span :class="$ct.deltaIcon(won.progress)"></span>
 
-                                <div class="flex items-center gap-0.5">
-                                    <span class="icon-stats-down text-base !font-semibold text-red-500 dark:!text-red-500"></span>
+                                @{{ $ct.pct(won.progress) }}
+                            </span>
 
-                                    <p class="text-xs font-semibold text-red-500">
-                                        @{{ Math.abs(report.statistics.total_lost_revenue.progress.toFixed(2)) }}%
-                                    </p>
-                                </div>
-                            </div>
+                            <span>@lang('admin::app.dashboard.index.vs-previous')</span>
                         </div>
                     </div>
 
-                    <!-- Bar Chart -->
-                    <div class="flex w-full max-w-full flex-col gap-4">
-                        <canvas
-                            :id="$.uid + '_chart'"
-                            class="w-full max-w-full items-end"
-                        ></canvas>
+                    <!-- Outflow (lost revenue) -->
+                    <div
+                        class="ct-tile"
+                        style="--tone: var(--ct-rose)"
+                    >
+                        <div class="ct-kpi-top">
+                            <span class="ct-kpi-label">
+                                @lang('admin::app.dashboard.index.revenue.lost-revenue')
+                            </span>
 
-                        <div class="flex justify-center gap-5">
-                            <div class="flex items-center gap-2">
-                                <span class="h-3.5 w-3.5 rounded-sm bg-green-500 opacity-80"></span>
-
-                                <p class="text-xs dark:text-gray-300">
-                                    @lang('admin::app.dashboard.index.revenue.won-revenue')
-                                </p>
-                            </div>
-
-                            <div class="flex items-center gap-2">
-                                <span class="h-3.5 w-3.5 rounded-sm bg-red-500 opacity-80"></span>
-
-                                <p class="text-xs dark:text-gray-300">
-                                    @lang('admin::app.dashboard.index.revenue.lost-revenue')
-                                </p>
-                            </div>
+                            <span class="ct-chip sm icon-stats-down"></span>
                         </div>
+
+                        <p
+                            class="ct-kpi-value"
+                            v-count-up="lost.formatted_total"
+                        ></p>
+
+                        <div class="ct-kpi-foot">
+                            <span
+                                class="ct-delta"
+                                :class="$ct.delta(lost.progress, true)"
+                            >
+                                <span :class="$ct.deltaIcon(lost.progress)"></span>
+
+                                @{{ $ct.pct(lost.progress) }}
+                            </span>
+
+                            <span>@lang('admin::app.dashboard.index.vs-previous')</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Share of each side -->
+                <div class="grid gap-2.5">
+                    <div class="ct-split">
+                        <i
+                            :style="{ '--tone': 'var(--ct-emerald)', flexGrow: wonShare || (lostShare ? 0 : 1) }"
+                        ></i>
+
+                        <i
+                            :style="{ '--tone': 'var(--ct-rose)', flexGrow: lostShare || (wonShare ? 0 : 1), animationDelay: '120ms' }"
+                        ></i>
+                    </div>
+
+                    <div class="ct-kpi-foot justify-between">
+                        <span>@{{ $ct.pct(wonShare) }}</span>
+
+                        <span>@{{ $ct.pct(lostShare) }}</span>
                     </div>
                 </div>
             </div>
@@ -112,9 +152,25 @@
                     report: [],
 
                     isLoading: true,
-
-                    chart: undefined,
                 }
+            },
+
+            computed: {
+                won() {
+                    return this.report.statistics.total_won_revenue;
+                },
+
+                lost() {
+                    return this.report.statistics.total_lost_revenue;
+                },
+
+                wonShare() {
+                    return this.$ct.share(this.won.current, (Number(this.won.current) || 0) + (Number(this.lost.current) || 0));
+                },
+
+                lostShare() {
+                    return this.$ct.share(this.lost.current, (Number(this.won.current) || 0) + (Number(this.lost.current) || 0));
+                },
             },
 
             mounted() {
@@ -138,97 +194,9 @@
                             this.report = response.data;
 
                             this.isLoading = false;
-
-                            setTimeout(() => {
-                                this.prepare();
-                            }, 0);
                         })
                         .catch(error => {});
                 },
-
-                prepare() {
-                    if (this.chart) {
-                        this.chart.destroy();
-                    }
-
-                    this.chart = new Chart(document.getElementById(this.$.uid + '_chart'), {
-                        type: 'bar',
-
-                        data: {
-                            labels: [
-                            "@lang('admin::app.dashboard.index.revenue.won-revenue')",
-                            "@lang('admin::app.dashboard.index.revenue.lost-revenue')"
-                        ],
-
-                            datasets: [{
-                                axis: 'y',
-                                data: [
-                                    this.report.statistics.total_won_revenue.current,
-                                    this.report.statistics.total_lost_revenue.current
-                                ],
-
-                                backgroundColor: [
-                                    'rgba(34, 197, 94, 0.8)',
-                                    'rgba(239, 68, 68, 0.8)',
-                                ],
-
-                                barPercentage: 0.8,
-                                categoryPercentage: 0.7,
-                            }],
-                        },
-
-                        options: {
-                            aspectRatio: 5,
-
-                            indexAxis: 'y',
-
-                            plugins: {
-                                legend: {
-                                    display: false,
-                                },
-                            },
-
-                            scales: {
-                                x: {
-                                    beginAtZero: true,
-
-                                    ticks: {
-                                        stepSize: 500,
-                                    },
-
-                                    border: {
-                                        dash: [8, 4],
-                                    }
-                                },
-
-                                y: {
-                                    beginAtZero: true,
-
-                                    ticks: {
-                                        display: false,
-                                    },
-
-                                    border: {
-                                        dash: [8, 4],
-                                    }
-                                }
-                            },
-
-                            maintainAspectRatio: true,
-
-                            responsive: true,
-
-                            layout: {
-                                padding: {
-                                    left: 0,
-                                    right: 0,
-                                    top: 0,
-                                    bottom: 0
-                                }
-                            }
-                        }
-                    });
-                }
             }
         });
     </script>
