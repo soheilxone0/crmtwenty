@@ -2300,6 +2300,16 @@ return [
                 'empty-title' => 'Ainda não há dados',
                 'empty-info' => 'Nenhum dado disponível para o intervalo selecionado',
             ],
+            'sales-funnel' => [
+                'title' => 'Sales Funnel',
+                'total' => 'Leads',
+                'win-rate' => 'Win rate',
+                'open-board' => 'Open pipeline board',
+                'in-stage' => 'in this stage',
+                'lost' => 'Lost leads',
+                'empty-title' => 'No leads yet',
+                'empty-info' => 'Leads created in the selected interval will appear in the funnel',
+            ],
         ],
     ],
     'layouts' => [

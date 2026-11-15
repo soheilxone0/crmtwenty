@@ -2300,6 +2300,16 @@ return [
                 'empty-title' => '데이터가 없습니다',
                 'empty-info' => '선택한 기간에 대한 데이터가 없습니다',
             ],
+            'sales-funnel' => [
+                'title' => 'Sales Funnel',
+                'total' => 'Leads',
+                'win-rate' => 'Win rate',
+                'open-board' => 'Open pipeline board',
+                'in-stage' => 'in this stage',
+                'lost' => 'Lost leads',
+                'empty-title' => 'No leads yet',
+                'empty-info' => 'Leads created in the selected interval will appear in the funnel',
+            ],
         ],
     ],
     'layouts' => [

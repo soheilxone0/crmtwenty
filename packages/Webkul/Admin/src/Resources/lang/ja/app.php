@@ -2273,6 +2273,16 @@ return [
                 'empty-title' => 'データがありません',
                 'empty-info' => '選択した期間のデータがありません',
             ],
+            'sales-funnel' => [
+                'title' => 'Sales Funnel',
+                'total' => 'Leads',
+                'win-rate' => 'Win rate',
+                'open-board' => 'Open pipeline board',
+                'in-stage' => 'in this stage',
+                'lost' => 'Lost leads',
+                'empty-title' => 'No leads yet',
+                'empty-info' => 'Leads created in the selected interval will appear in the funnel',
+            ],
             'export-pdf' => 'PDFエクスポート',
             'vs-previous' => '前期間比',
             'pdf' => [

@@ -2300,6 +2300,16 @@ return [
                 'empty-title' => 'لا توجد بيانات متاحة',
                 'empty-info' => 'لا توجد بيانات متاحة للفترة المختارة',
             ],
+            'sales-funnel' => [
+                'title' => 'Sales Funnel',
+                'total' => 'Leads',
+                'win-rate' => 'Win rate',
+                'open-board' => 'Open pipeline board',
+                'in-stage' => 'in this stage',
+                'lost' => 'Lost leads',
+                'empty-title' => 'No leads yet',
+                'empty-info' => 'Leads created in the selected interval will appear in the funnel',
+            ],
         ],
     ],
     'layouts' => [
