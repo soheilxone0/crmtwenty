@@ -2300,6 +2300,16 @@ return [
                 'empty-title' => 'Không Có Dữ Liệu',
                 'empty-info' => 'Không có dữ liệu cho khoảng thời gian được chọn',
             ],
+            'sales-funnel' => [
+                'title' => 'Phễu bán hàng',
+                'total' => 'Khách hàng tiềm năng',
+                'win-rate' => 'Tỷ lệ thành công',
+                'open-board' => 'Mở bảng giai đoạn',
+                'in-stage' => 'ở giai đoạn này',
+                'lost' => 'Khách hàng bị mất',
+                'empty-title' => 'Chưa có khách hàng tiềm năng',
+                'empty-info' => 'Khách hàng tiềm năng được tạo trong khoảng thời gian đã chọn sẽ xuất hiện trong phễu',
+            ],
         ],
     ],
     'layouts' => [

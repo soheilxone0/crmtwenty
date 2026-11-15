@@ -2300,6 +2300,16 @@ return [
                 'empty-title' => 'No Hay Datos Disponibles',
                 'empty-info' => 'No hay datos disponibles para el intervalo seleccionado',
             ],
+            'sales-funnel' => [
+                'title' => 'Embudo de ventas',
+                'total' => 'Prospectos',
+                'win-rate' => 'Tasa de éxito',
+                'open-board' => 'Abrir tablero de etapas',
+                'in-stage' => 'en esta etapa',
+                'lost' => 'Prospectos perdidos',
+                'empty-title' => 'Aún no hay prospectos',
+                'empty-info' => 'Los prospectos creados en el intervalo seleccionado aparecerán en el embudo',
+            ],
         ],
     ],
     'layouts' => [

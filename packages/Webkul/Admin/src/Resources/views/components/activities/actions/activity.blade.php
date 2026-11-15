@@ -1,10 +1,14 @@
 @props([
     'entity' => null,
     'entityControlName' => null,
+    // Standalone: no tile button and no linked record (used on the activities page, which
+    // opens the form through the `open-activity-form` event).
+    'standalone' => false,
 ])
 
 <!-- Activity Button -->
 <div>
+    @unless ($standalone)
     {!! view_render_event('admin.components.activities.actions.activity.create_btn.before') !!}
 
     <button
@@ -17,13 +21,14 @@
     </button>
 
     {!! view_render_event('admin.components.activities.actions.activity.create_btn.after') !!}
+    @endunless
 
     {!! view_render_event('admin.components.activities.actions.activity.before') !!}
 
     <!-- Note Action Vue Component -->
     <v-activity
         ref="actionComponent"
-        :entity="{{ json_encode($entity) }}"
+        :entity="{{ $standalone ? '{}' : json_encode($entity) }}"
         entity-control-name="{{ $entityControlName }}"
     ></v-activity>
 
@@ -89,11 +94,13 @@
                             />
 
                             <!-- Id -->
-                            <x-admin::form.control-group.control
-                                type="hidden"
-                                ::name="entityControlName"
-                                ::value="entity.id"
-                            />
+                            <template v-if="entity && entity.id">
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    ::name="entityControlName"
+                                    ::value="entity.id"
+                                />
+                            </template>
 
                             <!-- Title -->
                             <x-admin::form.control-group>
@@ -249,12 +256,20 @@
                 }
             },
 
+            mounted() {
+                this.$emitter.on('open-activity-form', this.openModal);
+            },
+
+            beforeUnmount() {
+                this.$emitter.off('open-activity-form', this.openModal);
+            },
+
             methods: {
                 openModal(type) {
                     this.$refs.activityModal.open();
                 },
 
-                save(params) {
+                save(params, { setErrors }) {
                     this.isStoring = true;
 
                     this.$axios.post("{{ route('admin.activities.store') }}", params)

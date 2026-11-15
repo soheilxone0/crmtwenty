@@ -2300,6 +2300,16 @@ return [
                 'empty-title' => 'Veri Bulunamadı',
                 'empty-info' => 'Seçilen aralık için veri bulunamadı',
             ],
+            'sales-funnel' => [
+                'title' => 'Satış hunisi',
+                'total' => 'Potansiyel müşteriler',
+                'win-rate' => 'Kazanma oranı',
+                'open-board' => 'Aşama panosunu aç',
+                'in-stage' => 'bu aşamada',
+                'lost' => 'Kaybedilen müşteriler',
+                'empty-title' => 'Henüz potansiyel müşteri yok',
+                'empty-info' => 'Seçilen aralıkta oluşturulan potansiyel müşteriler hunide görünecek',
+            ],
         ],
     ],
     'layouts' => [

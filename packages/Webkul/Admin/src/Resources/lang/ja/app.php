@@ -2273,6 +2273,16 @@ return [
                 'empty-title' => 'データがありません',
                 'empty-info' => '選択した期間のデータがありません',
             ],
+            'sales-funnel' => [
+                'title' => 'セールスファネル',
+                'total' => 'リード',
+                'win-rate' => '成約率',
+                'open-board' => 'パイプラインボードを開く',
+                'in-stage' => 'このステージ',
+                'lost' => '失注リード',
+                'empty-title' => 'リードはまだありません',
+                'empty-info' => '選択した期間に作成されたリードがファネルに表示されます',
+            ],
             'export-pdf' => 'PDFエクスポート',
             'vs-previous' => '前期間比',
             'pdf' => [

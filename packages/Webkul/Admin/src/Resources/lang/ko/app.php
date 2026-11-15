@@ -2300,6 +2300,16 @@ return [
                 'empty-title' => '데이터가 없습니다',
                 'empty-info' => '선택한 기간에 대한 데이터가 없습니다',
             ],
+            'sales-funnel' => [
+                'title' => '영업 퍼널',
+                'total' => '리드',
+                'win-rate' => '성공률',
+                'open-board' => '파이프라인 보드 열기',
+                'in-stage' => '이 단계',
+                'lost' => '잃은 리드',
+                'empty-title' => '아직 리드가 없습니다',
+                'empty-info' => '선택한 기간에 생성된 리드가 퍼널에 표시됩니다',
+            ],
         ],
     ],
     'layouts' => [

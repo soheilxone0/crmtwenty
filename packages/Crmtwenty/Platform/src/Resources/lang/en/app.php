@@ -182,4 +182,12 @@ return [
             'expires' => 'This link is valid for :minutes minutes. If you did not ask for it, ignore this email.',
         ],
     ],
+
+    'shortcut' => [
+        'menu' => 'Manage companies',
+        'title' => 'Companies panel',
+        'lead' => 'This is your company\'s CRM. To add a new company (each with its own separate space and manager) open the companies panel.',
+        'add' => 'Add a new company',
+        'setup' => 'Set up the companies panel',
+    ],
 ];

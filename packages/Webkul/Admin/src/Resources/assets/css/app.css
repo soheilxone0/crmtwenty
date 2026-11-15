@@ -1843,3 +1843,183 @@ header.sticky {
         transition-duration: .01ms !important;
     }
 }
+
+/* Sales funnel (dashboard) */
+.ct-funnel {
+    display: flex;
+    flex-direction: column;
+}
+
+.ct-funnel-row {
+    display: grid;
+    grid-template-columns: minmax(96px, .8fr) minmax(0, 2.4fr) minmax(92px, .8fr);
+    align-items: center;
+    gap: 14px;
+}
+
+.ct-funnel-name,
+.ct-funnel-meta {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+    font-size: 13px;
+}
+
+.ct-funnel-name b {
+    font-weight: 600;
+    color: var(--ct-text);
+}
+
+.ct-funnel-name small,
+.ct-funnel-meta small {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ct-text-3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ct-funnel-meta {
+    justify-items: end;
+    text-align: end;
+}
+
+.ct-funnel-meta em {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--ct-text);
+    font-variant-numeric: tabular-nums;
+}
+
+.ct-funnel-lane {
+    display: flex;
+    justify-content: center;
+}
+
+.ct-funnel-band {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--tone, var(--ct-brand));
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    transform-origin: center;
+    animation: ct-grow .9s var(--ct-ease) backwards;
+    animation-delay: calc(var(--i, 0) * 90ms + 120ms);
+    transition: width .6s var(--ct-ease), filter .2s ease;
+}
+
+.ct-funnel-band:hover {
+    filter: brightness(1.08);
+}
+
+.ct-funnel-step {
+    display: grid;
+    grid-template-columns: minmax(96px, .8fr) minmax(0, 2.4fr) minmax(92px, .8fr);
+    gap: 14px;
+    height: 26px;
+    align-items: center;
+}
+
+.ct-funnel-step span {
+    grid-column: 2;
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ct-text-2);
+}
+
+.ct-funnel-step i {
+    font-size: 16px;
+    color: var(--ct-text-3);
+}
+
+.ct-funnel-lost {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--ct-border);
+    font-size: 13px;
+    color: var(--ct-text-2);
+}
+
+.ct-funnel-lost b {
+    color: var(--ct-text);
+    font-variant-numeric: tabular-nums;
+}
+
+.ct-funnel-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ct-text-2);
+    background: color-mix(in srgb, var(--ct-text) 6%, transparent);
+}
+
+.ct-funnel-pill.win {
+    color: #047857;
+    background: #ecfdf5;
+}
+
+.dark .ct-funnel-pill.win {
+    color: #6ee7b7;
+    background: rgba(16, 185, 129, .14);
+}
+
+.ct-funnel-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ct-brand);
+}
+
+.ct-funnel-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+    .ct-funnel-row,
+    .ct-funnel-step {
+        grid-template-columns: minmax(72px, .9fr) minmax(0, 2fr) minmax(64px, .8fr);
+        gap: 8px;
+    }
+}
+
+/* Companies panel shortcut on the dashboard */
+.ct-platform-cta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    border-inline-start: 3px solid var(--ct-brand);
+}
+
+.ct-platform-cta b {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ct-text);
+}
+
+.ct-platform-cta span:not(.ct-chip) {
+    font-size: 13px;
+    color: var(--ct-text-2);
+}
+
+@media (max-width: 640px) {
+    .ct-platform-cta {
+        flex-wrap: wrap;
+    }
+}

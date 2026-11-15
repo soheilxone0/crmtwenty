@@ -116,6 +116,17 @@
                         @lang('admin::app.layouts.my-account')
                     </a>
 
+                    @php($platformUrl = \Crmtwenty\Platform\Support\Tenancy::managementUrlFor($user))
+
+                    @if ($platformUrl)
+                        <a
+                            class="cursor-pointer px-5 py-2 text-base text-gray-800 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950"
+                            href="{{ $platformUrl }}"
+                        >
+                            @lang('platform::app.shortcut.menu')
+                        </a>
+                    @endif
+
                     <!--Admin logout-->
                     <x-admin::form
                         method="DELETE"

@@ -2300,6 +2300,16 @@ return [
                 'empty-title' => '暂无数据',
                 'empty-info' => '所选时间段内暂无数据',
             ],
+            'sales-funnel' => [
+                'title' => '销售漏斗',
+                'total' => '线索',
+                'win-rate' => '成交率',
+                'open-board' => '打开阶段看板',
+                'in-stage' => '处于此阶段',
+                'lost' => '流失线索',
+                'empty-title' => '暂无线索',
+                'empty-info' => '所选时间段内创建的线索将显示在漏斗中',
+            ],
         ],
     ],
     'layouts' => [

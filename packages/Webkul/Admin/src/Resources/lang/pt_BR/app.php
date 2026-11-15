@@ -2300,6 +2300,16 @@ return [
                 'empty-title' => 'Ainda não há dados',
                 'empty-info' => 'Nenhum dado disponível para o intervalo selecionado',
             ],
+            'sales-funnel' => [
+                'title' => 'Funil de vendas',
+                'total' => 'Leads',
+                'win-rate' => 'Taxa de sucesso',
+                'open-board' => 'Abrir quadro de etapas',
+                'in-stage' => 'nesta etapa',
+                'lost' => 'Leads perdidos',
+                'empty-title' => 'Ainda não há leads',
+                'empty-info' => 'Os leads criados no período selecionado aparecerão no funil',
+            ],
         ],
     ],
     'layouts' => [
