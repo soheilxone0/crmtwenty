@@ -25,6 +25,12 @@
             sizes="16x16"
         />
 
+        <link
+            type="image/svg+xml"
+            href="{{ asset('favicon.svg') }}"
+            rel="icon"
+        />
+
         @stack('styles')
     </head>
 
@@ -121,6 +127,7 @@
                     <div class="m-auto grid h-[100vh] max-w-[362px] items-end">
                         <div class="grid gap-4">
                             <img
+                                class="h-12 w-12"
                                 src="{{ vite()->asset('images/logo.svg', 'installer') }}"
                                 alt="@lang('installer::app.installer.index.crm-logo')"
                             >

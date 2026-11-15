@@ -18,7 +18,7 @@
 
                 <span class="flex items-center gap-2.5">
                     <img
-                        class="h-9 w-9 rounded-[11px] shadow-[0_8px_18px_-10px_var(--brand-color)]"
+                        class="h-10 w-10 object-contain"
                         src="{{ request()->cookie('dark_mode') ? vite()->asset('images/dark-logo.svg') : vite()->asset('images/logo.svg') }}"
                         id="logo-image"
                         alt="{{ $brandName }}"
