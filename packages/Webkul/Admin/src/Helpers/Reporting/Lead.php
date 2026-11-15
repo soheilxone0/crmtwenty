@@ -359,6 +359,84 @@ class Lead extends AbstractReporting
     }
 
     /**
+     * Builds the sales funnel of the dashboard pipeline.
+     *
+     * Every lead created in the selected interval is counted once in the stage it is in now. A lead
+     * that sits in a later stage has already passed the earlier ones, so the number of leads that
+     * "reached" a stage is the sum of that stage and every later stage (lost leads excluded).
+     */
+    public function getSalesFunnel(): array
+    {
+        $rows = $this->leadRepository
+            ->resetModel()
+            ->select(
+                'lead_pipeline_stage_id',
+                DB::raw('COUNT(*) as total'),
+                DB::raw('SUM(lead_value) as value')
+            )
+            ->whereIn('lead_pipeline_stage_id', $this->allStageIds)
+            ->whereBetween('created_at', [$this->startDate, $this->endDate])
+            ->groupBy('lead_pipeline_stage_id')
+            ->get()
+            ->keyBy('lead_pipeline_stage_id')
+            ->map(fn ($row) => [
+                'total' => (int) $row->getAttribute('total'),
+                'value' => (float) $row->getAttribute('value'),
+            ]);
+
+        $stages = $this->pipeline->stages
+            ->reject(fn ($stage) => in_array($stage->id, $this->lostStageIds))
+            ->values();
+
+        $current = $stages->map(fn ($stage) => [
+            'id' => $stage->id,
+            'code' => $stage->code,
+            'name' => $stage->name,
+            'current' => $rows->get($stage->id)['total'] ?? 0,
+            'value' => $rows->get($stage->id)['value'] ?? 0.0,
+        ])->all();
+
+        $reached = 0;
+
+        $reachedValue = 0.0;
+
+        for ($index = count($current) - 1; $index >= 0; $index--) {
+            $reached += $current[$index]['current'];
+
+            $reachedValue += $current[$index]['value'];
+
+            $current[$index]['total'] = $reached;
+
+            $current[$index]['total_value'] = $reachedValue;
+
+            $current[$index]['formatted_value'] = core()->formatBasePrice($current[$index]['value']);
+        }
+
+        $top = $current[0]['total'] ?? 0;
+
+        foreach ($current as $index => $stage) {
+            $previous = $index ? $current[$index - 1]['total'] : $stage['total'];
+
+            $current[$index]['conversion'] = $top ? round($stage['total'] / $top * 100, 1) : 0;
+
+            $current[$index]['step_conversion'] = $previous ? round($stage['total'] / $previous * 100, 1) : 0;
+        }
+
+        $won = (int) $rows->only($this->wonStageIds)->sum('total');
+
+        $lost = (int) $rows->only($this->lostStageIds)->sum('total');
+
+        return [
+            'pipeline' => $this->pipeline->name,
+            'stages' => $current,
+            'total' => $top + $lost,
+            'won' => $won,
+            'lost' => $lost,
+            'win_rate' => ($won + $lost) ? round($won / ($won + $lost) * 100, 1) : 0,
+        ];
+    }
+
+    /**
      * Returns over time stats.
      *
      * @param  Carbon  $startDate

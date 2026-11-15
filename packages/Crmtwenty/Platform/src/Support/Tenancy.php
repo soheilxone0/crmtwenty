@@ -117,6 +117,29 @@ class Tenancy
     }
 
     /**
+     * Where a CRM user should go to manage companies, or null when they may not.
+     *
+     * Only full administrators of the primary company (the original installation) get the
+     * shortcut; managers of the other companies never see the platform.
+     */
+    public function managementUrl(mixed $user): ?string
+    {
+        if (! $user || ($user->role->permission_type ?? null) !== 'all') {
+            return null;
+        }
+
+        if (! $this->enabled()) {
+            return route('platform.setup.create');
+        }
+
+        if ($this->company && ! $this->company->isPrimary()) {
+            return null;
+        }
+
+        return route('platform.companies.create');
+    }
+
+    /**
      * The base table prefix of the installation.
      */
     public function basePrefix(): string

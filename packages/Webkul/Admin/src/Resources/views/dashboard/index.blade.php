@@ -44,6 +44,35 @@
 
     {!! view_render_event('admin.dashboard.index.header.after') !!}
 
+    @php
+        $platformUrl = class_exists(\Crmtwenty\Platform\Support\Tenancy::class)
+            ? app(\Crmtwenty\Platform\Support\Tenancy::class)->managementUrl(auth()->guard('user')->user())
+            : null;
+    @endphp
+
+    @if ($platformUrl)
+        <!-- Shortcut to the companies panel (primary company administrators only) -->
+        <div class="ct-card ct-rise ct-platform-cta">
+            <span
+                class="ct-chip icon-organization"
+                style="--tone: var(--ct-brand)"
+            ></span>
+
+            <div class="grid min-w-0 flex-1 gap-0.5">
+                <b>@lang('platform::app.shortcut.title')</b>
+
+                <span>@lang('platform::app.shortcut.lead')</span>
+            </div>
+
+            <a
+                href="{{ $platformUrl }}"
+                class="primary-button whitespace-nowrap"
+            >
+                {{ str_contains($platformUrl, '/setup') ? trans('platform::app.shortcut.setup') : trans('platform::app.shortcut.add') }}
+            </a>
+        </div>
+    @endif
+
     <!-- Body Component -->
     {!! view_render_event('admin.dashboard.index.content.before') !!}
 
@@ -60,6 +89,9 @@
 
             <!-- Total Leads Stats -->
             @include('admin::dashboard.index.total-leads')
+
+            <!-- Sales Funnel -->
+            @include('admin::dashboard.index.sales-funnel')
 
             <div class="flex gap-5 max-lg:flex-wrap">
                 <!-- Total Products -->

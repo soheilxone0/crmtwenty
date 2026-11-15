@@ -36,6 +36,13 @@
 
     {!! view_render_event('admin.activities.index.activities.after') !!}
 
+    @if (bouncer()->hasPermission('activities.create'))
+        <x-admin::activities.actions.activity
+            entity-control-name="lead_id"
+            :standalone="true"
+        />
+    @endif
+
     @pushOnce('scripts')
         <script
             type="text/x-template"
@@ -53,6 +60,18 @@
 
                     {!! view_render_event('admin.activities.index.toggle_view.before') !!}
 
+                    <div class="flex items-center gap-2">
+                        @if (bouncer()->hasPermission('activities.create'))
+                            <!-- Add an activity that is not tied to a lead or person -->
+                            <button
+                                type="button"
+                                class="primary-button"
+                                @click="$emitter.emit('open-activity-form')"
+                            >
+                                @lang('admin::app.components.activities.actions.activity.title')
+                            </button>
+                        @endif
+
                     <div class="flex">
                         <i
                             class="icon-list cursor-pointer rounded-md p-2 text-2xl"
@@ -65,6 +84,8 @@
                             :class="{'bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white': viewType == 'calendar'}"
                             @click="toggleView('calendar')"
                         ></i>
+                    </div>
+
                     </div>
 
                     {!! view_render_event('admin.activities.index.toggle_view.after') !!}
@@ -522,7 +543,32 @@
                     };
                 },
 
+                mounted() {
+                    this.$emitter.on('on-activity-added', this.refresh);
+                },
+
+                beforeUnmount() {
+                    this.$emitter.off('on-activity-added', this.refresh);
+                },
+
                 methods: {
+                    /**
+                     * Shows a newly added activity without reloading the page.
+                     */
+                    refresh() {
+                        if (this.viewType == 'table') {
+                            this.$refs.datagrid?.get?.();
+
+                            return;
+                        }
+
+                        const calendar = this.$refs.calendar;
+
+                        if (calendar?.lastViewRange) {
+                            calendar.getActivities(calendar.lastViewRange);
+                        }
+                    },
+
                     /**
                      * Toggle view type.
                      *

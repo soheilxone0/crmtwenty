@@ -97,6 +97,14 @@ class Dashboard
     }
 
     /**
+     * Returns the sales funnel of the selected pipeline.
+     */
+    public function getSalesFunnel(): array
+    {
+        return $this->leadReporting->getSalesFunnel();
+    }
+
+    /**
      * Returns top selling products statistics.
      */
     public function getTopSellingProducts(): Collection

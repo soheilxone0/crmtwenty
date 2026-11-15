@@ -29,6 +29,7 @@ class DashboardController extends Controller
         'top-selling-products' => 'getTopSellingProducts',
         'top-persons' => 'getTopPersons',
         'open-leads-by-states' => 'getOpenLeadsByStates',
+        'sales-funnel' => 'getSalesFunnel',
     ];
 
     /**
