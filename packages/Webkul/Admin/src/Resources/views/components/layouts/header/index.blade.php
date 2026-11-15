@@ -116,11 +116,7 @@
                         @lang('admin::app.layouts.my-account')
                     </a>
 
-                    @php
-                        $platformUrl = class_exists(\Crmtwenty\Platform\Support\Tenancy::class)
-                            ? app(\Crmtwenty\Platform\Support\Tenancy::class)->managementUrl($user)
-                            : null;
-                    @endphp
+                    @php($platformUrl = \Crmtwenty\Platform\Support\Tenancy::managementUrlFor($user))
 
                     @if ($platformUrl)
                         <a

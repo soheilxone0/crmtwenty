@@ -44,11 +44,7 @@
 
     {!! view_render_event('admin.dashboard.index.header.after') !!}
 
-    @php
-        $platformUrl = class_exists(\Crmtwenty\Platform\Support\Tenancy::class)
-            ? app(\Crmtwenty\Platform\Support\Tenancy::class)->managementUrl(auth()->guard('user')->user())
-            : null;
-    @endphp
+    @php($platformUrl = \Crmtwenty\Platform\Support\Tenancy::managementUrlFor(auth()->guard('user')->user()))
 
     @if ($platformUrl)
         <!-- Shortcut to the companies panel (primary company administrators only) -->

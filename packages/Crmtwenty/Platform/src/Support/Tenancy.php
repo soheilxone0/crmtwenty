@@ -122,6 +122,11 @@ class Tenancy
      * Only full administrators of the primary company (the original installation) get the
      * shortcut; managers of the other companies never see the platform.
      */
+    public static function managementUrlFor(mixed $user): ?string
+    {
+        return app(self::class)->managementUrl($user);
+    }
+
     public function managementUrl(mixed $user): ?string
     {
         if (! $user || ($user->role->permission_type ?? null) !== 'all') {
