@@ -50,7 +50,17 @@
             rel="shortcut icon"
             sizes="16x16"
         />
+
+        <link
+            type="image/svg+xml"
+            href="{{ asset('favicon.svg') }}"
+            rel="icon"
+        />
     @endif
+
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}" />
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}" />
+    <meta name="theme-color" content="#2F6BFF" />
 
     @stack('styles')
 

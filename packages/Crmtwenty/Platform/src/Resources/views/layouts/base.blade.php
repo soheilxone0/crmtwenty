@@ -7,8 +7,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') — @lang('platform::app.name')</title>
     <link rel="icon" href="{{ asset('platform/favicon.ico') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
+    <meta name="theme-color" content="#2F6BFF">
     <link rel="preload" href="{{ asset('platform/fonts/Vazirmatn-Variable.woff2') }}" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="{{ asset('platform/platform.css') }}?v=2">
+    <link rel="stylesheet" href="{{ asset('platform/platform.css') }}?v=3">
     <link rel="stylesheet" href="{{ asset('platform/icons.css') }}?v=2">
 </head>
 <body>

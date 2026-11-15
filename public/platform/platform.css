@@ -82,7 +82,7 @@ a:hover { color: #4338ca; }
 
 .brand { display: flex; align-items: center; gap: 12px; padding: 0 8px; color: #fff; }
 
-.brand img { width: 40px; height: 40px; border-radius: 12px; }
+.brand img { width: 42px; height: 42px; object-fit: contain; }
 
 .brand strong { display: block; font-size: 16px; font-weight: 800; letter-spacing: -.2px; }
 
@@ -374,7 +374,7 @@ textarea.input { height: auto; min-height: 96px; padding: 10px 14px; resize: ver
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: var(--brand);
+    background: #0f172a;
 }
 
 .auth-side::after {
